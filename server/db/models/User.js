@@ -42,11 +42,11 @@ const User = db.define("user", {
     type: Sequelize.INTEGER,
   },
   myRecipes: {
-    type: Sequelize.ARRAY,
+    type: Sequelize.STRING,
     allowNull: true,
   },
   myFav: {
-    type: Sequelize.ARRAY,
+    type: Sequelize.STRING,
     allowNull: true,
   },
 });
