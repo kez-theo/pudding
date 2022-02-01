@@ -1,5 +1,5 @@
 const Sequelize = require("sequelize");
-const db = require(".");
+const db = require("../db");
 const FoodItem = require("./models/FoodItem");
 const Fridge = require("./models/Fridge");
 const Recipe = require("./models/Recipe");
