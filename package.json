@@ -26,8 +26,7 @@
     "react-native": "0.64.3",
     "react-native-web": "0.17.1",
     "sequelize": "^6.15.0",
-    "uuid": "^8.3.2",
-    "webpack": "^5.68.0"
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
