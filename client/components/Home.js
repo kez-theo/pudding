@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { StatusBar } from "expo-status-bar";
 import NavigationBar from "./NavigationBar";
 import { Button, StyleSheet, Image, Text, View } from "react-native";
@@ -14,9 +15,14 @@ export default function Home({ navigation }) {
             "https://us.123rf.com/450wm/eridanka/eridanka2103/eridanka210300026/165315737-a-sprig-of-rosemary-hand-drawn-sketch-style-illustration-design-element.jpg?ver=6",
         }}
       />
+      <Text>Dummy Navigation Buttons</Text>
       <Button
         title="Go to Fridge"
         onPress={() => navigation.navigate("Fridge")}
+      />
+      <Button
+        title="Go to Recipes"
+        onPress={() => navigation.navigate("Recipes")}
       />
       {/* // <NavigationBar /> */}
     </View>

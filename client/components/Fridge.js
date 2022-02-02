@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { StatusBar } from "expo-status-bar";
 import Scanner from "./Scanner";
 import { StyleSheet, Text, View, Button } from "react-native";

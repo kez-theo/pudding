@@ -20,9 +20,9 @@ export default function App() {
           options={{
             title: "Thymely Cook",
             headerStyle: {
-              backgroundColor: "white",
+              backgroundColor: "#f4511e",
             },
-            headerTintColor: "tomato",
+            headerTintColor: "#fff",
             headerTitleStyle: {
               fontWeight: "bold",
             },
