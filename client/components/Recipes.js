@@ -7,7 +7,7 @@ const Recipes = () => {
   //gives access to dispatch thunks directly
   const dispatch = useDispatch();
   //gives access to redux state
-  const books = useSelector((state) => state.recipesReducer);
+  const recipes = useSelector((state) => state.recipesReducer);
 
   //where you preform side effects, including data fetching, manually changing the DOM, using history (also available as a hook). Basically componentDidMount, componentDidUpdate and componentWillUnmount combined.
   useEffect(() => {
@@ -18,6 +18,9 @@ const Recipes = () => {
   return (
     <View style={styles.list}>
       <Text>Recipes</Text>  
+      {recipes.map((recipe) => {
+        <Text key={recipe.key}>{recipe.title}</Text>
+      })}
     </View>
   );
 };
@@ -31,4 +34,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Books;
+export default Recipes;
