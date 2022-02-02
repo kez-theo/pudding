@@ -59,7 +59,8 @@ const seed = async () => {
   try {
     await db.sync({ force: true });
     await Recipe.bulkCreate(recipes);
-    await User.bulkCreate(users);
+    const user = await User.bulkCreate(users);
+    console.log(user[0].__proto__);
     await FoodItem.bulkCreate(foodItems);
   } catch (err) {
     console.log(err);
