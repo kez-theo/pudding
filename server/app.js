@@ -1,56 +1,60 @@
-// //all of our routes like app.use
-// const path = require("path");
-// const express = require("express");
-// const morgan = require("morgan");
-// const bodyParser = require("body-parser");
-// const cors = require("cors");
+//all of our routes like app.use
+const path = require("path");
+const express = require("express");
+const morgan = require("morgan");
+const bodyParser = require("body-parser");
+const cors = require("cors");
 
-// const app = express();
+const app = express();
 
-// module.exports = app;
+module.exports = app;
 
-// // logging middleware
-// app.use(morgan("dev"));
+// require keys
+if (process.env.NODE_ENV !== "production") require("../.keys");
+const JWT = process.env.JWT;
 
-// // body parsing middleware
-// app.use(express.json());
+// logging middleware
+app.use(morgan("dev"));
 
-// // cors middleware
-// app.use(cors());
+// body parsing middleware
+app.use(express.json());
 
-// app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(bodyParser.json());
+// cors middleware
+app.use(cors());
 
-// // auth and api routes
-// app.use("/auth", require("./auth"));
-// app.use("/api", require("./api"));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
-// app.get("/", (req, res) =>
-//   res.sendFile(path.join(__dirname, "..", "public/index.html"))
-// );
+// auth and api routes
+app.use("/auth", require("./auth"));
+app.use("/api", require("./api"));
 
-// // static file-serving middleware
-// app.use(express.static(path.join(__dirname, "..", "public")));
+app.get("/", (req, res) =>
+  res.sendFile(path.join(__dirname, "..", "public/index.html"))
+);
 
-// // any remaining requests with an extension (.js, .css, etc.) send 404
-// app.use((req, res, next) => {
-//   if (path.extname(req.path).length) {
-//     const err = new Error("Not found");
-//     err.status = 404;
-//     next(err);
-//   } else {
-//     next();
-//   }
-// });
+// static file-serving middleware
+app.use(express.static(path.join(__dirname, "..", "public")));
 
-// // sends index.html
-// app.use("*", (req, res) => {
-//   res.sendFile(path.join(__dirname, "..", "public/index.html"));
-// });
+// any remaining requests with an extension (.js, .css, etc.) send 404
+app.use((req, res, next) => {
+  if (path.extname(req.path).length) {
+    const err = new Error("Not found");
+    err.status = 404;
+    next(err);
+  } else {
+    next();
+  }
+});
 
-// // error handling endware
-// app.use((err, req, res, next) => {
-//   console.error(err);
-//   console.error(err.stack);
-//   res.status(err.status || 500).send(err.message || "Internal server error.");
-// });
+// sends index.html
+app.use("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "public/index.html"));
+});
+
+// error handling endware
+app.use((err, req, res, next) => {
+  console.error(err);
+  console.error(err.stack);
+  res.status(err.status || 500).send(err.message || "Internal server error.");
+});
