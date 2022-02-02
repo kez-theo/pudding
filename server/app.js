@@ -11,7 +11,7 @@ module.exports = app;
 
 // require keys
 if (process.env.NODE_ENV !== "production") require("../.keys");
-const JWT = process.env.JWT;
+const SPOON_API_KEY = process.env.SPOON_API_KEY;
 
 // logging middleware
 app.use(morgan("dev"));
