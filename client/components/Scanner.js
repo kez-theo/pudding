@@ -1,21 +1,22 @@
+/* eslint-disable no-unused-vars */
 import { statusBar } from "expo-status-bar";
 import React, { useState, useEffect } from "react";
-import { Stylesheet, Text, View, SafeAreaView, Button } from "react-native";
-import { barcodeScanner } from "expo-barcode-scanner";
+import { StyleSheet, Text, View, Button } from "react-native";
+import { BarCodeScanner } from "expo-barcode-scanner";
 //put in env file
 let EdamamURL = "https://api.edamam.com/api/food-database/v2/parser";
 let EdamamId = "?app_id=df75a211";
 let EdamamKey = "&app_key=1bc205251ce1ff9a48d6d26579d9b2de";
 let EdamamType = "&nutrition-type=logging";
 
-export default function barcodeScanner() {
+export default function Scanner() {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const [text, setText] = useState("No Barcode Scanned Yet!");
 
   const askForCameraPermission = () => {
     (async () => {
-      const { status } = await barcodeScanner.requestPermissionsAsync();
+      const { status } = await BarCodeScanner.requestPermissionsAsync();
       setHasPermission(status === "granted");
     })();
   };
