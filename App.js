@@ -7,6 +7,7 @@ import { StyleSheet, Text, View } from "react-native";
 import Home from "./client/components/Home";
 import Fridge from "./client/components/Fridge";
 import Scanner from "./client/components/Scanner";
+import Recipes from "./client/components/Recipes";
 
 const Stack = createNativeStackNavigator();
 
@@ -30,6 +31,7 @@ export default function App() {
         />
         <Stack.Screen name="Fridge" component={Fridge} />
         <Stack.Screen name="Scanner" component={Scanner} />
+        <Stack.Screen name="Recipes" component={Recipes} />
       </Stack.Navigator>
     </NavigationContainer>
   );

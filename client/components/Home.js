@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-vars */
 import { StatusBar } from "expo-status-bar";
-import NavigationBar from "./NavigationBar";
 import { Button, StyleSheet, Image, Text, View } from "react-native";
 
 //navigation prop passed down documentation: https://reactnavigation.org/docs/navigation-prop
@@ -17,10 +16,12 @@ export default function Home({ navigation }) {
       />
       <Text>Dummy Navigation Buttons</Text>
       <Button
+        style={styles.button}
         title="Go to Fridge"
         onPress={() => navigation.navigate("Fridge")}
       />
       <Button
+        style={styles.button}
         title="Go to Recipes"
         onPress={() => navigation.navigate("Recipes")}
       />
@@ -35,6 +36,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+  },
+  button: {
+    margin: 10,
   },
   tinyThyme: {
     width: 150,
