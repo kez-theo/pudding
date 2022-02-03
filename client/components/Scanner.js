@@ -1,17 +1,29 @@
-import { statusBar } from "expo-status-bar";
+/* eslint-disable no-unused-vars */
+
+// // //put in env file
+// let EdamamURL = "https://api.edamam.com/api/food-database/v2/parser";
+// let EdamamId = "?app_id=df75a211";
+// let EdamamKey = "&app_key=1bc205251ce1ff9a48d6d26579d9b2de";
+// let EdamamType = "&nutrition-type=logging";
+
 import React, { useState, useEffect } from "react";
+<<<<<<< HEAD:client/components/barcodeScanner.js
 import { Stylesheet, Text, View, SafeAreaView, Button } from "react-native";
 import { barcodeScanner } from "expo-barcode-scanner";
 //put in env file
+=======
+import { Text, View, StyleSheet, Button } from "react-native";
+import { BarCodeScanner } from "expo-barcode-scanner";
+>>>>>>> main:client/components/Scanner.js
 
-export default function barcodeScanner() {
+export default function Scanner({ navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const [text, setText] = useState("No Barcode Scanned Yet!");
 
   const askForCameraPermission = () => {
     (async () => {
-      const { status } = await barcodeScanner.requestPermissionsAsync();
+      const { status } = await BarCodeScanner.requestPermissionsAsync();
       setHasPermission(status === "granted");
     })();
   };
@@ -23,19 +35,12 @@ export default function barcodeScanner() {
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
     setText(data);
-    console.log("Type: " + type + "Data" + data);
-    //axios.get(EdamamURL, EdamamId, EdamamKey, data, EdamamType)
-    //let UPC = "UPC="+`${text}`
+    alert(`How much of ${data} would you like to add to the fridge?`);
   };
 
   if (hasPermission === null) {
-    return (
-      <View style={styles.container}>
-        <Text>Requesting for Camera Permission</Text>
-      </View>
-    );
+    return <Text>Requesting for camera permission</Text>;
   }
-
   if (hasPermission === false) {
     return (
       <View style={styles.container}>
@@ -62,20 +67,29 @@ export default function barcodeScanner() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.barcode}>
-        <BarCodeScanner
-          onBarcodeScanned={scanned ? undefined : handleBarCodeScanned}
-          style={{ height: 400, width: 400 }}
-        />
-      </View>
-      <Text style={styles.maintext}> {text} </Text>
-
+      <Text style={styles.maintext}>
+        {" "}
+        Will be the name of the food, not UPC {text}{" "}
+      </Text>
+      <BarCodeScanner
+        onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+        style={styles.barcode}
+      />
       {scanned && (
-        <Button
-          title={"Scan again?"}
-          onPress={() => setScanned(false)}
-          color="tomato"
-        />
+        <View>
+          <BarCodeScanner style={{ height: 0 }} />
+          <Button
+            title={"Tap to Scan Again"}
+            onPress={() => {
+              setScanned(false);
+              setText(false);
+            }}
+          />
+          <Button
+            title="Go to Fridge"
+            onPress={() => navigation.navigate("Fridge")}
+          />
+        </View>
       )}
     </View>
   );

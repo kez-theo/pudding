@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import { Button, StyleSheet, Image, Text, View } from 'react-native';
 import { useSelector, useDispatch } from "react-redux";
 import { getRecipesByFoodItem } from "../store/recipes";
 
