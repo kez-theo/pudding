@@ -1,8 +1,9 @@
 /* eslint-disable no-unused-vars */
-
 import React, { useState, useEffect } from "react";
 import { Text, View, StyleSheet, Button, Alert } from "react-native";
+import { useDispatch, useSelector, connect } from "react-redux";
 import { BarCodeScanner } from "expo-barcode-scanner";
+import { ADD_FOOD_ITEM } from "../store/foodItems";
 import axios from "axios";
 
 let EdamamURL = "https://api.edamam.com/api/food-database/v2/parser?";
@@ -12,6 +13,12 @@ export default function Scanner({ navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const [text, setText] = useState("No Barcode Scanned Yet!");
+
+  const dispatch = useDispatch();
+  const allFoodItems = useSelector((state) => state.foodItemsReducer);
+  const addFoodItem = (foodItem) => {
+    dispatch(ADD_FOOD_ITEM(foodItem));
+  };
 
   const askForCameraPermission = () => {
     (async () => {
@@ -25,7 +32,7 @@ export default function Scanner({ navigation }) {
   }, []);
 
   const addToFridgeAlert = (foodName) =>
-    Alert.alert(foodName, `Would you like to add ${foodName} to your fidge?`, [
+    Alert.alert(foodName, `Would you like to add ${foodName} to your fridge?`, [
       {
         text: "No",
         onPress: () => {
@@ -36,13 +43,15 @@ export default function Scanner({ navigation }) {
       },
       {
         text: "Yes",
-        onPress: () => console.log("database request goes here sending the foodName and the userId 1"),
+        onPress: () =>
+          console.log("AYE WE GETTIN PLACES TIME TO ADD TO FRIDGE BB"),
       },
     ]);
 
   const foodName = (foodItemData) => {
     let foodObject = foodItemData.hints[0].food;
     let foodName = foodObject.label;
+    addFoodItem(foodName);
     setText(foodName);
     addToFridgeAlert(foodName);
   };
