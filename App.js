@@ -1,5 +1,7 @@
 /* eslint-disable no-unused-vars */
 import * as React from "react";
+import {Provider} from 'react-redux'
+import store from './client/store'
 import { StatusBar } from "expo-status-bar";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -11,7 +13,15 @@ import Recipes from "./client/components/Recipes";
 
 const Stack = createNativeStackNavigator();
 
-export default function App() {
+const App = () => {
+  return (
+    <Provider store={store}>
+      <AppSource />
+    </Provider>
+  )
+}
+
+const AppSource = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
@@ -45,3 +55,5 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
+
+export default App;

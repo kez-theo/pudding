@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button, StyleSheet, Image, Text, View } from 'react-native';
 import { useSelector, useDispatch } from "react-redux";
 import { getRecipesByFoodItem } from "../store/recipes";
@@ -7,7 +7,11 @@ const Recipes = () => {
   //gives access to dispatch thunks directly
   const dispatch = useDispatch();
   //gives access to redux state
-  const recipes = useSelector((state) => state.recipesReducer);
+  const { recipes } = useSelector((state) => {
+    return {
+      recipes: state.recipesReducer,
+    }
+  });  
 
   //where you preform side effects, including data fetching, manually changing the DOM, using history (also available as a hook). Basically componentDidMount, componentDidUpdate and componentWillUnmount combined.
   useEffect(() => {
@@ -16,10 +20,10 @@ const Recipes = () => {
   }, []);
 
   return (
-    <View style={styles.list}>
+    <View>
       <Text>Recipes</Text>  
       {recipes.map((recipe) => {
-        <Text key={recipe.key}>{recipe.title}</Text>
+        <Text key={recipe.id}>{recipe.title}</Text>
       })}
     </View>
   );

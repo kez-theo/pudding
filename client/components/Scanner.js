@@ -7,14 +7,8 @@
 // let EdamamType = "&nutrition-type=logging";
 
 import React, { useState, useEffect } from "react";
-<<<<<<< HEAD:client/components/barcodeScanner.js
-import { Stylesheet, Text, View, SafeAreaView, Button } from "react-native";
-import { barcodeScanner } from "expo-barcode-scanner";
-//put in env file
-=======
 import { Text, View, StyleSheet, Button } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
->>>>>>> main:client/components/Scanner.js
 
 export default function Scanner({ navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
