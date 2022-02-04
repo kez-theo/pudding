@@ -41,11 +41,6 @@ const recipes = {
   "totalResults": 539
 }
 
-
-// results = Array.from(results)
-// console.log(Array.isArray(results))
-// console.log(results)
-
 export default function Recipes() {
   const results = recipes.results
   return (
