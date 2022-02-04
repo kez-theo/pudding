@@ -48,19 +48,16 @@ const recipes = {
 
 export default function Recipes() {
   const results = recipes.results
-  console.log(Array.isArray(results))
-  console.log(results)
   return (
     <View style={styles.container}>
       {results.map((result) => {
         return (
-        <Text key={result.id}>{result.title}</Text>
+          <View key={result.id}>
+            <Text>{result.title}</Text>
+            <Image style={styles.thumbnail} source={ {uri: result.image} } />
+          </View>
         )
       })}
-      {/* Object.keys(results) */}
-      {/* <Image style={styles.thumbnail} source={{ uri: results[3].image }} />
-      <Text>{ results[3].title }</Text> */}
-      {/* <Text>{ results[3].title }</Text> */}
     </View>
   );
 }
