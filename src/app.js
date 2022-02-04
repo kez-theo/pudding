@@ -1,17 +1,16 @@
 //all of our routes like app.use
 const path = require("path");
 const express = require("express");
-const morgan = require("morgan");
 const bodyParser = require("body-parser");
+const morgan = require("morgan");
 const cors = require("cors");
-
 const app = express();
 
 module.exports = app;
 
 // require keys
-if (process.env.NODE_ENV !== "production") require('dotenv').config({ path: '../.env' });
-const SPOON_API_KEY = process.env.SPOON_API_KEY;
+// // if (process.env.NODE_ENV !== "production") require("../.keys");
+// const SPOON_API_KEY = process.env.SPOON_API_KEY;
 
 // logging middleware
 app.use(morgan("dev"));
@@ -26,8 +25,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // auth and api routes
-// app.use("/auth", require("./auth"));
-// app.use("/api", require("./api"));
+//app.use("/auth", require("./auth"));
+app.use("/api", require("./api"));
 
 app.get("/", (req, res) =>
   res.sendFile(path.join(__dirname, "..", "public/index.html"))

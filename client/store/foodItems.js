@@ -42,9 +42,8 @@ export const getFoodItemThunk = (foodItemId) => {
 export const addFoodItemThunk = (newFoodItem) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.post("/api/foodItems", {
-        foodItem_name: newFoodItem,
-      });
+      console.log(newFoodItem);
+      const { data } = await axios.post("/api/foodItems", newFoodItem);
       console.log(data);
       console.log("we here 2?");
       dispatch(_addFoodItem(data));

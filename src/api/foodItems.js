@@ -28,19 +28,22 @@ router.get("/:foodItemId", async (req, res, next) => {
   }
 });
 
-router.post("/api/foodItems", async (req, res, next) => {
+router.post("/", async (req, res, next) => {
   console.log("finding");
   try {
-    console.log("finding2 ");
-    let exist = await FoodItem.findOne({ where: { name: req.body.name } });
-    if (exist === null) {
-      console.log("not found");
-      let createInfo = await FoodItem.create(req.body);
-      res.status(201).json(createInfo);
-    } else {
-      res.status(409).send("exists?");
-    }
+    // console.log("finding2 ");
+    // let exist = await FoodItem.findOne({ where: { foodItem_name: req.body } });
+    // if (exist === null) {
+    //   console.log("not found");
+    console.log(req.body);
+    let createInfo = await FoodItem.create(req.body);
+    res.status(201).json(createInfo);
+    // } else {
+    //   res.status(409).send("exists?");
+    // }
   } catch (error) {
     next(error);
   }
 });
+
+module.exports = router;
