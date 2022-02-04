@@ -1,15 +1,16 @@
 /* eslint-disable no-unused-vars */
 import * as React from "react";
-import {Provider} from 'react-redux'
-import store from './client/store'
+import store from "./client/store";
 import { StatusBar } from "expo-status-bar";
 import { NavigationContainer } from "@react-navigation/native";
+import { Provider } from "react-redux";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StyleSheet, Text, View } from "react-native";
 import Home from "./client/components/Home";
 import Fridge from "./client/components/Fridge";
 import Scanner from "./client/components/Scanner";
 import Recipes from "./client/components/Recipes";
+import SingleRecipe from "./client/components/SingleRecipe";
 
 const Stack = createNativeStackNavigator();
 
@@ -18,8 +19,8 @@ const App = () => {
     <Provider store={store}>
       <AppSource />
     </Provider>
-  )
-}
+  );
+};
 
 const AppSource = () => {
   return (
@@ -42,10 +43,11 @@ const AppSource = () => {
         <Stack.Screen name="Fridge" component={Fridge} />
         <Stack.Screen name="Scanner" component={Scanner} />
         <Stack.Screen name="Recipes" component={Recipes} />
+        <Stack.Screen name="SingleRecipe" component={SingleRecipe} />
       </Stack.Navigator>
     </NavigationContainer>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
