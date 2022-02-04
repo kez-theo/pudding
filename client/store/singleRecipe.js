@@ -15,7 +15,7 @@ export const getSingleRecipe = (recipeId) => ({
 //THUNK
 
 //get recipe by  recipe id
-export const getSingleRecipe = (recipeId) => {
+export const getRecipeById = (recipeId) => {
   return async (dispatch) => {
     try {
         const { data: recipe } = await axios.get(`${spnAPI}${recipeId}/analyzedInstructions`);
