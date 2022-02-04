@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const router = require("express").Router();
 const FoodItem = require("../db/models/FoodItem");
 const Fridge = require("../db/models/Fridge");

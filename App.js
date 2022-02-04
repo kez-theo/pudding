@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-vars */
 import * as React from "react";
-import {Provider} from 'react-redux'
-import store from './client/store'
+import store from "./client/store";
 import { StatusBar } from "expo-status-bar";
 import { NavigationContainer } from "@react-navigation/native";
 import { Provider } from "react-redux";
@@ -19,8 +18,8 @@ const App = () => {
     <Provider store={store}>
       <AppSource />
     </Provider>
-  )
-}
+  );
+};
 
 const AppSource = () => {
   return (
@@ -46,7 +45,7 @@ const AppSource = () => {
       </Stack.Navigator>
     </NavigationContainer>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
