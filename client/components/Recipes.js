@@ -1,41 +1,135 @@
 import React, { useEffect } from 'react';
-import { Button, StyleSheet, Image, Text, View } from 'react-native';
+import { Button, StyleSheet, Image, FlatList, Text, View } from 'react-native';
 import { useSelector, useDispatch } from "react-redux";
 import { getRecipesByFoodItem } from "../store/recipes";
 
-const Recipes = () => {
-  //gives access to dispatch thunks directly
-  const dispatch = useDispatch();
-  //gives access to redux state
-  const { recipes } = useSelector((state) => {
-    return {
-      recipes: state.recipesReducer,
-    }
-  });  
+const recipes = {
+  "results": [
+      {
+          "id": 639203,
+          "title": "Chocolate Soup",
+          "image": "https://spoonacular.com/recipeImages/639203-312x231.jpg",
+          "imageType": "jpg"
+      },
+      {
+          "id": 639167,
+          "title": "Chocolate Plums",
+          "image": "https://spoonacular.com/recipeImages/639167-312x231.jpg",
+          "imageType": "jpg"
+      },
+      {
+          "id": 639234,
+          "title": "Chocolate Wafers",
+          "image": "https://spoonacular.com/recipeImages/639234-312x231.jpg",
+          "imageType": "jpg"
+      },
+      {
+          "id": 639168,
+          "title": "Chocolate Popcorn",
+          "image": "https://spoonacular.com/recipeImages/639168-312x231.jpg",
+          "imageType": "jpg"
+      },
+      {
+          "id": 67308,
+          "title": "Chocolate Souffle",
+          "image": "https://spoonacular.com/recipeImages/67308-312x231.jpg",
+          "imageType": "jpg"
+      }
+  ],
+  "offset": 0,
+  "number": 5,
+  "totalResults": 539
+}
 
-  //where you preform side effects, including data fetching, manually changing the DOM, using history (also available as a hook). Basically componentDidMount, componentDidUpdate and componentWillUnmount combined.
-  useEffect(() => {
-    dispatch(getRecipesByFoodItem());
-    //this empty bracket determines that whatever is in the useEffect body will be called once, making this a replacement for componentDidMount.
-  }, []);
 
+// results = Array.from(results)
+// console.log(Array.isArray(results))
+// console.log(results)
+
+export default function Recipes() {
+  const results = recipes.results
+  console.log(Array.isArray(results))
+  console.log(results)
   return (
-    <View>
-      <Text>Recipes</Text>  
-      {recipes.map((recipe) => {
-        <Text key={recipe.id}>{recipe.title}</Text>
+    <View style={styles.container}>
+      {results.map((result) => {
+        return (
+        <Text key={result.id}>{result.title}</Text>
+        )
       })}
+      {/* Object.keys(results) */}
+      {/* <Image style={styles.thumbnail} source={{ uri: results[3].image }} />
+      <Text>{ results[3].title }</Text> */}
+      {/* <Text>{ results[3].title }</Text> */}
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+  },
   list: {
     flex: 1,
-    backgroundColor: '#eee',
-    width: '90%',
-    paddingTop: 50,
+    backgroundColor: '#e3ffee',
+    width: '100%',
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  thumbnail: {
+    width: 150,
+    height: 150,
   },
 });
 
-export default Recipes;
+
+
+
+// const Recipes = () => {
+//   //gives access to dispatch thunks directly
+//   const dispatch = useDispatch();
+//   //gives access to redux state
+//   const { recipes } = useSelector((state) => {
+//     return {
+//       recipes: state.recipesReducer,
+//     }
+//   });  
+
+//   //where you preform side effects, including data fetching, manually changing the DOM, using history (also available as a hook). Basically componentDidMount, componentDidUpdate and componentWillUnmount combined.
+//   useEffect(() => {
+//     dispatch(getRecipesByFoodItem());
+//     //this empty bracket determines that whatever is in the useEffect body will be called once, making this a replacement for componentDidMount.
+//   }, []);
+
+//   const results = recipes.results;
+//   console.log(results)
+
+//   return (
+//     <View styles={styles.container}>
+//       <Text>Hello World</Text>
+//       {/* {results.map((result) => {
+//         <Text key={result.id}>{result.title}</Text>
+//       })} */}
+//     </View>
+//   );
+// };
+
+// export default Recipes;
+
+// const styles = StyleSheet.create({
+//   list: {
+//     flex: 1,
+//     backgroundColor: '#eee',
+//     width: '90%',
+//     paddingTop: 50,
+//   },
+//   container: {
+//     flex: 1,
+//     backgroundColor: "#fe0055",
+//     alignItems: "center",
+//     justifyContent: "center",
+//   },
+// });
