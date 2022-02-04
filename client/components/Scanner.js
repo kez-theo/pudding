@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Text, View, StyleSheet, Button, Alert } from "react-native";
 import { useDispatch, useSelector, connect } from "react-redux";
 import { BarCodeScanner } from "expo-barcode-scanner";
-import { getFoodItemThunk } from "../store/foodItems";
+import { addFoodItemThunk } from "../store/foodItems";
 import axios from "axios";
 
 let EdamamURL = "https://api.edamam.com/api/food-database/v2/parser?";
@@ -17,7 +17,7 @@ export default function Scanner({ navigation }) {
   const dispatch = useDispatch();
   const foodItems = useSelector((state) => state.foodItemsReducer);
   const addFoodItem = (foodItem) => {
-    dispatch(getFoodItemThunk(foodItem));
+    dispatch(addFoodItemThunk(foodItem));
   };
 
   const askForCameraPermission = () => {

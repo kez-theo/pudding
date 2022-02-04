@@ -25,6 +25,11 @@ export default function Home({ navigation }) {
         title="Go to Recipes"
         onPress={() => navigation.navigate("Recipes")}
       />
+      <Button
+        style={styles.button}
+        title="Go to Recipe"
+        onPress={() => navigation.navigate("SingleRecipe")}
+      />
       {/* // <NavigationBar /> */}
     </View>
   );

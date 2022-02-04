@@ -1,12 +1,20 @@
 import axios from "axios";
 
 export const GET_FOOD_ITEM = "GET_FOOD_ITEM";
+export const GET_FOOD_ITEMS = "GET_FOOD_ITEMs";
 export const ADD_FOOD_ITEM = "ADD_FOOD_ITEM";
 
 export const _getFoodItem = (foodItem) => {
   return {
     type: ADD_FOOD_ITEM,
     foodItem,
+  };
+};
+
+export const _getFoodItems = (foodItems) => {
+  return {
+    type: ADD_FOOD_ITEM,
+    foodItems,
   };
 };
 
@@ -32,17 +40,16 @@ export const getFoodItemThunk = (foodItemId) => {
 };
 
 export const addFoodItemThunk = (newFoodItem) => {
-  console.log("we here?");
   return async (dispatch) => {
     try {
-      const { data: foodItem } = await axios.post(
-        "/api/foodItems",
-        newFoodItem
-      );
+      const { data } = await axios.post("/api/foodItems", {
+        foodItem_name: newFoodItem,
+      });
+      console.log(data);
       console.log("we here 2?");
-      dispatch(_addFoodItem(foodItem));
+      dispatch(_addFoodItem(data));
     } catch (err) {
-      console.log("ADD FOOD ITEM ERROR");
+      console.log("ADD FOOD ITEM THUNK ERROR");
     }
   };
 };
@@ -51,6 +58,8 @@ let initialState = [];
 
 export default function foodItemsReducer(state = initialState, action) {
   switch (action.type) {
+    case GET_FOOD_ITEMS:
+      return action.foodItems;
     case GET_FOOD_ITEM:
       return action.foodItem;
     case ADD_FOOD_ITEM:
