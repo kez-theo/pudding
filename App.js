@@ -10,6 +10,7 @@ import Home from "./client/components/Home";
 import Fridge from "./client/components/Fridge";
 import Scanner from "./client/components/Scanner";
 import Recipes from "./client/components/Recipes";
+import LoginScreen from "./client/components/UserLogin";
 
 const Stack = createNativeStackNavigator();
 
@@ -24,7 +25,8 @@ const App = () => {
 const AppSource = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
+      <Stack.Navigator initialRouteName="Login">
+        <Stack.Screen name="Login" component={LoginScreen}/>
         <Stack.Screen
           name="Home"
           component={Home}

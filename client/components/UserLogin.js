@@ -14,6 +14,10 @@ export default function LoginScreen({ navigation }) {
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
 
+    const onFooterLinkPress = () => {
+      navigation.navigate('Registration')
+    }
+
     React.useEffect(() => {
       const unsubscribe = auth.onAuthStateChanged(user => {
         if (user) {
@@ -27,11 +31,8 @@ export default function LoginScreen({ navigation }) {
     const handleLogin = async () => {
       if(!email || !password) Alert.alert("Please fill out the required fields!")
         try {
-          await auth.signInWithEmailAndPassword(email, password)
-          .then(userCredentials => {
-            const user = userCredentials.user
-            console.log('Logged in with: ', user.email)
-          })
+          const  { user } = await auth.signInWithEmailAndPassword(email, password)
+          console.log('Logged in with: ', user.email)
           } catch(error) {
           console.log(error);
           Alert.alert("Incorrect Email or Password")
@@ -68,8 +69,15 @@ export default function LoginScreen({ navigation }) {
           <TouchableOpacity style={styles.forgotButton} onPress={()=>navigation.navigate('forgotPassword')}>
             <Text style={styles.buttonText}>Forgot password</Text>
           </TouchableOpacity>
+          <View style={styles.footerView}>
+            <Text style={styles.footerText}>
+              Don't have an account? {' '}
+               <Text onPress={onFooterLinkPress} style={styles.footerLink}>
+                 Sign up
+               </Text>
+            </Text>
+          </View>
       </View> 
-
   );
 };
 
@@ -141,5 +149,22 @@ export default function LoginScreen({ navigation }) {
         tinyTomato: {
           width: 150,
           height: 150,
-        }
+        },
+        footerView: {
+          flex: 1,
+          alignItems: 'center',
+          marginTop: 165,
+        },
+        footerText: {
+          fontSize: 17,
+          color: '#2e2e2d',
+          fontFamily: 'Lato_400Regular',
+          letterSpacing: 0.2,
+        },
+        footerLink: {
+          color: '#1261B1',
+          fontFamily: 'Lato_900Black',
+          fontSize: 17,
+          letterSpacing: 0.2,
+        },
       });
