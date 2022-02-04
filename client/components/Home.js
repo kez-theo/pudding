@@ -1,9 +1,5 @@
 /* eslint-disable no-unused-vars */
 import { StatusBar } from "expo-status-bar";
-<<<<<<< HEAD
-import NavigationBar from "./NavigationBar";
-=======
->>>>>>> main
 import { Button, StyleSheet, Image, Text, View } from "react-native";
 
 //navigation prop passed down documentation: https://reactnavigation.org/docs/navigation-prop
@@ -20,18 +16,12 @@ export default function Home({ navigation }) {
       />
       <Text>Dummy Navigation Buttons</Text>
       <Button
-<<<<<<< HEAD
-=======
         style={styles.button}
->>>>>>> main
         title="Go to Fridge"
         onPress={() => navigation.navigate("Fridge")}
       />
       <Button
-<<<<<<< HEAD
-=======
         style={styles.button}
->>>>>>> main
         title="Go to Recipes"
         onPress={() => navigation.navigate("Recipes")}
       />
@@ -47,12 +37,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-<<<<<<< HEAD
-=======
   button: {
     margin: 10,
   },
->>>>>>> main
   tinyThyme: {
     width: 150,
     height: 150,
