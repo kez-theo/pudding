@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Text, View, StyleSheet, Button, Alert } from "react-native";
 import { useDispatch, useSelector, connect } from "react-redux";
 import { BarCodeScanner } from "expo-barcode-scanner";
-import { _addFoodItem } from "../store/foodItems";
+import { getFoodItemThunk } from "../store/foodItems";
 import axios from "axios";
 
 let EdamamURL = "https://api.edamam.com/api/food-database/v2/parser?";
@@ -17,7 +17,7 @@ export default function Scanner({ navigation }) {
   const dispatch = useDispatch();
   const foodItems = useSelector((state) => state.foodItemsReducer);
   const addFoodItem = (foodItem) => {
-    dispatch(_addFoodItem(foodItem));
+    dispatch(getFoodItemThunk(foodItem));
   };
 
   const askForCameraPermission = () => {
@@ -58,7 +58,7 @@ export default function Scanner({ navigation }) {
 
   const fetchFoodItem = async (data) => {
     try {
-      const URL = `${EdamamURL}app_id=ac348bb8&app_key="PUTINAPPKEY"&upc=${data}${EDEMAM_TYPE}`;
+      const URL = `${EdamamURL}app_id=ac348bb8&app_key=1ebf1a9a2fd8a87a83ce0aa38a7f00ad&upc=${data}${EDEMAM_TYPE}`;
       const res = await axios.get(URL);
       const foodItemData = res.data;
       foodName(foodItemData);
@@ -68,7 +68,6 @@ export default function Scanner({ navigation }) {
   };
   const handleBarCodeScanned = ({ data }) => {
     setScanned(true);
-    console.log("data", data);
     fetchFoodItem(data);
   };
 
