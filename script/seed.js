@@ -1,7 +1,7 @@
-const { db } = require("../server/db");
+const { db } = require("../src/db");
 const {
   models: { FoodItem, Fridge, Recipe, User_Recipe, User },
-} = require("../server/db");
+} = require("../src/db");
 
 //seed dummy data
 
