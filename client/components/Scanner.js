@@ -1,19 +1,24 @@
 /* eslint-disable no-unused-vars */
-
-// // //put in env file
-// let EdamamURL = "https://api.edamam.com/api/food-database/v2/parser";
-// let EdamamId = "?app_id=df75a211";
-// let EdamamKey = "&app_key=1bc205251ce1ff9a48d6d26579d9b2de";
-// let EdamamType = "&nutrition-type=logging";
-
 import React, { useState, useEffect } from "react";
-import { Text, View, StyleSheet, Button } from "react-native";
+import { Text, View, StyleSheet, Button, Alert } from "react-native";
+import { useDispatch, useSelector, connect } from "react-redux";
 import { BarCodeScanner } from "expo-barcode-scanner";
+import { addFoodItemThunk } from "../store/foodItems";
+import axios from "axios";
+
+let EdamamURL = "https://api.edamam.com/api/food-database/v2/parser?";
+const EDEMAM_TYPE = "&nutrition-type=logging";
 
 export default function Scanner({ navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const [text, setText] = useState("No Barcode Scanned Yet!");
+
+  const dispatch = useDispatch();
+  const foodItems = useSelector((state) => state.foodItemsReducer);
+  const addFoodItem = (foodItem) => {
+    dispatch(addFoodItemThunk(foodItem));
+  };
 
   const askForCameraPermission = () => {
     (async () => {
@@ -26,10 +31,44 @@ export default function Scanner({ navigation }) {
     askForCameraPermission();
   }, []);
 
-  const handleBarCodeScanned = ({ type, data }) => {
+  const addToFridgeAlert = (foodName) =>
+    Alert.alert(foodName, `Would you like to add ${foodName} to your fridge?`, [
+      {
+        text: "No",
+        onPress: () => {
+          setScanned(false);
+          setText(false);
+        },
+        style: "cancel",
+      },
+      {
+        text: "Yes",
+        onPress: () =>
+          console.log("AYE WE GETTIN PLACES TIME TO ADD TO FRIDGE BB"),
+      },
+    ]);
+
+  const foodName = (foodItemData) => {
+    let foodObject = foodItemData.hints[0].food;
+    let foodName = foodObject.label;
+    addFoodItem(foodName);
+    setText(foodName);
+    addToFridgeAlert(foodName);
+  };
+
+  const fetchFoodItem = async (data) => {
+    try {
+      const URL = `${EdamamURL}app_id=ac348bb8&app_key=1ebf1a9a2fd8a87a83ce0aa38a7f00ad&upc=${data}${EDEMAM_TYPE}`;
+      const res = await axios.get(URL);
+      const foodItemData = res.data;
+      foodName(foodItemData);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const handleBarCodeScanned = ({ data }) => {
     setScanned(true);
-    setText(data);
-    alert(`How much of ${data} would you like to add to the fridge?`);
+    fetchFoodItem(data);
   };
 
   if (hasPermission === null) {
@@ -61,10 +100,7 @@ export default function Scanner({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.maintext}>
-        {" "}
-        Will be the name of the food, not UPC {text}{" "}
-      </Text>
+      <Text style={styles.maintext}>{text}</Text>
       <BarCodeScanner
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
         style={styles.barcode}
