@@ -2,19 +2,23 @@ import React, { useEffect } from 'react';
 import { StatusBar } from "expo-status-bar";
 import { Button, StyleSheet, Image, Text, View } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import { getRecipeById } from "../store/recipe";
+import { getRecipeById } from "../store/singleRecipe";
 
 export default function SingleRecipe({navigation}) {
-    let stepsArray = dummyRecipe[0].steps;
-  return (
+    
+   
 
-   <View style={styles.container}>
+   
+    //let stepsArray = recipe[0].steps;
+    return (
+     
+     <View style={styles.container}>
      <Text style={styles.text}>{dummyRecipesOptions.results[1].title} Preparation</Text> 
-     {
+     {/* {
       stepsArray.map((item, index) => (
         <Text key={index} style={styles.text2}>{item.number} {item.step}</Text> 
       )
-      )}  
+      )}   */}
      <Text style={styles.text}>Enjoy!</Text> 
      <Image
         style={styles.tinyThyme}
@@ -24,8 +28,6 @@ export default function SingleRecipe({navigation}) {
         }}
       />
      
-
-
 
    </View> 
 
