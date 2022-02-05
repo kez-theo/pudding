@@ -10,7 +10,7 @@ npm-debug.*
 *.mobileprovision
 *.orig.*
 web-build/
-.keys.js
+.env
 package-lock.json
 
 # macOS
