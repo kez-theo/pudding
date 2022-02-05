@@ -7,7 +7,7 @@ const {
 
 const foodItems = [
   {
-    foodItem_name: "tomato",
+    foodItem_name: "watermelon",
     category: "vegetable",
   },
   {
@@ -26,7 +26,7 @@ const foodItems = [
 
 const users = [
   {
-    firstName: "Cody",
+    firstName: "Codys",
     lastName: "Fullstack",
     email: "cody@fullstack.com",
     password: "123",
