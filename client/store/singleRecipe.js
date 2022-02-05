@@ -1,6 +1,9 @@
 import axios from 'axios'
+require('dotenv').config();
 const spnAPI = 'https://api.spoonacular.com/recipes/'
-import {SPOON_API_KEY} from "../.keys.js"
+//import {SPOON_API_KEY} from "../.keys.js"
+import {SPOON_API_KEY} from '@env';
+
 
 //ACTIONS
 const GET_RECIPE = 'GET_RECIPE'
@@ -24,8 +27,8 @@ export const getRecipeById = (recipeId) => {
         dispatch(getSingleRecipe(recipe));
         
     } catch (error) {
-      dispatch(setSingleMoleFetchStatus(FETCH_FAILED));
-      console.log("getSingleRecipe THUNK ERROR:  ", error);
+     
+      console.log(`getSingleRecipe THUNK ERROR:${error} The URL thunk was trying is ${spnAPI}${recipeId}/analyzedInstructions?&apiKey=${SPOON_API_KEY}`);
     }
   };
 };
