@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Button, StyleSheet, Image, FlatList, Text, View } from 'react-native';
 import { useSelector, useDispatch } from "react-redux";
 import { getRecipesByFoodItem } from "../store/recipes";
+ 
 
 
 // const Recipes = () => {
@@ -94,6 +95,7 @@ const recipes = {
 
 export default function Recipes() {
   const results = recipes.results
+  console.log(process.env)
   return (
     <View style={styles.container}>
       {results.map((result) => {
