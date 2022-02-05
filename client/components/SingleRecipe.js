@@ -23,10 +23,10 @@ export default function SingleRecipe({navigation}) {
         <View style={styles.container}>
             <Text style={styles.text}>{dummyRecipesOptions.results[1].title} preparation</Text> 
             {
-            recipeSteps.map((item, index) => (
-                <Text key={index} style={styles.text2}>{item.number}. {item.step}</Text> 
-            )
-            )}  
+                //recipeSteps.map((item, index) => ( <Text key={index} style={styles.text2}>{item.number}. {item.step}</Text>  )) map crash ternary fix:
+                recipeSteps ? (recipeSteps.map((item, index) => ( <Text key={index} style={styles.text2}>{item.number}. {item.step}</Text>  ))) : (<Text>Loading...</Text>)
+               
+            }  
             <Text style={styles.text}>Enjoy!</Text> 
             <Image
                 style={styles.tinyThyme}

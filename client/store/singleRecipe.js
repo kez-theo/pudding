@@ -20,7 +20,7 @@ export const getRecipeById = (recipeId) => {
   return async (dispatch) => {
     try {
         const { data: recipe } = await axios.get(`${spnAPI}${recipeId}/analyzedInstructions?&apiKey=${SPOON_API_KEY}`);
-       // console.log(`recipe from getRecipeById thunk ${recipe}`)
+       console.log(`The URL thunk was trying is ${spnAPI}${recipeId}/analyzedInstructions?&apiKey=${SPOON_API_KEY}`)
         dispatch(getSingleRecipe(recipe));
         
     } catch (error) {
@@ -34,10 +34,11 @@ export const getRecipeById = (recipeId) => {
 //REDUCER
 
 export default function recipeReducer(state = {}, action) {
-    console.log("I'm recipeReducer")
+    console.log("I'm recipeReducer, I got ", action.recipe)
   switch (action.type) {
     case GET_RECIPE:
     //because the url returns an array [{}]
+    console.log()
       return action.recipe[0];
     default:
       return state;
