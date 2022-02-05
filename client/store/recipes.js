@@ -21,7 +21,7 @@ export const getRecipes = (recipes) => ({
 export const getRecipesByFoodItem = () => {
   return async (dispatch) => {
     try {
-      const { data: recipes } = await axios.get(`${spnAPI}complexSearch?query=tomato&number=2&apiKey=7de551d8a45043c7b1297b9a73eaf5c1`, recipes)
+      const { data: recipes } = await axios.get(`${spnAPI}complexSearch?query=tomato&number=2&apiKey=160ace34d8bb4c9f94baf956fd5923a7`, recipes)
       dispatch(getRecipes(recipes))
     } catch (err) {
       console.log(">>>>>>>GET RECIPES THUNK NOT WORKING!")
