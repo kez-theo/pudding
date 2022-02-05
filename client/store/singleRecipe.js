@@ -1,5 +1,5 @@
 import axios from 'axios'
-require('dotenv').config();
+
 const spnAPI = 'https://api.spoonacular.com/recipes/'
 //import {SPOON_API_KEY} from "../.keys.js"
 import {SPOON_API_KEY} from '@env';
@@ -15,7 +15,7 @@ export const getSingleRecipe = (recipe) => ({
 });
 
 
-//THUNK
+//THUNKgit status
 
 //get recipe by  recipe id
 export const getRecipeById = (recipeId) => {

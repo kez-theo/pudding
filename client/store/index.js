@@ -11,7 +11,7 @@ import foodItemsReducer from "./foodItems";
 
 const reducer = combineReducers({
   recipesReducer,
-  recipeReducer
+  recipeReducer,
   foodItemsReducer,
 
 });
