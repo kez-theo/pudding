@@ -1,6 +1,7 @@
 const Sequelize = require("sequelize");
 const pkg = require("../../package.json");
-import {HEROKU_DB} from '@env';
+//import {HEROKU_DB} from '@env';
+//import {HEROKU_DB} from "./.keys.js"
 
 const databaseName =
   pkg.name + (process.env.NODE_ENV === "test" ? "-test" : "");
@@ -24,6 +25,7 @@ if (true) {
 }
 
 const db = new Sequelize(
+  import {HEROKU_DB} from "./.keys.js"
   process.env.DATABASE_URL || `postgres://${HEROKU_DB}`,
   //process.env.DATABASE_URL || `postgres://localhost:5432/${databaseName}`,
   config
