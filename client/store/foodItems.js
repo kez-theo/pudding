@@ -1,5 +1,4 @@
 import axios from "axios";
-
 export const GET_FOOD_ITEM = "GET_FOOD_ITEM";
 export const GET_FOOD_ITEMS = "GET_FOOD_ITEMs";
 export const ADD_FOOD_ITEM = "ADD_FOOD_ITEM";
@@ -39,16 +38,20 @@ export const getFoodItemThunk = (foodItemId) => {
   };
 };
 
-export const addFoodItemThunk = (newFoodItem) => {
+export const addFoodItemThunk = (foodItem_name) => {
   return async (dispatch) => {
     try {
-      console.log(newFoodItem);
-      const { data } = await axios.post("/api/foodItems", newFoodItem);
-      console.log(data);
+      const { data: food } = await axios.post(
+        "https://unlucky-robin-25.loca.lt/api/foodItems/",
+        {
+          foodItem_name,
+        }
+      );
+      console.log("THUS FUD", food);
       console.log("we here 2?");
-      dispatch(_addFoodItem(data));
+      dispatch(_addFoodItem(food));
     } catch (err) {
-      console.log("ADD FOOD ITEM THUNK ERROR");
+      console.log(err);
     }
   };
 };
