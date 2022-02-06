@@ -1,11 +1,6 @@
 const Sequelize = require("sequelize");
 const pkg = require("../../package.json");
-<<<<<<< HEAD
-const pg = require('pg')
-const {HEROKU_DB} = require("../../.env")
-=======
-require('dotenv').config();
->>>>>>> main
+require("dotenv").config();
 
 const databaseName =
   pkg.name + (process.env.NODE_ENV === "test" ? "-test" : "");
@@ -28,11 +23,10 @@ if (true) {
     },
   };
 }
-console.log("herokudb",process.env.HEROKU_DB);
+console.log("herokudb", process.env.HEROKU_DB);
 const db = new Sequelize(
-  
-  process.env.DATABASE_URL || `postgres://${process.env.HEROKU_DB}`,
-  //process.env.DATABASE_URL || `postgres://localhost:5432/${databaseName}`,
+  //process.env.DATABASE_URL || `postgres://${process.env.HEROKU_DB}`,
+  process.env.DATABASE_URL || `postgres://localhost:5432/${databaseName}`,
   config
 );
 module.exports = db;

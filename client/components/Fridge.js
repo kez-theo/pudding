@@ -24,7 +24,7 @@ export default function Fridge({ navigation }) {
         <Text> Fridge is Loading </Text>
       ) : (
         fridgeSelector.foodItems.map((item, index) => (
-          <View style={styles.item}>
+          <View style={styles.item} key={index}>
             <View>
               <Image
                 style={styles.tinyThyme}
