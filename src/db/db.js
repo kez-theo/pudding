@@ -15,7 +15,7 @@ if (process.env.LOGGING === "true") {
 
 //https://stackoverflow.com/questions/61254851/heroku-postgres-sequelize-no-pg-hba-conf-entry-for-host
 //It was if (process.env.DATABASE_URL) I changed to if true because the ssl wasn't working
-if (process.env.DATABASE_URL) {
+if (true) {
   config.dialectOptions = {
     ssl: {
       require: true,
