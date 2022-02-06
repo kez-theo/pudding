@@ -19,7 +19,10 @@
     "@react-navigation/stack": "^6.1.1",
     "axios": "^0.25.0",
     "cors": "^2.8.5",
+<<<<<<< HEAD
     "dotenv": "^15.0.0",
+=======
+>>>>>>> main
     "expo": "~44.0.0",
     "expo-barcode-scanner": "^11.2.0",
     "expo-status-bar": "~1.2.0",
