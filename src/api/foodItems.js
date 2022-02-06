@@ -29,18 +29,11 @@ router.get("/:foodItemId", async (req, res, next) => {
 });
 
 router.post("/", async (req, res, next) => {
-  console.log("finding");
   try {
-    // console.log("finding2 ");
-    // let exist = await FoodItem.findOne({ where: { foodItem_name: req.body } });
-    // if (exist === null) {
-    //   console.log("not found");
-    console.log(req.body);
-    let createInfo = await FoodItem.create(req.body);
-    res.status(201).json(createInfo);
-    // } else {
-    //   res.status(409).send("exists?");
-    // }
+    let fooditem = await FoodItem.findOrCreate({
+      where: { foodItem_name: req.body.foodItem_name },
+    });
+    res.status(201).json(fooditem[0]);
   } catch (error) {
     next(error);
   }
