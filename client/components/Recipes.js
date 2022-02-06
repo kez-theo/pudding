@@ -2,39 +2,39 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, Image, FlatList, SafeAreaView, Text, View } from 'react-native';
 import { getRecipesFromFridge } from '../../src/extApi_recipes';
 
-//dummy data
-const RESULTS = [
-    {
-        "id": 639203,
-        "title": "Chocolate Soup",
-        "image": "https://spoonacular.com/recipeImages/639203-312x231.jpg",
-        "imageType": "jpg"
-    },
-    {
-        "id": 639167,
-        "title": "Chocolate Plums",
-        "image": "https://spoonacular.com/recipeImages/639167-312x231.jpg",
-        "imageType": "jpg"
-    },
-    {
-        "id": 639234,
-        "title": "Chocolate Wafers",
-        "image": "https://spoonacular.com/recipeImages/639234-312x231.jpg",
-        "imageType": "jpg"
-    },
-    {
-        "id": 639168,
-        "title": "Chocolate Popcorn",
-        "image": "https://spoonacular.com/recipeImages/639168-312x231.jpg",
-        "imageType": "jpg"
-    },
-    {
-        "id": 67308,
-        "title": "Chocolate Souffle",
-        "image": "https://spoonacular.com/recipeImages/67308-312x231.jpg",
-        "imageType": "jpg"
-    }
-]
+//dummy data - uncomment below to use
+// const RESULTS = [
+//     {
+//         "id": 639203,
+//         "title": "Chocolate Soup",
+//         "image": "https://spoonacular.com/recipeImages/639203-312x231.jpg",
+//         "imageType": "jpg"
+//     },
+//     {
+//         "id": 639167,
+//         "title": "Chocolate Plums",
+//         "image": "https://spoonacular.com/recipeImages/639167-312x231.jpg",
+//         "imageType": "jpg"
+//     },
+//     {
+//         "id": 639234,
+//         "title": "Chocolate Wafers",
+//         "image": "https://spoonacular.com/recipeImages/639234-312x231.jpg",
+//         "imageType": "jpg"
+//     },
+//     {
+//         "id": 639168,
+//         "title": "Chocolate Popcorn",
+//         "image": "https://spoonacular.com/recipeImages/639168-312x231.jpg",
+//         "imageType": "jpg"
+//     },
+//     {
+//         "id": 67308,
+//         "title": "Chocolate Souffle",
+//         "image": "https://spoonacular.com/recipeImages/67308-312x231.jpg",
+//         "imageType": "jpg"
+//     }
+// ]
 
 
 const Recipes = () => {
@@ -44,9 +44,13 @@ const Recipes = () => {
   const [recipes, setRecipes] = useState( [] );  
   //where you preform side effects, including data fetching, manually changing the DOM, using history (also available as a hook). Basically componentDidMount, componentDidUpdate and componentWillUnmount combined.
   useEffect(() => {
+      setRecipes(getRecipesFromFridge())
     // setRecipes(getRecipesFromFridge())
-    setRecipes(RESULTS)
+    // uncomment below and comment above to use with RESULTS dummy data
+    // setRecipes(RESULTS)
   }, []);
+
+  console.log(recipes)
 
   const Recipe = ({ title, image }) => (
     <View style={styles.item}>
@@ -54,23 +58,32 @@ const Recipes = () => {
       <Text style={styles.title}>{title}</Text>
     </View>
   );
-  
+
   const renderRecipe = ({ item }) => (
     <Recipe title={item.title} image={item.image} />
   );
+
   return (
     <View style={styles.container}>
-      {recipes.length === null ? (
+      {!recipes ? (
         <View>
           <Text>Loading...</Text>
         </View>
       ) : (
         <SafeAreaView style={styles.list}>
-          <FlatList 
+          {recipes.map((recipe) => {
+            return (
+              <>
+                <Image style={styles.thumbnail} source={ {uri: recipe.image} } />
+                <Text style={styles.title}>{title}</Text>
+              </>
+            )
+          })}
+          {/* <FlatList 
             data={recipes}
             renderItem={renderRecipe}
             keyExtractor={item => item.id}
-          />
+          /> */}
         </SafeAreaView>
       )}
     </View>
