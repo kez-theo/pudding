@@ -1,10 +1,10 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 import { Text, View, StyleSheet, Button, Alert } from "react-native";
-import { useDispatch, useSelector, connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import { addFoodItemThunk } from "../store/foodItems";
-import { addToFridge } from "../store/fridge";
+import { addToFridgeThunk } from "../store/fridge";
 import axios from "axios";
 
 let EdamamURL = "https://api.edamam.com/api/food-database/v2/parser?";
@@ -17,8 +17,13 @@ export default function Scanner({ navigation }) {
 
   const dispatch = useDispatch();
   const foodItems = useSelector((state) => state.foodItemsReducer);
+  const fridge = useSelector((state) => state.fridgeReducer);
+
   const addFoodItem = (foodItem) => {
     dispatch(addFoodItemThunk(foodItem));
+  };
+  const addToFridge = (foodItem) => {
+    dispatch(addToFridgeThunk(foodItem));
   };
 
   const askForCameraPermission = () => {
@@ -26,6 +31,11 @@ export default function Scanner({ navigation }) {
       const { status } = await BarCodeScanner.requestPermissionsAsync();
       setHasPermission(status === "granted");
     })();
+  };
+
+  const reScan = () => {
+    setScanned(false);
+    setText(false);
   };
 
   useEffect(() => {
@@ -37,16 +47,38 @@ export default function Scanner({ navigation }) {
       {
         text: "No",
         onPress: () => {
-          setScanned(false);
-          setText(false);
+          reScan();
         },
         style: "cancel",
       },
       {
         text: "Yes",
-        onPress: () => addToFridge(foodName),
+        onPress: () => {
+          addToFridge(foodName);
+          fridgeOrReScanAlert();
+        },
       },
     ]);
+
+  const fridgeOrReScanAlert = () =>
+    Alert.alert(
+      `Successfully added! Would you like to scan another item or go back to your fridge?`,
+      [
+        {
+          text: "Scan Again",
+          onPress: () => {
+            reScan();
+          },
+          style: "cancel",
+        },
+        {
+          text: "Go To Fridge",
+          onPress: () => {
+            navigation.navigate("Fridge");
+          },
+        },
+      ]
+    );
 
   const foodName = (foodItemData) => {
     let foodObject = foodItemData.hints[0].food;
@@ -111,8 +143,7 @@ export default function Scanner({ navigation }) {
           <Button
             title={"Tap to Scan Again"}
             onPress={() => {
-              setScanned(false);
-              setText(false);
+              reScan();
             }}
           />
           <Button

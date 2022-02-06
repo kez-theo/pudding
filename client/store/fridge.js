@@ -33,16 +33,15 @@ export const _deleteFoodItemFromFridge = (fridge) => {
 };
 
 //thunks
-export const getFridgeThunk = (Id) => {
-  let userId = 1;
+export const getFridgeThunk = (userId) => {
   return async (dispatch) => {
     try {
       const { data: fridge } = await axios.get(
-        `https://unlucky-robin-25.loca.lt/api/fridge/${userId}`
+        `https://fast-grasshopper-49.loca.lt/api/fridge/${userId}`
       );
       dispatch(_getFridge(fridge));
     } catch (error) {
-      console.log("GET FRIDGE THUNK ERROR");
+      console.error(error);
     }
   };
 };
@@ -51,19 +50,22 @@ export const deleteFoodItemFromFridgeThunk = (userId, foodItemId) => {
   return async (dispatch) => {
     try {
       userId = 1;
-      await axios.delete(`/api/users/${userId}`, { foodItemId });
+      await axios.delete(
+        `https://fast-grasshopper-49.loca.lt/api/fridge${userId}`,
+        { foodItemId }
+      );
     } catch (err) {
       console.error(`Failed to delete fridge item`, err);
     }
   };
 };
 
-export const addToFridge = (foodItem_name) => {
+export const addToFridgeThunk = (foodItem_name) => {
   let userId = 1;
   return async (dispatch) => {
     try {
       const { data: foodItem } = await axios.post(
-        `https://unlucky-robin-25.loca.lt/api/fridge/${userId}`,
+        `https://fast-grasshopper-49.loca.lt/api/fridge/${userId}`,
         {
           foodItem_name,
         }

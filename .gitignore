@@ -12,6 +12,6 @@ npm-debug.*
 web-build/
 .keys.js
 package-lock.json
-
+.env
 # macOS
 .DS_Store

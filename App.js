@@ -32,6 +32,34 @@ const AppSource = () => {
           options={{
             title: "Thymely Cook",
             headerStyle: {
+              backgroundColor: "rgb(242, 250, 247)",
+            },
+            headerTintColor: "green",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
+          }}
+        />
+        <Stack.Screen
+          name="Fridge"
+          component={Fridge}
+          options={{
+            title: "My Fridge",
+            headerStyle: {
+              backgroundColor: "white",
+            },
+            headerTintColor: "green",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
+          }}
+        />
+        <Stack.Screen
+          name="Scanner"
+          component={Scanner}
+          options={{
+            title: "Add Your Groceries",
+            headerStyle: {
               backgroundColor: "#f4511e",
             },
             headerTintColor: "#fff",
@@ -40,8 +68,6 @@ const AppSource = () => {
             },
           }}
         />
-        <Stack.Screen name="Fridge" component={Fridge} />
-        <Stack.Screen name="Scanner" component={Scanner} />
         <Stack.Screen name="Recipes" component={Recipes} />
         <Stack.Screen name="SingleRecipe" component={SingleRecipe} />
       </Stack.Navigator>
