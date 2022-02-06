@@ -1,8 +1,8 @@
 import axios from 'axios'
+import {SPOON_API_KEY} from '@env'
 
 const spnAPI = 'https://api.spoonacular.com/recipes/'
 
-const apiKey = process.env.SPOON_API_KEY
 
 //Action
 const GET_RECIPES = 'GET_RECIPES'
@@ -21,7 +21,7 @@ export const getRecipes = (recipes) => ({
 export const getRecipesByFoodItem = () => {
   return async (dispatch) => {
     try {
-      const { data: recipes } = await axios.get(`${spnAPI}complexSearch?query=tomato&number=2&apiKey=${apiKey}`, recipes)
+      const { data: recipes } = await axios.get(`${spnAPI}complexSearch?query=tomato&number=2&apiKey=${SPOON_API_KEY}`, recipes)
       dispatch(getRecipes(recipes))
     } catch (err) {
       console.log(">>>>>>>GET RECIPES THUNK NOT WORKING!")
