@@ -1,6 +1,7 @@
 const Sequelize = require("sequelize");
 const pkg = require("../../package.json");
-const {HEROKU_DB} = require("@env")
+const pg = require('pg')
+const {HEROKU_DB} = require("../../.env")
 
 const databaseName =
   pkg.name + (process.env.NODE_ENV === "test" ? "-test" : "");
@@ -17,14 +18,14 @@ if (process.env.LOGGING === "true") {
 if (process.env.DATABASE_URL) {
   config.dialectOptions = {
     ssl: {
+      require: true,
       rejectUnauthorized: false,
     },
   };
 }
 
 const db = new Sequelize(
-  process.env.DATABASE_URL || `postgres://${HEROKU_DB}`,
-  // process.env.DATABASE_URL || `postgres://localhost:5432/${databaseName}`,
+  process.env.DATABASE_URL || `postgres://localhost:5432/${databaseName}`,
   config
 );
 module.exports = db;

@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Image, FlatList, SafeAreaView, Text, View } from 'react-native';
 import { getRecipesFromFridge } from '../../src/extApi_recipes';
+const axios = require("axios");
+import {SPOON_API_KEY} from '@env'
+
+const spnAPI = 'https://api.spoonacular.com/recipes/'
 
 //dummy data - uncomment below to use
 // const RESULTS = [
@@ -44,13 +48,16 @@ const Recipes = () => {
   const [recipes, setRecipes] = useState( [] );  
   //where you preform side effects, including data fetching, manually changing the DOM, using history (also available as a hook). Basically componentDidMount, componentDidUpdate and componentWillUnmount combined.
   useEffect(() => {
-      setRecipes(getRecipesFromFridge())
-    // setRecipes(getRecipesFromFridge())
+    const fetchRecipes = async () => {
+      const res = await axios.get(
+        `${spnAPI}complexSearch?query=tomatos&number=4&apiKey=${SPOON_API_KEY}`
+      )
+      setRecipes(res.data.results)
+    };
+    fetchRecipes();
     // uncomment below and comment above to use with RESULTS dummy data
     // setRecipes(RESULTS)
   }, []);
-
-  console.log(recipes)
 
   const Recipe = ({ title, image }) => (
     <View style={styles.item}>
@@ -65,25 +72,17 @@ const Recipes = () => {
 
   return (
     <View style={styles.container}>
-      {!recipes ? (
+      {recipes.length === null ? (
         <View>
           <Text>Loading...</Text>
         </View>
       ) : (
         <SafeAreaView style={styles.list}>
-          {recipes.map((recipe) => {
-            return (
-              <>
-                <Image style={styles.thumbnail} source={ {uri: recipe.image} } />
-                <Text style={styles.title}>{title}</Text>
-              </>
-            )
-          })}
-          {/* <FlatList 
+          <FlatList 
             data={recipes}
             renderItem={renderRecipe}
             keyExtractor={item => item.id}
-          /> */}
+          />
         </SafeAreaView>
       )}
     </View>
