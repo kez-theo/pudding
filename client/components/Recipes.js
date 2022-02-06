@@ -1,132 +1,119 @@
-import React, { useEffect } from 'react';
-import { Button, StyleSheet, Image, FlatList, Text, View } from 'react-native';
-import { useSelector, useDispatch } from "react-redux";
-import { getRecipesByFoodItem } from "../store/recipes";
- 
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Image, FlatList, SafeAreaView, Text, View } from 'react-native';
+import { getRecipesFromFridge } from '../../src/extApi_recipes';
+
+//dummy data
+const RESULTS = [
+    {
+        "id": 639203,
+        "title": "Chocolate Soup",
+        "image": "https://spoonacular.com/recipeImages/639203-312x231.jpg",
+        "imageType": "jpg"
+    },
+    {
+        "id": 639167,
+        "title": "Chocolate Plums",
+        "image": "https://spoonacular.com/recipeImages/639167-312x231.jpg",
+        "imageType": "jpg"
+    },
+    {
+        "id": 639234,
+        "title": "Chocolate Wafers",
+        "image": "https://spoonacular.com/recipeImages/639234-312x231.jpg",
+        "imageType": "jpg"
+    },
+    {
+        "id": 639168,
+        "title": "Chocolate Popcorn",
+        "image": "https://spoonacular.com/recipeImages/639168-312x231.jpg",
+        "imageType": "jpg"
+    },
+    {
+        "id": 67308,
+        "title": "Chocolate Souffle",
+        "image": "https://spoonacular.com/recipeImages/67308-312x231.jpg",
+        "imageType": "jpg"
+    }
+]
 
 
-// const Recipes = () => {
-//   //gives access to dispatch thunks directly
-//   const dispatch = useDispatch();
-//   //gives access to redux state
-//   const recipes = useSelector((state) => {
-//     return {
-//       recipes: state.recipesReducer,
-//     }
-//   });  
+const Recipes = () => {
+  //set state (locally). useState returns an array with 2 items: first is the name of the state variable 
+  //(recipes), second is the function to change/set variable to the state. With the dummy data RESULTS, 
+  //I am setting the RESULTS object to the recipes variable so i can access the data
+  const [recipes, setRecipes] = useState( [] );  
+  //where you preform side effects, including data fetching, manually changing the DOM, using history (also available as a hook). Basically componentDidMount, componentDidUpdate and componentWillUnmount combined.
+  useEffect(() => {
+    // setRecipes(getRecipesFromFridge())
+    setRecipes(RESULTS)
+  }, []);
 
-//   //where you preform side effects, including data fetching, manually changing the DOM, using history (also available as a hook). Basically componentDidMount, componentDidUpdate and componentWillUnmount combined.
-//   useEffect(() => {
-//     dispatch(getRecipesByFoodItem());
-//     //this empty bracket determines that whatever is in the useEffect body will be called once, making this a replacement for componentDidMount.
-//   }, []);
-
-//   const results = recipes.results
-//   console.log(results)
-//   return (
-//     <View style={styles.container}>
-//       {results.map((result) => {
-//         return (
-//           <View key={result.id}>
-//             <Text>{result.title}</Text>
-//             <Image style={styles.thumbnail} source={ {uri: result.image} } />
-//           </View>
-//         )
-//       })}
-//     </View>
-//   );
-// };
-
-// export default Recipes;
-
-// const styles = StyleSheet.create({
-//   list: {
-//     flex: 1,
-//     backgroundColor: '#eee',
-//     width: '90%',
-//     paddingTop: 50,
-//   },
-//   container: {
-//     flex: 1,
-//     backgroundColor: "#fe0055",
-//     alignItems: "center",
-//     justifyContent: "center",
-//   },
-// });
-
-
-const recipes = {
-  "results": [
-      {
-          "id": 639203,
-          "title": "Chocolate Soup",
-          "image": "https://spoonacular.com/recipeImages/639203-312x231.jpg",
-          "imageType": "jpg"
-      },
-      {
-          "id": 639167,
-          "title": "Chocolate Plums",
-          "image": "https://spoonacular.com/recipeImages/639167-312x231.jpg",
-          "imageType": "jpg"
-      },
-      {
-          "id": 639234,
-          "title": "Chocolate Wafers",
-          "image": "https://spoonacular.com/recipeImages/639234-312x231.jpg",
-          "imageType": "jpg"
-      },
-      {
-          "id": 639168,
-          "title": "Chocolate Popcorn",
-          "image": "https://spoonacular.com/recipeImages/639168-312x231.jpg",
-          "imageType": "jpg"
-      },
-      {
-          "id": 67308,
-          "title": "Chocolate Souffle",
-          "image": "https://spoonacular.com/recipeImages/67308-312x231.jpg",
-          "imageType": "jpg"
-      }
-  ],
-  "offset": 0,
-  "number": 5,
-  "totalResults": 539
-}
-
-export default function Recipes() {
-  const results = recipes.results
-  console.log(process.env)
-  return (
-    <View style={styles.container}>
-      {results.map((result) => {
-        return (
-          <View key={result.id}>
-            <Text>{result.title}</Text>
-            <Image style={styles.thumbnail} source={ {uri: result.image} } />
-          </View>
-        )
-      })}
+  const Recipe = ({ title, image }) => (
+    <View style={styles.item}>
+      <Image style={styles.thumbnail} source={ {uri: image} } />
+      <Text style={styles.title}>{title}</Text>
     </View>
   );
-}
+  
+  const renderRecipe = ({ item }) => (
+    <Recipe title={item.title} image={item.image} />
+  );
+  return (
+    <View style={styles.container}>
+      {recipes.length === null ? (
+        <View>
+          <Text>Loading...</Text>
+        </View>
+      ) : (
+        <SafeAreaView style={styles.list}>
+          <FlatList 
+            data={recipes}
+            renderItem={renderRecipe}
+            keyExtractor={item => item.id}
+          />
+        </SafeAreaView>
+      )}
+    </View>
+  );
+};
 
+export default Recipes;
+
+//styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#eee",
     alignItems: "center",
     justifyContent: "center",
   },
   list: {
     flex: 1,
-    backgroundColor: '#e3ffee',
-    width: '100%',
+    width: '90%',
+    paddingTop: 100,
+  },
+  item: {
+    backgroundColor: '#dce6df',
+    padding: 20,
+    marginVertical: 8,
+    marginHorizontal: 16,
+    borderRadius: 20,
+    borderColor: 'teal',
+    borderWidth: 1,
     alignItems: "center",
     justifyContent: "center",
+  },
+  title: {
+    fontSize: 24,
+    color: 'teal',
+    paddingTop: 5,
+    fontWeight: 'bold',
+    fontFamily: 'Avenir'
   },
   thumbnail: {
     width: 150,
     height: 150,
+    borderRadius: 10
   },
 });
 
