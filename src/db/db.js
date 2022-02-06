@@ -26,8 +26,8 @@ if (true) {
 //console.log("herokudb",process.env.HEROKU_DB);
 const db = new Sequelize(
   
-  process.env.DATABASE_URL || `postgres://${process.env.HEROKU_DB}`,
-  // process.env.DATABASE_URL || `postgres://localhost:5432/${databaseName}`,
+  // process.env.DATABASE_URL || `postgres://${process.env.HEROKU_DB}`,
+  process.env.DATABASE_URL || `postgres://localhost:5432/${databaseName}`,
   config
 );
 module.exports = db;
