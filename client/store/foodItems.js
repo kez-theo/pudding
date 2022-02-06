@@ -42,7 +42,7 @@ export const addFoodItemThunk = (foodItem_name) => {
   return async (dispatch) => {
     try {
       const { data: food } = await axios.post(
-        "https://unlucky-robin-25.loca.lt/api/foodItems/",
+        "https://fast-grasshopper-49.loca.lt/api/foodItems/",
         {
           foodItem_name,
         }
