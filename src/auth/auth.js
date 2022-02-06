@@ -1,9 +1,10 @@
 const router = require('express').Router()
-const {models: {User}} = require("../db/models/User");
+const User = require("../db/models/User");
+const { checkAuth } = require('../auth-middleware.js')
 
-router.post("/login", async (req, res, next) => {
+router.post('/login', async (req, res, next) => {
     try { 
-        let user = await User.findByPk(req.body.id)
+        let user = await User.findByPk(req.body.uid)
         if(!user) {
             user = await User.create(req.body)
         }
@@ -13,7 +14,7 @@ router.post("/login", async (req, res, next) => {
       }
     })
 
-router.post("/signup", async (req, res, next) => {
+router.post('/signup', async (req, res, next) => {
     try {
         const user = await User.create(req.body);
         res.status(201).json(user)
@@ -26,18 +27,18 @@ router.post("/signup", async (req, res, next) => {
     }
 });
 
-router.get("/me", async (req, res, next) => {
+router.get('/me', checkAuth, async (req, res, next) => {
     try {
-        const user = await User.findByPk(req.user.id)
+        const user = await User.findByPk(req.user.uid)
         res.json(user)
         } catch(error) {
          next(error)
      }
   });
 
-  router.put("update", async (req, res, next) => {
+  router.put('/update', checkAuth, async (req, res, next) => {
       try{
-          const user = await User.findByPk(req.user.id);
+          const user = await User.findByPk(req.user.uid);
           if(user) {
               res.json(await user.update(req.body))
           } else {
@@ -47,3 +48,5 @@ router.get("/me", async (req, res, next) => {
           next(error)
       }
   })
+
+  module.exports = router;

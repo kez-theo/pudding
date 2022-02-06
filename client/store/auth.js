@@ -2,17 +2,14 @@ import axios from "axios";
 import { auth } from '../firebaseAuth/firebase'
 import firebase from "firebase";
 
-
-/**
- * ACTION TYPES
- */
+//Action Type
 const SET_USER = "SET_USER";
 
-/**
- * ACTION CREATORS
- */
+//Action Types
+//A user signs in (the current user is set)
 const setUser = (user) => ({ type: SET_USER, user });
 
+//A user signs out(the current user becomes null or empty)
 export const logout = () => {
   return {
     type: SET_USER,
@@ -20,13 +17,11 @@ export const logout = () => {
   };
 };
 
-/**
- * THUNK CREATORS
- */
+//Thunks
 export const setUserThunk = () => async (dispatch) => {
   const idToken = await auth.currentUser.getIdToken(true);
   if (idToken) {
-    const { data } = await axios.get(``, {
+    const { data } = await axios.get(`/auth/me`, {
       headers: {
         authtoken: idToken,
       },
@@ -41,8 +36,7 @@ export const updateUserThunk =
     try {
       const idToken = await auth.currentUser.getIdToken(true);
       if (idToken) {
-        const { data } = await axios.put(
-          ``,
+        const { data } = await axios.put(`/auth/update`,
           {
             firstName,
             lastName,
@@ -57,7 +51,7 @@ export const updateUserThunk =
         return true;
       }
     } catch (err) {
-      console.log("THUNK ERROR: ", err);
+      console.log("thunk error: ", err);
     }
   };
 
@@ -67,20 +61,20 @@ export const updatePassword = async (password) => {
     await user.updatePassword(password);
     return true;
   } catch (err) {
-    console.log("UPDATE PASSWORD: err");
+    console.log("update password thunk error");
     return err.message;
   }
 };
 
 export const authenticateSignUp =
-  ({ email, firstName, lastName, password, method }) =>
+  ({ email, firstName, lastName, password }) =>
   async (dispatch) => {
     try {
       const { user } = await auth.createUserWithEmailAndPassword(
         email,
         password
       );
-      const { data } = await axios.post(``, {
+      const { data } = await axios.post(`/auth/signup`, {
         id: user.id,
         email,
         firstName,
@@ -100,7 +94,7 @@ export const authenticateLogin = ({ email, password }) =>
         email,
         password
       );
-      const { data } = await axios.post(`/api/users/:id`, {
+      const { data } = await axios.post(`/auth/login`, {
         uid: user.uid,
       });
       if (verify(data, dispatch)) {
@@ -116,9 +110,7 @@ const initialState = {
   user: {},
 };
 
-/**
- * REDUCER
- */
+//Reducer
 export default function (state = initialState, action) {
   switch (action.type) {
     case SET_USER:

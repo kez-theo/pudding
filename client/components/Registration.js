@@ -1,6 +1,8 @@
 import React from 'react';
 import { Text, StyleSheet, View, TextInput, TouchableOpacity, Alert, Image } from 'react-native';
 import { auth } from '../firebaseAuth/firebase'
+import { authenticateSignUp } from '../store/auth'
+import { useDispatch } from "react-redux"
 //import { useDispatch } from 'react-redux';
 //Text - A React component for displaying text. Text supports nesting, styling, and touch handling.
 //View - The most fundamental component for building a UI, View is a container that supports layout with flexbox, style, some touch handling, and accessibility controls.
@@ -9,13 +11,14 @@ import { auth } from '../firebaseAuth/firebase'
 //TouchableOpacity - A wrapper for making views respond properly to touches. On press down, the opacity of the wrapped view is decreased, dimming it.
 
 export default function Registration({ navigation }) {  
-   // dispatch = useDispatch
+    const dispatch = useDispatch()
     const [firstName, setFirstName] = React.useState("")
     const [lastName, setLastName] = React.useState("")
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
-    const [error, setError] = React.useState(null)
-
+    const [confirmPassword, setConfirmPassword] = React.useState("")
+    const [error, setError] = React.useState("")
+    
     const onFooterLinkPress = () => {
       navigation.navigate('Login')
     }
@@ -30,14 +33,22 @@ export default function Registration({ navigation }) {
     }, [])
   
 
-    const handleSignIn = async () => {
-      if(!email || !password) Alert.alert("Please fill out the required fields!")
+    const handleRegistration = async () => {
         try {
-          const  { user } = await auth.createUserWithEmailAndPassword(email, password)
-          console.log('Registered with: ', user.email)
+          const response = await dispatch(
+            authenticateSignUp({firstName, lastName, email, password})
+          );
+          if(password !== confirmPassword) {
+            Alert.alert("Passwords don't match")
+          }
+          if(password.length < 6) {
+            Alert.alert('the password is too weak. Please use 6 or more characters.')
+          }
+          if(response !== true) setError(response)
+            console.log('Registered with: ', email)
           } catch(error) {
-          console.log(error);
-          Alert.alert("Invalid Input")
+            console.log(error);
+            Alert.alert("Invalid Input")
         }
     }
  
@@ -81,7 +92,14 @@ export default function Registration({ navigation }) {
             onChangeText={(password) => setPassword(password)}
             secureTextEntry={true}
           />
-          <TouchableOpacity style={styles.button} onPress={handleSignIn}>
+          <TextInput
+            style={styles.passwordInput}
+            placeholder="Confirm Password*"
+            value={confirmPassword}
+            onChangeText={(password) => setConfirmPassword(password)}
+            secureTextEntry={true}
+          />
+          <TouchableOpacity style={styles.button} onPress={handleRegistration}>
             <Text style={styles.buttonText}>Create Account</Text>
           </TouchableOpacity>
           <View style={styles.footerView}>

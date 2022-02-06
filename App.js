@@ -13,6 +13,7 @@ import Recipes from "./client/components/Recipes";
 import Login from "./client/components/Login";
 import Registration from "./client/components/Registration";
 import SingleRecipe from "./client/components/SingleRecipe";
+import Profile from "./client/components/Profile";
 
 
 
@@ -31,6 +32,7 @@ const AppSource = () => {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Login">
         <Stack.Screen name="Login" component={Login}/>
+        <Stack.Screen name="Profile" component={Profile}/>
         <Stack.Screen name ="Registration" component={Registration}/>
         <Stack.Screen
           name="Home"

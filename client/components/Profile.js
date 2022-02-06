@@ -1,31 +1,31 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {View,Text, TouchableOpacity,ImageBackground,Image,TextInput} from "react-native";
+import {View,Text, TouchableOpacity,ImageBackground,Image,TextInput, StyleSheet} from "react-native";
 import { updateUserThunk, updatePassword } from "../store/auth";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import Logout from "../components/Logout";
-import { INFO } from "../navigation/constants";
-import { auth } from 'f../firebaseAuth/firebase'
+//import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+//import Logout from "../components/Logout";
+//import { INFO } from "../navigation/constants";
+import { auth } from '../firebaseAuth/firebase'
 
-const Profile = (props) => {
-  const user = useSelector((state) => state.auth.user);
+export default function Profile() {
   const [error, setError] = useState(null);
   const [isEdit, setIsEdit] = useState(false);
   const [isEditPassword, setIsEditPassword] = useState(false);
-  const [firstName, setFirstName] = useState(user.firstName);
-  const [lastName, setLastName] = useState(user.lastName);
+  const [firstName, setFirstName] = useState(firstName);
+  const [lastName, setLastName] = useState(lastName);
   const [password, setPassword] = useState("123456");
+  const [email, setEmail] = useState("")
   const [passwordDuplicate, setPasswordDuplicate] = useState("123456");
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setFirstName(user.firstName);
-  }, [user.firstName]);
+    setFirstName(firstName);
+  }, [firstName]);
 
   useEffect(() => {
-    setLastName(user.lastName);
-  }, [user.lastName]);
+    setLastName(lastName);
+  }, [lastName]);
 
   const handleUpdateUser = async () => {
     try {
@@ -58,24 +58,15 @@ const Profile = (props) => {
     }
   };
 
-  const currentUser = firebaseAuth.currentUser;
+  const currentUser = auth.currentUser;
   const provider = currentUser.providerData[0].providerId;
 
   return (
-    <View style={styles.containerScroll}>
-      <ImageBackground
-        source={require("../../assets/images/background.png")}
-        style={styles.backgroundImage}
-      />
-      <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
-        <View style={{ ...styles.headerBoxLarge, paddingHorizontal: 20 }}>
-          <Text style={styles.fontExtraLarge}>Welcome {user.firstName}</Text>
-          <Image
-            style={styles.logoSmall}
-            source={require("../../assets/images/face-with-mole.png")}
-          ></Image>
+    <View >
+      <View showsVerticalScrollIndicator={false}>
+        <View style={{ paddingHorizontal: 20 }}>
+          <Text>Welcome {firstName}</Text>
         </View>
-
         <View>
           <View>
             {isEdit ? (
@@ -83,29 +74,26 @@ const Profile = (props) => {
                 <TextInput
                   editable={false}
                   style={{
-                    ...styles.textInputLarge,
                     borderBottomWidth: 0,
                   }}
                 >
-                  Email: {user.email}
+                  Email: {email}
                 </TextInput>
                 <TextInput
                   editable={true}
                   onChangeText={(firstName) => setFirstName(firstName)}
                   value={firstName}
-                  style={styles.textInputLarge}
                 ></TextInput>
                 <TextInput
                   editable={true}
                   onChangeText={(lastName) => setLastName(lastName)}
                   value={lastName}
-                  style={styles.textInputLarge}
                 ></TextInput>
                 <TouchableOpacity
                   onPress={handleUpdateUser}
-                  style={{ ...styles.buttonLarge, marginTop: 20 }}
+                  style={{marginTop: 20 }}
                 >
-                  <Text style={styles.buttonLargeText}>Update</Text>
+                  <Text>Update</Text>
                 </TouchableOpacity>
               </View>
             ) : (
@@ -113,36 +101,33 @@ const Profile = (props) => {
                 <TextInput
                   editable={false}
                   style={{
-                    ...styles.textInputLarge,
                     borderBottomWidth: 0,
                   }}
                 >
-                  Email: {user.email}
+                  Email: {email}
                 </TextInput>
                 <TextInput
                   editable={false}
                   style={{
-                    ...styles.textInputLarge,
                     borderBottomWidth: 0,
                   }}
                 >
-                  First Name: {user.firstName}
+                  First Name: {firstName}
                 </TextInput>
                 <TextInput
                   editable={false}
                   style={{
-                    ...styles.textInputLarge,
                     borderBottomWidth: 0,
                   }}
                 >
-                  Last Name: {user.lastName}
+                  Last Name: {lastName}
                 </TextInput>
 
                 <TouchableOpacity
                   onPress={() => setIsEdit(true)}
-                  style={{ ...styles.buttonLarge, marginTop: 20 }}
+                  style={{ marginTop: 20 }}
                 >
-                  <Text style={styles.buttonLargeText}>Edit Profile</Text>
+                  <Text>Edit Profile</Text>
                 </TouchableOpacity>
               </View>
             )}
@@ -155,7 +140,6 @@ const Profile = (props) => {
                   editable={true}
                   onChangeText={(password) => setPassword(password)}
                   value={password}
-                  style={styles.textInputLarge}
                 ></TextInput>
                 <TextInput
                   secureTextEntry
@@ -164,12 +148,10 @@ const Profile = (props) => {
                     setPasswordDuplicate(passwordDuplicate)
                   }
                   value={passwordDuplicate}
-                  style={styles.textInputLarge}
                 ></TextInput>
                 {error && (
                   <Text
                     style={{
-                      ...styles.fontExtraSmall,
                       color: "red",
                       marginTop: 10,
                     }}
@@ -180,7 +162,6 @@ const Profile = (props) => {
                 {password !== passwordDuplicate ? (
                   <Text
                     style={{
-                      ...styles.fontExtraSmall,
                       color: "red",
                       marginTop: 10,
                     }}
@@ -190,9 +171,8 @@ const Profile = (props) => {
                 ) : (
                   <TouchableOpacity
                     onPress={handleUpdatePassword}
-                    style={{ ...styles.buttonLarge, marginTop: 20 }}
                   >
-                    <Text style={styles.buttonLargeText}>Update Password</Text>
+                    <Text>Update Password</Text>
                   </TouchableOpacity>
                 )}
               </View>
@@ -202,7 +182,6 @@ const Profile = (props) => {
                   <TextInput
                     editable={false}
                     style={{
-                      ...styles.textInputLarge,
                       borderBottomWidth: 0,
                     }}
                   >
@@ -212,7 +191,6 @@ const Profile = (props) => {
                     editable={false}
                     secureTextEntry
                     style={{
-                      ...styles.textInputLarge,
                       borderBottomColor: "none",
                     }}
                   >
@@ -220,9 +198,8 @@ const Profile = (props) => {
                   </TextInput>
                   <TouchableOpacity
                     onPress={() => setIsEditPassword(true)}
-                    style={{ ...styles.buttonLarge, marginTop: 20 }}
                   >
-                    <Text style={styles.buttonLargeText}>Change Password</Text>
+                    <Text>Change Password</Text>
                   </TouchableOpacity>
                 </View>
               )
@@ -230,24 +207,126 @@ const Profile = (props) => {
           </View>
           <View
             style={{
-              ...styles.buttonBox,
               alignContent: "center",
               paddingLeft: 20,
               marginBottom: 20,
             }}
           >
             <TouchableOpacity
-              style={styles.buttonLarge}
               onPress={onPressInfoButton}
             >
-              <Text style={styles.buttonLargeText}>Info</Text>
             </TouchableOpacity>
-            <Logout />
+            {/* <Logout /> */}
           </View>
         </View>
-      </KeyboardAwareScrollView>
+      </View>
     </View>
   );
 };
 
-export default Profile;
+const styles = StyleSheet.create({
+    container: {
+      flex:1,
+      padding:"4%",
+      backgroundColor: "#CCFFCC",
+      alignItems: "center",
+      // justifyContent: "center",
+      position: 'relative',
+      padding: 100
+      
+    },
+    text: {
+      textAlign: "center",
+      fontSize: 18,
+      margin: 10,
+      fontWeight: "bold",
+      color: "#40434E",
+    },
+    firstnameInput: {
+      textAlign: "center",
+      justifyContent: "center",
+      width: 300,
+      borderWidth: 3,
+      borderColor:"#96C598",
+      padding: 10,
+      margin: 5,
+    },
+    lastnameInput: {
+      textAlign: "center",
+      justifyContent: "center",
+      width: 300,
+      borderWidth: 3,
+      borderColor:"#96C598",
+      padding: 10,
+      margin: 5,
+    },
+    emailInput: {
+      textAlign: "center",
+      justifyContent: "center",
+      width: 300,
+      borderWidth: 3,
+      borderColor:"#96C598",
+      padding: 10,
+      margin: 5,
+    },
+    passwordInput: {
+      textAlign: "center",
+      justifyContent: "center",
+      width: 300,
+      borderWidth: 3,
+      borderColor:"#96C598",
+      padding: 10,
+      margin: 5,
+    },
+    buttonText: {
+      color: "white",
+      fontWeight: "bold",
+      textAlign: "center",
+    },
+    button: {
+      width: 150,
+      padding: 5,
+      backgroundColor: "#8F540E",
+      borderWidth: 2,
+      borderColor: "#AD8557",
+      borderRadius: 15,
+      alignSelf: "center",
+      margin: 8,
+    },
+    forgotButton:{
+      width: 200,
+      padding: 6,
+      backgroundColor: "#8F540E",
+      borderWidth: 2,
+      borderColor: "#AD8557",
+      borderRadius: 15,
+      alignSelf: "center",
+      margin: 5,
+    },
+    scrollView: {
+      backgroundColor: 'white',
+      marginHorizontal: 20,
+    },
+    tinyTomato: {
+      width: 150,
+      height: 150,
+    },
+    footerView: {
+      flex: 1,
+      alignItems: 'center',
+      marginTop: 165,
+    },
+    footerText: {
+      fontSize: 17,
+      color: '#2e2e2d',
+      fontFamily: 'Lato_400Regular',
+      letterSpacing: 0.2,
+    },
+    footerLink: {
+      color: '#1261B1',
+      fontFamily: 'Lato_900Black',
+      fontSize: 17,
+      letterSpacing: 0.2,
+    },
+  });
+
