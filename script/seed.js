@@ -4,6 +4,18 @@ const {
 } = require("../src/db");
 
 //seed dummy data
+const fridges = [
+  {
+    userId: 1,
+    foodItemId: 2,
+    quantity: 3,
+  },
+  {
+    userId: 1,
+    foodItemId: 3,
+    quantity: 1,
+  },
+];
 
 const foodItems = [
   {
@@ -61,6 +73,7 @@ const seed = async () => {
     await Recipe.bulkCreate(recipes);
     await User.bulkCreate(users);
     await FoodItem.bulkCreate(foodItems);
+    await Fridge.bulkCreate(fridges);
   } catch (err) {
     console.log(err);
   }

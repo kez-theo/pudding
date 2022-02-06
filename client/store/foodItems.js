@@ -47,8 +47,6 @@ export const addFoodItemThunk = (foodItem_name) => {
           foodItem_name,
         }
       );
-      console.log("THUS FUD", food);
-      console.log("we here 2?");
       dispatch(_addFoodItem(food));
     } catch (err) {
       console.log(err);

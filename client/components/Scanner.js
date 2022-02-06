@@ -4,6 +4,7 @@ import { Text, View, StyleSheet, Button, Alert } from "react-native";
 import { useDispatch, useSelector, connect } from "react-redux";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import { addFoodItemThunk } from "../store/foodItems";
+import { addToFridge } from "../store/fridge";
 import axios from "axios";
 
 let EdamamURL = "https://api.edamam.com/api/food-database/v2/parser?";
@@ -43,8 +44,7 @@ export default function Scanner({ navigation }) {
       },
       {
         text: "Yes",
-        onPress: () =>
-          console.log("AYE WE GETTIN PLACES TIME TO ADD TO FRIDGE BB"),
+        onPress: () => addToFridge(foodName),
       },
     ]);
 
