@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { StatusBar } from "expo-status-bar";
 import { Button, StyleSheet, Image, Text, View } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import { getRecipeById } from "../store/singleRecipe";
+import { getRecipeById, saveRecipeThunk } from "../store/singleRecipe";
 //this screen should get resipeId and name as props
 export default function SingleRecipe({navigation}) {
     
@@ -10,7 +10,7 @@ export default function SingleRecipe({navigation}) {
 
     const { recipeSteps } = useSelector((state) => {
         return {
-            recipeSteps: state.recipeReducer.steps,
+            recipeSteps: state.recipeReducer.recipe.steps,
         }
     });  
     //need change number to recipeId (will pass from recipes screen)
@@ -18,9 +18,14 @@ export default function SingleRecipe({navigation}) {
        dispatch(getRecipeById(663641));
     }, []);
 
+    const handlePress = (recipe) => {
+    dispatch(saveRecipeThunk(saveRecipeThunk(recipe)));
+  };
+
     return (
 
         <View style={styles.container}>
+            <Text style={styles.text}></Text> 
             <Text style={styles.text}>{dummyRecipesOptions.results[1].title} preparation</Text> 
             {
                 //recipeSteps.map((item, index) => ( <Text key={index} style={styles.text2}>{item.number}. {item.step}</Text>  )) map crash ternary fix:
@@ -36,10 +41,10 @@ export default function SingleRecipe({navigation}) {
                 }}
             />
             <Button
-        style={styles.button}
-        title="Save to favorites"
-        onPress={() => navigation.navigate("Recipes")}
-      />
+                style={styles.button}
+                title="Save to favorites"
+                onPress={handlePress}
+            />
         </View> 
     )
   
@@ -55,12 +60,13 @@ const styles = StyleSheet.create({
   },
   
   text:{
-    fontSize: 24, 
+    fontSize: 22, 
     fontWeight: 'bold',
     justifyContent: 'center', 
     alignItems: 'center',
     color: 'teal',
-    fontFamily: 'Avenir', 
+    fontFamily: 'Avenir',
+    paddingTop: 20,
   },
   text2:{
     fontSize: 16, 
