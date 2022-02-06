@@ -1,5 +1,5 @@
 const router = require('express'). Router()
-const {models: { User }} = require('../db/models/User')
+const User = require("../db/models/User");
 
 router.post('/', async (req, res, next) => {
     try {

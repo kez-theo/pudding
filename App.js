@@ -10,8 +10,11 @@ import Home from "./client/components/Home";
 import Fridge from "./client/components/Fridge";
 import Scanner from "./client/components/Scanner";
 import Recipes from "./client/components/Recipes";
-import LoginScreen from "./client/components/UserLogin";
+import Login from "./client/components/Login";
+import Registration from "./client/components/Registration";
 import SingleRecipe from "./client/components/SingleRecipe";
+
+
 
 const Stack = createNativeStackNavigator();
 
@@ -27,7 +30,8 @@ const AppSource = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen name="Login" component={LoginScreen}/>
+        <Stack.Screen name="Login" component={Login}/>
+        <Stack.Screen name ="Registration" component={Registration}/>
         <Stack.Screen
           name="Home"
           component={Home}

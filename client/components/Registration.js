@@ -1,4 +1,3 @@
-import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { Text, StyleSheet, View, TextInput, TouchableOpacity, Alert, Image } from 'react-native';
 import { auth } from '../firebaseAuth/firebase'
@@ -9,13 +8,16 @@ import { auth } from '../firebaseAuth/firebase'
 //TextInput - The most basic use case is to plop down a TextInput and subscribe to the onChangeText events to read the user input.
 //TouchableOpacity - A wrapper for making views respond properly to touches. On press down, the opacity of the wrapped view is decreased, dimming it.
 
-export default function LoginScreen({ navigation }) {  
+export default function Registration({ navigation }) {  
    // dispatch = useDispatch
+    const [firstName, setFirstName] = React.useState("")
+    const [lastName, setLastName] = React.useState("")
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
+    const [error, setError] = React.useState(null)
 
     const onFooterLinkPress = () => {
-      navigation.navigate('Registration')
+      navigation.navigate('Login')
     }
 
     React.useEffect(() => {
@@ -28,14 +30,14 @@ export default function LoginScreen({ navigation }) {
     }, [])
   
 
-    const handleLogin = async () => {
+    const handleSignIn = async () => {
       if(!email || !password) Alert.alert("Please fill out the required fields!")
         try {
-          const  { user } = await auth.signInWithEmailAndPassword(email, password)
-          console.log('Logged in with: ', user.email)
+          const  { user } = await auth.createUserWithEmailAndPassword(email, password)
+          console.log('Registered with: ', user.email)
           } catch(error) {
           console.log(error);
-          Alert.alert("Incorrect Email or Password")
+          Alert.alert("Invalid Input")
         }
     }
  
@@ -48,7 +50,23 @@ export default function LoginScreen({ navigation }) {
               "https://upload.wikimedia.org/wikipedia/commons/8/89/Tomato_je.jpg",
           }}
         />
-        <Text style={styles.text}>Enter your email and password to sign in:</Text>
+        <Text style={styles.text}></Text>
+          <TextInput
+            style={styles.firstnameInput}
+            placeholder="Enter your firstname*"
+            value={firstName}
+            onChangeText={(firstName) => setFirstName(firstName)}
+            autoCapitalize="none"
+          />
+          <Text style={styles.text}></Text>
+          <TextInput
+            style={styles.lastnameInput}
+            placeholder="Enter your lastname*"
+            value={lastName}
+            onChangeText={(lastName) => setLastName(lastName)}
+            autoCapitalize="none"
+          />
+        <Text style={styles.text}></Text>
           <TextInput
             style={styles.emailInput}
             placeholder="Enter your email*"
@@ -63,17 +81,14 @@ export default function LoginScreen({ navigation }) {
             onChangeText={(password) => setPassword(password)}
             secureTextEntry={true}
           />
-          <TouchableOpacity style={styles.button} onPress={handleLogin}>
-            <Text style={styles.buttonText}>Submit</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.forgotButton} onPress={()=>navigation.navigate('forgotPassword')}>
-            <Text style={styles.buttonText}>Forgot password</Text>
+          <TouchableOpacity style={styles.button} onPress={handleSignIn}>
+            <Text style={styles.buttonText}>Create Account</Text>
           </TouchableOpacity>
           <View style={styles.footerView}>
             <Text style={styles.footerText}>
-              Don't have an account? {' '}
+              Already have an account? {' '}
                <Text onPress={onFooterLinkPress} style={styles.footerLink}>
-                 Sign up
+                 Log In
                </Text>
             </Text>
           </View>
@@ -98,6 +113,24 @@ export default function LoginScreen({ navigation }) {
           margin: 10,
           fontWeight: "bold",
           color: "#40434E",
+        },
+        firstnameInput: {
+          textAlign: "center",
+          justifyContent: "center",
+          width: 300,
+          borderWidth: 3,
+          borderColor:"#96C598",
+          padding: 10,
+          margin: 5,
+        },
+        lastnameInput: {
+          textAlign: "center",
+          justifyContent: "center",
+          width: 300,
+          borderWidth: 3,
+          borderColor:"#96C598",
+          padding: 10,
+          margin: 5,
         },
         emailInput: {
           textAlign: "center",
