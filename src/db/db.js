@@ -1,6 +1,11 @@
 const Sequelize = require("sequelize");
 const pkg = require("../../package.json");
+<<<<<<< HEAD
+const pg = require('pg')
+const {HEROKU_DB} = require("../../.env")
+=======
 require('dotenv').config();
+>>>>>>> main
 
 const databaseName =
   pkg.name + (process.env.NODE_ENV === "test" ? "-test" : "");
@@ -18,6 +23,7 @@ if (process.env.LOGGING === "true") {
 if (true) {
   config.dialectOptions = {
     ssl: {
+      require: true,
       rejectUnauthorized: false,
     },
   };
