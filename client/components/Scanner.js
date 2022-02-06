@@ -55,30 +55,30 @@ export default function Scanner({ navigation }) {
         text: "Yes",
         onPress: () => {
           addToFridge(foodName);
-          fridgeOrReScanAlert();
+          Alert.alert(`Successfully added ${foodName} to your fridge!`);
         },
       },
     ]);
 
-  const fridgeOrReScanAlert = () =>
-    Alert.alert(
-      `Successfully added! Would you like to scan another item or go back to your fridge?`,
-      [
-        {
-          text: "Scan Again",
-          onPress: () => {
-            reScan();
-          },
-          style: "cancel",
-        },
-        {
-          text: "Go To Fridge",
-          onPress: () => {
-            navigation.navigate("Fridge");
-          },
-        },
-      ]
-    );
+  // const fridgeOrReScanAlert = () =>
+  //   Alert.alert(
+  //     `Successfully added! Would you like to scan another item or go back to your fridge?`,
+  //     [
+  //       {
+  //         text: "Scan Again",
+  //         onPress: () => {
+  //           reScan();
+  //         },
+  //         style: "cancel",
+  //       },
+  //       {
+  //         text: "Go To Fridge",
+  //         onPress: () => {
+  //           navigation.navigate("Fridge");
+  //         },
+  //       },
+  //     ]
+  //   );
 
   const foodName = (foodItemData) => {
     let foodObject = foodItemData.hints[0].food;
@@ -109,7 +109,7 @@ export default function Scanner({ navigation }) {
   if (hasPermission === false) {
     return (
       <View style={styles.container}>
-        <Text style={{ marign: 10 }}>
+        <Text style={{ margin: 10 }}>
           Request Denied: How would you like to add food to your Fridge?
         </Text>
         <Button
