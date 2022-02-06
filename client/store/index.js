@@ -5,6 +5,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import recipesReducer from "./recipes";
 import recipeReducer from "./singleRecipe";
 import foodItemsReducer from "./foodItems";
+import fridgeReducer from "./fridge";
 
 
 //add reducers here! Don't forget to import!
@@ -14,6 +15,7 @@ const reducer = combineReducers({
   recipeReducer,
   recipeReducer,
   foodItemsReducer,
+  fridgeReducer,
 
 });
 const middleware = composeWithDevTools(

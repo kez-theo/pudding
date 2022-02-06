@@ -4,6 +4,7 @@ const router = require("express").Router();
 module.exports = router;
 //routers for our own databases --> commented out for now
 // router.use('/campuses', require('./campuses'));
+router.use("/fridge", require("./fridge"));
 router.use("/foodItems", require("./foodItems"));
 // If someone makes a request
 // but you DON'T have a corresponding router, this piece of
