@@ -38,7 +38,7 @@ export const getFridgeThunk = (userId) => {
     try {
       const { data: fridge } = await axios.get(
        // `https://massive-stingray-23.loca.lt/api/fridge/${userId}`
-       `https://the-thymely-cook.herokuapp.com/api/fridge/${userId}`
+       `/api/fridge/${userId}`
       );
       dispatch(_getFridge(fridge));
     } catch (error) {
