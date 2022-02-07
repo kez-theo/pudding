@@ -40,9 +40,9 @@ const AppSource = () => {
           options={{
             title: "Thymely Cook",
             headerStyle: {
-              backgroundColor: "rgb(242, 250, 247)",
+              backgroundColor: "rgb(65, 140, 115)",
             },
-            headerTintColor: "green",
+            headerTintColor: "white",
             headerTitleStyle: {
               fontWeight: "bold",
             },
@@ -54,9 +54,9 @@ const AppSource = () => {
           options={{
             title: "My Fridge",
             headerStyle: {
-              backgroundColor: "white",
+              backgroundColor: "rgb(65, 140, 115)",
             },
-            headerTintColor: "green",
+            headerTintColor: "white",
             headerTitleStyle: {
               fontWeight: "bold",
             },
@@ -68,16 +68,42 @@ const AppSource = () => {
           options={{
             title: "Add Your Groceries",
             headerStyle: {
-              backgroundColor: "#f4511e",
+              backgroundColor: "rgb(65, 140, 115)",
             },
-            headerTintColor: "#fff",
+            headerTintColor: "white",
             headerTitleStyle: {
               fontWeight: "bold",
             },
           }}
         />
-        <Stack.Screen name="Recipes" component={Recipes} />
-        <Stack.Screen name="SingleRecipe" component={SingleRecipe} />
+        <Stack.Screen
+          name="Recipes"
+          component={Recipes}
+          options={{
+            title: "Add Your Groceries",
+            headerStyle: {
+              backgroundColor: "rgb(65, 140, 115)",
+            },
+            headerTintColor: "white",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
+          }}
+        />
+        <Stack.Screen
+          name="SingleRecipe"
+          component={SingleRecipe}
+          options={{
+            title: "Add Your Groceries",
+            headerStyle: {
+              backgroundColor: "rgb(65, 140, 115)",
+            },
+            headerTintColor: "white",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
