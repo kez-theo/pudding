@@ -37,7 +37,7 @@ export const getFridgeThunk = (userId) => {
   return async (dispatch) => {
     try {
       const { data: fridge } = await axios.get(
-        `https://fast-grasshopper-49.loca.lt/api/fridge/${userId}`
+        `https://tall-snail-87.loca.lt/api/fridge/${userId}`
       );
       dispatch(_getFridge(fridge));
     } catch (error) {
@@ -50,10 +50,9 @@ export const deleteFoodItemFromFridgeThunk = (userId, foodItemId) => {
   return async (dispatch) => {
     try {
       userId = 1;
-      await axios.delete(
-        `https://fast-grasshopper-49.loca.lt/api/fridge${userId}`,
-        { foodItemId }
-      );
+      await axios.delete(`https://tall-snail-87.loca.lt/api/fridge/${userId}`, {
+        foodItemId,
+      });
     } catch (err) {
       console.error(`Failed to delete fridge item`, err);
     }
@@ -65,7 +64,7 @@ export const addToFridgeThunk = (foodItem_name) => {
   return async (dispatch) => {
     try {
       const { data: foodItem } = await axios.post(
-        `https://fast-grasshopper-49.loca.lt/api/fridge/${userId}`,
+        `https://tall-snail-87.loca.lt/api/fridge/${userId}`,
         {
           foodItem_name,
         }
@@ -87,9 +86,7 @@ export default function fridgeReducer(state = initialState, action) {
     case ADD_TO_FRIDGE:
       return [...state, action.foodItem];
     case DELETE_FOODITEM_FROM_FRIDGE:
-      return state.fridge.foodItems.filter(
-        (foodItem) => foodItem.id !== action.foodItem.id
-      );
+      return state.filter((foodItem) => foodItem.id !== action.foodItem.id);
     case DELETE_FRIDGE:
       return state.filter((user) => user.id !== action.user.id);
     default:

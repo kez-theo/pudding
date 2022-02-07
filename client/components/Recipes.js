@@ -29,11 +29,18 @@ const Recipes = ( {navigation} ) => {
     };
     fetchRecipes();
   }, []);
-
+  
   const navigateSingleRecipe = (recipeId, recipeName) => {
     // @Elena make sure you change "SearchSingleRecipe" to the name of your Component
     navigation.navigate("SearchSingleRecipe", { id: recipeId, title: recipeName });
   };
+
+  const Recipe = ({ title, image }) => (
+    <View style={styles.item}>
+      <Image style={styles.thumbnail} source={{ uri: image }} />
+      <Text style={styles.title}>{title}</Text>
+    </View>
+  );
 
   const renderRecipe = ({ item }) => {
     return (
@@ -56,7 +63,7 @@ const Recipes = ( {navigation} ) => {
         </View>
       ) : (
         <SafeAreaView style={styles.list}>
-          <FlatList 
+          <FlatList
             data={recipes}
             renderItem={renderRecipe}
             keyExtractor={item => item.id}
@@ -81,32 +88,31 @@ const styles = StyleSheet.create({
   },
   list: {
     flex: 1,
-    width: '90%',
+    width: "90%",
     paddingTop: 100,
   },
   item: {
+    backgroundColor: "#dce6df",
     padding: 20,
     marginVertical: 8,
     marginHorizontal: 16,
     backgroundColor: "#dce6df",
     borderRadius: 20,
-    borderColor: 'teal',
+    borderColor: "teal",
     borderWidth: 1,
     alignItems: "center",
     justifyContent: "center",
   },
   title: {
     fontSize: 24,
-    color: 'teal',
+    color: "teal",
     paddingTop: 5,
-    fontWeight: 'bold',
-    fontFamily: 'Avenir'
+    fontWeight: "bold",
+    fontFamily: "Avenir",
   },
   thumbnail: {
     width: 150,
     height: 150,
-    borderRadius: 10
+    borderRadius: 10,
   },
 });
-
-

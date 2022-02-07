@@ -17,7 +17,10 @@ router.get("/", async (req, res, next) => {
 
 router.get("/:foodItemId", async (req, res, next) => {
   try {
-    const foodItem = await FoodItem.findByPk(req.params.foodItemId);
+    console.log(req.params.foodItemId);
+    const foodItem = await FoodItem.findOne({
+      where: { id: req.params.foodItemId },
+    });
     if (!foodItem) {
       res.status(404).send("Sorry this foodItem does not exist!");
     } else {
