@@ -1,29 +1,35 @@
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, Image, FlatList, SafeAreaView, Text, View } from 'react-native';
+import React, { useEffect, useState } from "react";
+import {
+  StyleSheet,
+  Image,
+  FlatList,
+  SafeAreaView,
+  Text,
+  View,
+} from "react-native";
 const axios = require("axios");
-import {SPOON_API_KEY} from '@env'
+import { SPOON_API_KEY } from "@env";
 
-const spnAPI = 'https://api.spoonacular.com/recipes/'
-
+const spnAPI = "https://api.spoonacular.com/recipes/";
 const Recipes = () => {
-  //set state (locally). useState returns an array with 2 items: first is the name of the state variable 
-  //(recipes), second is the function to change/set variable to the state. With the dummy data RESULTS, 
+  //set state (locally). useState returns an array with 2 items: first is the name of the state variable
+  //(recipes), second is the function to change/set variable to the state. With the dummy data RESULTS,
   //I am setting the RESULTS object to the recipes variable so i can access the data
-  const [recipes, setRecipes] = useState( [] );  
+  const [recipes, setRecipes] = useState([]);
   //where you preform side effects, including data fetching, manually changing the DOM, using history (also available as a hook). Basically componentDidMount, componentDidUpdate and componentWillUnmount combined.
   useEffect(() => {
     const fetchRecipes = async () => {
       const res = await axios.get(
         `${spnAPI}complexSearch?query=tomatos&number=4&apiKey=${SPOON_API_KEY}`
-      )
-      setRecipes(res.data.results)
+      );
+      setRecipes(res.data.results);
     };
     fetchRecipes();
   }, []);
 
   const Recipe = ({ title, image }) => (
     <View style={styles.item}>
-      <Image style={styles.thumbnail} source={ {uri: image} } />
+      <Image style={styles.thumbnail} source={{ uri: image }} />
       <Text style={styles.title}>{title}</Text>
     </View>
   );
@@ -40,10 +46,10 @@ const Recipes = () => {
         </View>
       ) : (
         <SafeAreaView style={styles.list}>
-          <FlatList 
+          <FlatList
             data={recipes}
             renderItem={renderRecipe}
-            keyExtractor={item => item.id}
+            keyExtractor={(item) => item.id}
           />
         </SafeAreaView>
       )}
@@ -63,32 +69,30 @@ const styles = StyleSheet.create({
   },
   list: {
     flex: 1,
-    width: '90%',
+    width: "90%",
     paddingTop: 100,
   },
   item: {
-    backgroundColor: '#dce6df',
+    backgroundColor: "#dce6df",
     padding: 20,
     marginVertical: 8,
     marginHorizontal: 16,
     borderRadius: 20,
-    borderColor: 'teal',
+    borderColor: "teal",
     borderWidth: 1,
     alignItems: "center",
     justifyContent: "center",
   },
   title: {
     fontSize: 24,
-    color: 'teal',
+    color: "teal",
     paddingTop: 5,
-    fontWeight: 'bold',
-    fontFamily: 'Avenir'
+    fontWeight: "bold",
+    fontFamily: "Avenir",
   },
   thumbnail: {
     width: 150,
     height: 150,
-    borderRadius: 10
+    borderRadius: 10,
   },
 });
-
-

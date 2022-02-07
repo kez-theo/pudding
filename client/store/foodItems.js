@@ -29,7 +29,7 @@ export const getFoodItemThunk = (foodItemId) => {
   return async (dispatch) => {
     try {
       const { data: foodItem } = await axios.get(
-        `/api/foodItems/${foodItemId}`
+        `https://massive-stingray-23.loca.lt/api/foodItems/${foodItemId}`
       );
       dispatch(_getFoodItem(foodItem));
     } catch (error) {
@@ -42,7 +42,7 @@ export const addFoodItemThunk = (foodItem_name) => {
   return async (dispatch) => {
     try {
       const { data: food } = await axios.post(
-        "https://fast-grasshopper-49.loca.lt/api/foodItems/",
+        "https://massive-stingray-23.loca.lt/api/foodItems/",
         {
           foodItem_name,
         }
