@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-vars */
 import { StatusBar } from "expo-status-bar";
-import Scanner from "./Scanner";
 import React, { useState, useEffect } from "react";
 import {
   Text,
@@ -27,7 +26,13 @@ export default function Fridge({ navigation }) {
     viewFridge(1);
   }, []);
 
-  const FridgeFlatList = ({ item, onPress, backgroundColor, textColor }) => (
+  const FridgeFlatList = ({
+    navigation,
+    item,
+    onPress,
+    backgroundColor,
+    textColor,
+  }) => (
     <TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor]}>
       <Image
         style={styles.tinyThyme}
@@ -41,14 +46,21 @@ export default function Fridge({ navigation }) {
     </TouchableOpacity>
   );
 
-  const renderFridgeFlatList = ({ item }) => {
+  const navigationOpacity = (foodItemId) => {
+    navigation.navigate("SingleFoodItem", { id: foodItemId });
+  };
+
+  const renderFridgeFlatList = ({ navigation, item }) => {
     const color =
       item.id === selectedId ? "rgb(42, 82, 69)" : "rgb(65, 140, 115)";
 
     return (
       <FridgeFlatList
         item={item}
-        onPress={() => setSelectedId(item.id)}
+        onPress={() => {
+          setSelectedId(item.id);
+          navigationOpacity(item.id);
+        }}
         textColor={{ color }}
       />
     );
