@@ -37,7 +37,8 @@ export const getFridgeThunk = (userId) => {
   return async (dispatch) => {
     try {
       const { data: fridge } = await axios.get(
-        `https://massive-stingray-23.loca.lt/api/fridge/${userId}`
+       // `https://massive-stingray-23.loca.lt/api/fridge/${userId}`
+       `https://the-thymely-cook.herokuapp.com/api/fridge/${userId}`
       );
       dispatch(_getFridge(fridge));
     } catch (error) {
@@ -45,13 +46,12 @@ export const getFridgeThunk = (userId) => {
     }
   };
 };
-
 export const deleteFoodItemFromFridgeThunk = (userId, foodItemId) => {
   return async (dispatch) => {
     try {
       userId = 1;
       await axios.delete(
-        `https://massive-stingray-23.loca.lt/api/fridge${userId}`,
+        `https://massive-stingray-23.loca.lt/api/fridge/${userId}`,
         { foodItemId }
       );
     } catch (err) {
@@ -65,7 +65,7 @@ export const addToFridgeThunk = (foodItem_name) => {
   return async (dispatch) => {
     try {
       const { data: foodItem } = await axios.post(
-        `https://massive-stingray-23.loca.lt/api/fridge/${userId}`,
+        `https://fast-grasshopper-49.loca.lt/api/fridge/${userId}`,
         {
           foodItem_name,
         }
@@ -87,7 +87,9 @@ export default function fridgeReducer(state = initialState, action) {
     case ADD_TO_FRIDGE:
       return [...state, action.foodItem];
     case DELETE_FOODITEM_FROM_FRIDGE:
-      return state.filter((foodItem) => foodItem.id !== action.foodItem.id);
+      return state.fridge.foodItems.filter(
+        (foodItem) => foodItem.id !== action.foodItem.id
+      );
     case DELETE_FRIDGE:
       return state.filter((user) => user.id !== action.user.id);
     default:

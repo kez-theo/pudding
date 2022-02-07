@@ -10,7 +10,7 @@
     "web": "expo start --web",
     "eject": "expo eject",
     "seed": "node script/seed.js",
-    "build": "expo build:web"
+   
     
   },
   "dependencies": {
