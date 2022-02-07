@@ -36,7 +36,9 @@ export const _deleteFoodItemFromFridge = (fridge) => {
 export const getFridgeThunk = (userId) => {
   return async (dispatch) => {
     try {
-      const { data: fridge } = await axios.get(`api/fridge/${userId}`);
+      const { data: fridge } = await axios.get(
+        `https://massive-stingray-23.loca.lt/api/fridge/${userId}`
+      );
       dispatch(_getFridge(fridge));
     } catch (error) {
       console.error(error);
