@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Image, FlatList, SafeAreaView, Text, View } from 'react-native';
-import { getRecipesFromFridge } from '../../src/extApi_recipes';
 const axios = require("axios");
 import {SPOON_API_KEY} from '@env'
 
