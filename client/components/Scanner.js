@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import { addFoodItemThunk } from "../store/foodItems";
 import { addToFridgeThunk } from "../store/fridge";
+import { EDEMAM_KEY, EDEMAM_ID } from "@env";
 import axios from "axios";
 
 let EdamamURL = "https://api.edamam.com/api/food-database/v2/parser?";
@@ -60,26 +61,6 @@ export default function Scanner({ navigation }) {
       },
     ]);
 
-  // const fridgeOrReScanAlert = () =>
-  //   Alert.alert(
-  //     `Successfully added! Would you like to scan another item or go back to your fridge?`,
-  //     [
-  //       {
-  //         text: "Scan Again",
-  //         onPress: () => {
-  //           reScan();
-  //         },
-  //         style: "cancel",
-  //       },
-  //       {
-  //         text: "Go To Fridge",
-  //         onPress: () => {
-  //           navigation.navigate("Fridge");
-  //         },
-  //       },
-  //     ]
-  //   );
-
   const foodName = (foodItemData) => {
     let foodObject = foodItemData.hints[0].food;
     let foodName = foodObject.label;
@@ -90,7 +71,7 @@ export default function Scanner({ navigation }) {
 
   const fetchFoodItem = async (data) => {
     try {
-      const URL = `${EdamamURL}app_id=ac348bb8&app_key=1ebf1a9a2fd8a87a83ce0aa38a7f00ad&upc=${data}${EDEMAM_TYPE}`;
+      const URL = `${EdamamURL}${EDEMAM_ID}&${EDEMAM_KEY}&upc=${data}${EDEMAM_TYPE}`;
       const res = await axios.get(URL);
       const foodItemData = res.data;
       foodName(foodItemData);
