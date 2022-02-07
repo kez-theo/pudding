@@ -1,31 +1,48 @@
 import React, { useEffect, useState } from 'react';
+const axios = require("axios");
 import { Button, StyleSheet, Image, Text, View } from "react-native";
 import {SPOON_API_KEY} from '@env'
 
 const spnAPI = 'https://api.spoonacular.com/recipes/'
 
-//this screen should get resipeId and name as props
-export default function SearchSingleRecipe({navigation}) {
-    
-  // const [currentRecipe, setCurrentRecipe] = useState( null );
+// @Elena grab the route parameter
+export default function SearchSingleRecipe({route}) {
 
-  // useEffect(() => {
-  //   const fetchRecipes = async () => {
-  //     const res = await axios.get(
-  //       `${spnAPI}/${recipeId}information?includeNutrition=false&apiKey=${SPOON_API_KEY}`
-  //     )
-  //     setRecipes(res.data.results)
-  //   };
-  //   fetchRecipes();
-  // }, []);
+  // @Elena take these three functions over
+  const [recipe, setRecipe] = useState( null );
+  const id = route.params.id
+  const name = route.params.title
 
-  return (
+  // @Elena here is the api route
+  useEffect(() => {
+    const fetchRecipe = async () => {
+      const res = await axios.get(
+        `${spnAPI}${id}/information?includeNutrition=false&apiKey=${SPOON_API_KEY}`
+      )
+      setRecipe(res.data)
+    };
+    fetchRecipe();
+  }, []);
 
-    <View style={styles.container}>
-      <Text>Hello Recipe</Text>
-    </View> 
-  )
-  
+  // @Elena put the parameters you want to use here!
+  if (recipe) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.text}>{ name }</Text>
+        <Text style={styles.text}>{ recipe.readyInMinutes } Minutes </Text>
+        <Text style={styles.text}>Serves { recipe.servings }</Text>
+        { recipe.extendedIngredients.map((ingredient) => (<Text style={styles.text2}>{ ingredient.name }</Text>)) }
+        <Text style={styles.text2}></Text>
+        <Text style={styles.text2}>{ recipe.instructions }</Text>
+      </View> 
+    )
+  } else {
+    return (
+      <View>
+        <Text>Loading...</Text>
+      </View>
+    )
+  }
 }
 
 

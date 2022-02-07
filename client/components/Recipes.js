@@ -23,15 +23,15 @@ const Recipes = ( {navigation} ) => {
   useEffect(() => {
     const fetchRecipes = async () => {
       const res = await axios.get(
-        `${spnAPI}complexSearch?query=tomatos&number=4&apiKey=${SPOON_API_KEY}`
+        `${spnAPI}complexSearch?query=chocolate&number=4&apiKey=${SPOON_API_KEY}`
       )
       setRecipes(res.data.results)
     };
     fetchRecipes();
   }, []);
 
-  const navigateSingleRecipe = (recipeId) => {
-    navigation.navigate("SearchSingleRecipe", { id: recipeId });
+  const navigateSingleRecipe = (recipeId, recipeName) => {
+    navigation.navigate("SearchSingleRecipe", { id: recipeId, title: recipeName });
   };
 
   const renderRecipe = ({ item }) => {
@@ -41,16 +41,12 @@ const Recipes = ( {navigation} ) => {
         image={item.image} 
         onPress={() => {
           setCurrentRecipe(item.id)
-          navigateSingleRecipe(item.id)
+          navigateSingleRecipe(item.id, item.title)
         }}
       />
     )
   };
 
-  // if (currentRecipe) {
-  //   console.log(currentRecipe)
-  //   return <SearchSingleRecipe />
-  // } else {
   return (
     <View style={styles.container}>
       {recipes.length === null ? (
