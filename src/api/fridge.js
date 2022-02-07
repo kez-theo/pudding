@@ -4,6 +4,7 @@ const FoodItem = require("../db/models/FoodItem");
 const Fridge = require("../db/models/Fridge");
 const User = require("../db/models/User");
 
+
 let UserId = 1;
 
 router.get("/", async (req, res, next) => {
@@ -19,7 +20,7 @@ router.get("/", async (req, res, next) => {
 
 router.get("/:userId", async (req, res, next) => {
   try {
-    console.log(req.params.userId);
+    console.log("I am Ania's reducer",req.params.userId);
     const userFridge = await User.findOne({
       where: { id: req.params.userId },
       attributes: ["id"],
