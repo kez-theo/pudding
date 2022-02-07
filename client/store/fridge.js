@@ -50,7 +50,10 @@ export const deleteFoodItemFromFridgeThunk = (userId, foodItemId) => {
   return async (dispatch) => {
     try {
       userId = 1;
-      await axios.delete(`api/fridge${userId}`, { foodItemId });
+      await axios.delete(
+        `https://massive-stingray-23.loca.lt/api/fridge${userId}`,
+        { foodItemId }
+      );
     } catch (err) {
       console.error(`Failed to delete fridge item`, err);
     }
@@ -61,9 +64,12 @@ export const addToFridgeThunk = (foodItem_name) => {
   let userId = 1;
   return async (dispatch) => {
     try {
-      const { data: foodItem } = await axios.post(`api/fridge/${userId}`, {
-        foodItem_name,
-      });
+      const { data: foodItem } = await axios.post(
+        `https://massive-stingray-23.loca.lt/api/fridge/${userId}`,
+        {
+          foodItem_name,
+        }
+      );
       dispatch(_addToFridge(foodItem));
     } catch (err) {
       console.log("ADD TO FRIDGE ERROR");
