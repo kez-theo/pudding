@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, TouchableOpacity, Image, FlatList, SafeAreaView, Text, View } from 'react-native';
 const axios = require("axios");
 import {SPOON_API_KEY} from '@env'
-import SingleRecipe from './SingleRecipe';
+import SearchSingleRecipe from './SingleRecipe';
 
 const spnAPI = 'https://api.spoonacular.com/recipes/'
 
@@ -42,7 +42,7 @@ const Recipes = () => {
 
   if (currentRecipe) {
     console.log(currentRecipe)
-    return <SingleRecipe />
+    return <SearchSingleRecipe />
   } else {
     return (
       <View style={styles.container}>
