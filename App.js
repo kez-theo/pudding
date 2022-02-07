@@ -11,6 +11,7 @@ import Fridge from "./client/components/Fridge";
 import Scanner from "./client/components/Scanner";
 import Recipes from "./client/components/Recipes";
 import SingleRecipe from "./client/components/SingleRecipe";
+import SingleFoodItem from "./client/components/SingleFoodItem";
 
 const Stack = createNativeStackNavigator();
 
@@ -87,6 +88,20 @@ const AppSource = () => {
           component={SingleRecipe}
           options={{
             title: "Add Your Groceries",
+            headerStyle: {
+              backgroundColor: "rgb(65, 140, 115)",
+            },
+            headerTintColor: "white",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
+          }}
+        />
+        <Stack.Screen
+          name="SingleFoodItem"
+          component={SingleFoodItem}
+          options={{
+            title: "Food Details",
             headerStyle: {
               backgroundColor: "rgb(65, 140, 115)",
             },
