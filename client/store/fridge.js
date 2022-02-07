@@ -51,7 +51,7 @@ export const deleteFoodItemFromFridgeThunk = (userId, foodItemId) => {
     try {
       userId = 1;
       await axios.delete(
-        `https://massive-stingray-23.loca.lt/api/fridge/${userId}`,
+        `https://the-thymely-cook.herokuapp.com/api/fridge/${userId}`,
         { foodItemId }
       );
     } catch (err) {
@@ -65,7 +65,7 @@ export const addToFridgeThunk = (foodItem_name) => {
   return async (dispatch) => {
     try {
       const { data: foodItem } = await axios.post(
-        `https://fast-grasshopper-49.loca.lt/api/fridge/${userId}`,
+        `https://the-thymely-cook.herokuapp.com/api/fridge/${userId}`,
         {
           foodItem_name,
         }
