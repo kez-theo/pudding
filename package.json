@@ -10,8 +10,6 @@
     "web": "expo start --web",
     "eject": "expo eject",
     "seed": "node script/seed.js"
-   
-    
   },
   "dependencies": {
     "@expo/metro-config": "^0.3.9",
