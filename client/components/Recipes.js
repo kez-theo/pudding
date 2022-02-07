@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Image, FlatList, SafeAreaView, Text, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, Image, FlatList, SafeAreaView, Text, View } from 'react-native';
 const axios = require("axios");
 import {SPOON_API_KEY} from '@env'
+import SingleRecipe from './SingleRecipe';
 
 const spnAPI = 'https://api.spoonacular.com/recipes/'
 
@@ -9,7 +10,8 @@ const Recipes = () => {
   //set state (locally). useState returns an array with 2 items: first is the name of the state variable 
   //(recipes), second is the function to change/set variable to the state. With the dummy data RESULTS, 
   //I am setting the RESULTS object to the recipes variable so i can access the data
-  const [recipes, setRecipes] = useState( [] );  
+  const [recipes, setRecipes] = useState( [] );
+  const [currentRecipe, setCurrentRecipe] = useState( null );  
   //where you preform side effects, including data fetching, manually changing the DOM, using history (also available as a hook). Basically componentDidMount, componentDidUpdate and componentWillUnmount combined.
   useEffect(() => {
     const fetchRecipes = async () => {
@@ -21,34 +23,45 @@ const Recipes = () => {
     fetchRecipes();
   }, []);
 
-  const Recipe = ({ title, image }) => (
-    <View style={styles.item}>
+  const Recipe = ({ title, image, onPress }) => (
+    <TouchableOpacity onPress={onPress} style={styles.item}>
       <Image style={styles.thumbnail} source={ {uri: image} } />
       <Text style={styles.title}>{title}</Text>
-    </View>
+    </TouchableOpacity>
   );
 
-  const renderRecipe = ({ item }) => (
-    <Recipe title={item.title} image={item.image} />
-  );
+  const renderRecipe = ({ item }) => {
+    return (
+      <Recipe 
+        title={item.title} 
+        image={item.image} 
+        onPress={() => setCurrentRecipe(item.id)}
+      />
+    )
+  };
 
-  return (
-    <View style={styles.container}>
-      {recipes.length === null ? (
-        <View>
-          <Text>Loading...</Text>
-        </View>
-      ) : (
-        <SafeAreaView style={styles.list}>
-          <FlatList 
-            data={recipes}
-            renderItem={renderRecipe}
-            keyExtractor={item => item.id}
-          />
-        </SafeAreaView>
-      )}
-    </View>
-  );
+  if (currentRecipe) {
+    return <SingleRecipe />
+  } else {
+    return (
+      <View style={styles.container}>
+        {recipes.length === null ? (
+          <View>
+            <Text>Loading...</Text>
+          </View>
+        ) : (
+          <SafeAreaView style={styles.list}>
+            <FlatList 
+              data={recipes}
+              renderItem={renderRecipe}
+              keyExtractor={item => item.id}
+              extraData={currentRecipe}
+            />
+          </SafeAreaView>
+        )}
+      </View>
+    );
+  }
 };
 
 export default Recipes;
@@ -67,10 +80,10 @@ const styles = StyleSheet.create({
     paddingTop: 100,
   },
   item: {
-    backgroundColor: '#dce6df',
     padding: 20,
     marginVertical: 8,
     marginHorizontal: 16,
+    backgroundColor: "#dce6df",
     borderRadius: 20,
     borderColor: 'teal',
     borderWidth: 1,
