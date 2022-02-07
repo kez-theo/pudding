@@ -11,7 +11,7 @@ import Fridge from "./client/components/Fridge";
 import Scanner from "./client/components/Scanner";
 import Recipes from "./client/components/Recipes";
 import SingleRecipe from "./client/components/SingleRecipe";
-// import SingleFoodItem from "./client/components/SingleFoodItem";
+import SingleFoodItem from "./client/components/SingleFoodItem";
 import SearchSingleRecipe from "./client/components/SearchSingleRecipe";
 
 const Stack = createNativeStackNavigator();
@@ -98,7 +98,7 @@ const AppSource = () => {
             },
           }}
         />
-        {/* <Stack.Screen
+        <Stack.Screen
           name="SingleFoodItem"
           component={SingleFoodItem}
           options={{
@@ -110,8 +110,8 @@ const AppSource = () => {
             headerTitleStyle: {
               fontWeight: "bold",
             },
-          }} */}
-        {/* /> */}
+          }}
+         />
         <Stack.Screen
           name="SearchSingleRecipe"
           component={SearchSingleRecipe}
