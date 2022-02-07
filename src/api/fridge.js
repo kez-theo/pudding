@@ -20,7 +20,9 @@ router.get("/", async (req, res, next) => {
 
 router.get("/:userId", async (req, res, next) => {
   try {
+
     console.log("I am Ania's reducer",req.params.userId);
+
     const userFridge = await User.findOne({
       where: { id: req.params.userId },
       attributes: ["id"],
