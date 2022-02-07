@@ -13,7 +13,7 @@ const Recipe = ({ title, image, onPress }) => (
   </TouchableOpacity>
 );
 
-const Recipes = () => {
+const Recipes = ( {navigation} ) => {
   //set state (locally). useState returns an array with 2 items: first is the name of the state variable 
   //(recipes), second is the function to change/set variable to the state. With the dummy data RESULTS, 
   //I am setting the RESULTS object to the recipes variable so i can access the data
@@ -30,39 +30,46 @@ const Recipes = () => {
     fetchRecipes();
   }, []);
 
+  const navigateSingleRecipe = (recipeId) => {
+    navigation.navigate("SearchSingleRecipe", { id: recipeId });
+  };
+
   const renderRecipe = ({ item }) => {
     return (
       <Recipe 
         title={item.title} 
         image={item.image} 
-        onPress={() => setCurrentRecipe(item.id)}
+        onPress={() => {
+          setCurrentRecipe(item.id)
+          navigateSingleRecipe(item.id)
+        }}
       />
     )
   };
 
-  if (currentRecipe) {
-    console.log(currentRecipe)
-    return <SearchSingleRecipe />
-  } else {
-    return (
-      <View style={styles.container}>
-        {recipes.length === null ? (
-          <View>
-            <Text>Loading...</Text>
-          </View>
-        ) : (
-          <SafeAreaView style={styles.list}>
-            <FlatList 
-              data={recipes}
-              renderItem={renderRecipe}
-              keyExtractor={item => item.id}
-              extraData={currentRecipe}
-            />
-          </SafeAreaView>
-        )}
-      </View>
-    );
-  }
+  // if (currentRecipe) {
+  //   console.log(currentRecipe)
+  //   return <SearchSingleRecipe />
+  // } else {
+  return (
+    <View style={styles.container}>
+      {recipes.length === null ? (
+        <View>
+          <Text>Loading...</Text>
+        </View>
+      ) : (
+        <SafeAreaView style={styles.list}>
+          <FlatList 
+            data={recipes}
+            renderItem={renderRecipe}
+            keyExtractor={item => item.id}
+            extraData={currentRecipe}
+          />
+        </SafeAreaView>
+      )}
+    </View>
+  );
+
 };
 
 export default Recipes;

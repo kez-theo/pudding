@@ -7,20 +7,22 @@ const spnAPI = 'https://api.spoonacular.com/recipes/'
 //this screen should get resipeId and name as props
 export default function SearchSingleRecipe({navigation}) {
     
-  useEffect(() => {
-    const fetchRecipes = async () => {
-      const res = await axios.get(
-        `${spnAPI}complexSearch?query=tomatos&number=4&apiKey=${SPOON_API_KEY}`
-      )
-      setRecipes(res.data.results)
-    };
-    fetchRecipes();
-  }, []);
+  // const [currentRecipe, setCurrentRecipe] = useState( null );
+
+  // useEffect(() => {
+  //   const fetchRecipes = async () => {
+  //     const res = await axios.get(
+  //       `${spnAPI}/${recipeId}information?includeNutrition=false&apiKey=${SPOON_API_KEY}`
+  //     )
+  //     setRecipes(res.data.results)
+  //   };
+  //   fetchRecipes();
+  // }, []);
 
   return (
 
     <View style={styles.container}>
-      
+      <Text>Hello Recipe</Text>
     </View> 
   )
   
@@ -65,4 +67,3 @@ const styles = StyleSheet.create({
 
 
 
-"https://api.spoonacular.com/recipes/642585/information?includeNutrition=false"
