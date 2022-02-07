@@ -6,6 +6,13 @@ import SingleRecipe from './SingleRecipe';
 
 const spnAPI = 'https://api.spoonacular.com/recipes/'
 
+const Recipe = ({ title, image, onPress }) => (
+  <TouchableOpacity onPress={onPress} style={styles.item}>
+    <Image style={styles.thumbnail} source={ {uri: image} } />
+    <Text style={styles.title}>{title}</Text>
+  </TouchableOpacity>
+);
+
 const Recipes = () => {
   //set state (locally). useState returns an array with 2 items: first is the name of the state variable 
   //(recipes), second is the function to change/set variable to the state. With the dummy data RESULTS, 
@@ -23,13 +30,6 @@ const Recipes = () => {
     fetchRecipes();
   }, []);
 
-  const Recipe = ({ title, image, onPress }) => (
-    <TouchableOpacity onPress={onPress} style={styles.item}>
-      <Image style={styles.thumbnail} source={ {uri: image} } />
-      <Text style={styles.title}>{title}</Text>
-    </TouchableOpacity>
-  );
-
   const renderRecipe = ({ item }) => {
     return (
       <Recipe 
@@ -41,6 +41,7 @@ const Recipes = () => {
   };
 
   if (currentRecipe) {
+    console.log(currentRecipe)
     return <SingleRecipe />
   } else {
     return (
