@@ -38,7 +38,7 @@ const foodItems = [
 
 const users = [
   {
-    firstName: "Codys",
+    firstName: "codie",
     lastName: "Fullstack",
     email: "cody@fullstack.com",
     password: "123",
