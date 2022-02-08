@@ -18,7 +18,8 @@ const Logout = () => {
       await auth.signOut();
       dispatch(logout());
       navigation.navigate("Login");
-      //alert("You have signed out");
+      Alert.alert("You have signed out");
+      console.log("user signed out!!")
     } catch (error) {
       setError(error.message);
     }
