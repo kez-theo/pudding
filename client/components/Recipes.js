@@ -35,13 +35,6 @@ const Recipes = ( {navigation} ) => {
     navigation.navigate("SearchSingleRecipe", { id: recipeId, title: recipeName });
   };
 
-  const Recipe = ({ title, image }) => (
-    <View style={styles.item}>
-      <Image style={styles.thumbnail} source={{ uri: image }} />
-      <Text style={styles.title}>{title}</Text>
-    </View>
-  );
-
   const renderRecipe = ({ item }) => {
     return (
       <Recipe 
