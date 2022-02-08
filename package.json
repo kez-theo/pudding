@@ -4,10 +4,11 @@
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "server": "nodemon src/index.js",
-    "web": "node src/index.js",
-    "start": "expo start",
+    "start": "node src/index.js",
+    "expo start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
+    "web": "expo start --web",
     "eject": "expo eject",
     "seed": "node script/seed.js"
   },
