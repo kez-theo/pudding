@@ -14,12 +14,11 @@ import { deleteFoodItemFromFridgeThunk } from "../store/fridge";
 import { getFoodItemThunk } from "../store/foodItem";
 
 export default function SingleFoodItem({ route, navigation }) {
-  const [fridgey, setFridgey] = useState([]);
-  const [food, setFood] = useState([]);
   const dispatch = useDispatch();
   const fridgeSelector = useSelector((state) => state.fridgeReducer);
   const foodItemSelector = useSelector((state) => state.foodItemReducer);
   let DATA = foodItemSelector;
+  let name = DATA.foodItem_name;
 
   //hook usedispatch function
   const viewFoodItem = (foodItemId) => {
@@ -33,13 +32,14 @@ export default function SingleFoodItem({ route, navigation }) {
   //immediate page render
   useEffect((id) => {
     viewFoodItem(route.params.id);
-    setFridgey(fridgeSelector.foodItems);
+    //setFridgey(fridgeSelector.foodItems);
   }, []);
-  const Quantity = () => {
-    const result = fridgey.find(({ id }) => id === DATA.id);
+  //const Quantity = () => {
+  //  const result = fridgey.find(({ id }) => id === DATA.id);
 
-    console.log("FRIDGE BITCH", foodItemSelector.foodItems);
-  };
+  //  console.log("FRIDGE BITCH", foodItemSelector.foodItems);
+  // };
+  const onPressRecipe = () => navigation.navigate("Recipes", { name });
 
   return (
     <SafeAreaView style={styles.container}>
@@ -47,7 +47,7 @@ export default function SingleFoodItem({ route, navigation }) {
         <Text> Loading... </Text>
       ) : (
         <SafeAreaView style={styles.item}>
-          <Text style={styles.heading}>{DATA.foodItem_name}</Text>
+          <Text style={styles.heading}>{name}</Text>
           <View>
             <Text style={styles.itemText2}>More functionality to come</Text>
           </View>
@@ -63,6 +63,9 @@ export default function SingleFoodItem({ route, navigation }) {
           <Text style={styles.heading}></Text>
         </SafeAreaView>
       )}
+      <TouchableOpacity style={styles.logout} onPress={onPressRecipe}>
+        <Text style={{ color: "rgb(65, 140, 115)" }}>Recipe Suggestions</Text>
+      </TouchableOpacity>
       <Text style={styles.hint}>
         Hint: Try Asking Alexa to call Ms. Pudding
       </Text>
@@ -76,6 +79,18 @@ const styles = StyleSheet.create({
     backgroundColor: "whitesmoke",
     alignItems: "center",
     justifyContent: "center",
+  },
+  logout: {
+    shadowColor: "rgb(44, 89, 74)",
+    shadowOffset: { width: -2, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+    backgroundColor: "white",
+    padding: 16,
+    color: "red",
+    borderRadius: 30,
+    flexDirection: "row",
+    margin: 20,
   },
   itemText2: {
     fontSize: 16,

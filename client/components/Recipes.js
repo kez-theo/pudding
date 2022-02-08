@@ -1,51 +1,63 @@
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, TouchableOpacity, Image, FlatList, SafeAreaView, Text, View } from 'react-native';
+import React, { useEffect, useState } from "react";
+import {
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  FlatList,
+  SafeAreaView,
+  Text,
+  View,
+} from "react-native";
 const axios = require("axios");
-import {SPOON_API_KEY} from '@env'
-import SearchSingleRecipe from './SingleRecipe';
+import { SPOON_API_KEY } from "@env";
+import SearchSingleRecipe from "./SingleRecipe";
 
-const spnAPI = 'https://api.spoonacular.com/recipes/'
+const spnAPI = "https://api.spoonacular.com/recipes/";
 
 const Recipe = ({ title, image, onPress }) => (
   <TouchableOpacity onPress={onPress} style={styles.item}>
-    <Image style={styles.thumbnail} source={ {uri: image} } />
+    <Image style={styles.thumbnail} source={{ uri: image }} />
     <Text style={styles.title}>{title}</Text>
   </TouchableOpacity>
 );
 
-const Recipes = ( {navigation} ) => {
-  //set state (locally). useState returns an array with 2 items: first is the name of the state variable 
-  //(recipes), second is the function to change/set variable to the state. With the dummy data RESULTS, 
+const Recipes = ({ route, navigation }) => {
+  //set state (locally). useState returns an array with 2 items: first is the name of the state variable
+  //(recipes), second is the function to change/set variable to the state. With the dummy data RESULTS,
   //I am setting the RESULTS object to the recipes variable so i can access the data
-  const [recipes, setRecipes] = useState( [] );
-  const [currentRecipe, setCurrentRecipe] = useState( null );  
+  const [recipes, setRecipes] = useState([]);
+  const [currentRecipe, setCurrentRecipe] = useState(null);
+  let ingredient = route.params.name;
   //where you preform side effects, including data fetching, manually changing the DOM, using history (also available as a hook). Basically componentDidMount, componentDidUpdate and componentWillUnmount combined.
   useEffect(() => {
     const fetchRecipes = async () => {
       const res = await axios.get(
-        `${spnAPI}complexSearch?query=chocolate&number=4&apiKey=${SPOON_API_KEY}`
-      )
-      setRecipes(res.data.results)
+        `${spnAPI}complexSearch?query=${ingredient}&number=4&apiKey=${SPOON_API_KEY}`
+      );
+      setRecipes(res.data.results);
     };
     fetchRecipes();
   }, []);
-  
+
   const navigateSingleRecipe = (recipeId, recipeName) => {
     // @Elena make sure you change "SearchSingleRecipe" to the name of your Component
-    navigation.navigate("SearchSingleRecipe", { id: recipeId, title: recipeName });
+    navigation.navigate("SearchSingleRecipe", {
+      id: recipeId,
+      title: recipeName,
+    });
   };
 
   const renderRecipe = ({ item }) => {
     return (
-      <Recipe 
-        title={item.title} 
-        image={item.image} 
+      <Recipe
+        title={item.title}
+        image={item.image}
         onPress={() => {
-          setCurrentRecipe(item.id)
-          navigateSingleRecipe(item.id, item.title)
+          setCurrentRecipe(item.id);
+          navigateSingleRecipe(item.id, item.title);
         }}
       />
-    )
+    );
   };
 
   return (
@@ -59,14 +71,13 @@ const Recipes = ( {navigation} ) => {
           <FlatList
             data={recipes}
             renderItem={renderRecipe}
-            keyExtractor={item => item.id}
+            keyExtractor={(item) => item.id}
             extraData={currentRecipe}
           />
         </SafeAreaView>
       )}
     </View>
   );
-
 };
 
 export default Recipes;
