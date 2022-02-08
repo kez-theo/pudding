@@ -66,6 +66,7 @@ const AppSource = () => {
             title: "Thymely Cook",
             headerStyle: {
               backgroundColor: "rgb(65, 140, 115)",
+              headerLeft: null,
             },
             headerTintColor: "white",
             headerTitleStyle: {
@@ -166,7 +167,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    alignItems: "center", 
+    alignItems: "center",
     justifyContent: "center",
   },
 });
