@@ -13,13 +13,7 @@ import Recipes from "./client/components/Recipes";
 import Login from "./client/components/Login";
 import Registration from "./client/components/Registration";
 import SingleRecipe from "./client/components/SingleRecipe";
-<<<<<<< HEAD
-import Profile from "./client/components/Profile";
-
-
-=======
 import SingleFoodItem from "./client/components/SingleFoodItem";
->>>>>>> main
 
 const Stack = createNativeStackNavigator();
 
@@ -35,9 +29,35 @@ const AppSource = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen name="Login" component={Login}/>
-        <Stack.Screen name="Profile" component={Profile}/>
-        <Stack.Screen name ="Registration" component={Registration}/>
+        <Stack.Screen 
+          name="Login"
+          component={Login}
+          options={{
+            title: "Login",
+            headerStyle: {
+              backgroundColor: "rgb(65, 140, 115)",
+            },
+            headerTintColor: "white",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
+          }}
+         />
+        {/* <Stack.Screen name="Profile" component={Profile}/> */}
+        <Stack.Screen 
+        name ="Registration" 
+        component={Registration}
+        options={{
+          title: "Login",
+          headerStyle: {
+            backgroundColor: "rgb(65, 140, 115)",
+          },
+          headerTintColor: "white",
+          headerTitleStyle: {
+            fontWeight: "bold",
+          },
+        }}
+        />
         <Stack.Screen
           name="Home"
           component={Home}

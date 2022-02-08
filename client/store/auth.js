@@ -1,6 +1,5 @@
 import axios from "axios";
 import { auth } from '../firebaseAuth/firebase'
-import firebase from "firebase";
 
 //Action Type
 const SET_USER = "SET_USER";
@@ -11,6 +10,7 @@ const setUser = (user) => ({ type: SET_USER, user });
 
 //A user signs out(the current user becomes null or empty)
 export const logout = () => {
+  console.log("log out function reached!!!")
   return {
     type: SET_USER,
     user: {},
@@ -67,15 +67,15 @@ export const updatePassword = async (password) => {
 };
 
 export const authenticateSignUp =
-  ({ email, firstName, lastName, password }) =>
+  ({ email, firstName, lastName, password, method }) =>
   async (dispatch) => {
     try {
       const { user } = await auth.createUserWithEmailAndPassword(
         email,
         password
       );
-      const { data } = await axios.post(`/auth/signup`, {
-        id: user.id,
+      const { data } = await axios.post(`/auth/${method}`, {
+        uid: user.uid,
         email,
         firstName,
         lastName,
@@ -87,14 +87,14 @@ export const authenticateSignUp =
     }
   };
 
-export const authenticateLogin = ({ email, password }) =>
+export const authenticateLogin = ({ email, password, method }) =>
   async (dispatch) => {
     try {
       const { user } = await auth.signInWithEmailAndPassword(
         email,
         password
       );
-      const { data } = await axios.post(`/auth/login`, {
+      const { data } = await axios.post(`/auth/${method}`, {
         uid: user.uid,
       });
       if (verify(data, dispatch)) {
@@ -114,7 +114,7 @@ const initialState = {
 export default function (state = initialState, action) {
   switch (action.type) {
     case SET_USER:
-      return { ...state, user: action.user };
+      return {...state, user: action.user};
     default:
       return state;
   }

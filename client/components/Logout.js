@@ -1,20 +1,25 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { View, TouchableOpacity, Text, ImageBackground } from "react-native";
+import { View, TouchableOpacity, Text, StyleSheet, Alert } from "react-native";
 import { logout } from "../store/auth";
 import { auth } from "../firebaseAuth/firebase";
+import { useNavigation } from "@react-navigation/native";
+import { NavigationActions, StackActions } from "@react-navigation/routers";
 
-const Logout = (props) => {
-  const navigation = props.navigation;
+const Logout = () => {
+
+  const navigation = useNavigation()
   const dispatch = useDispatch();
-  const [error, setError] = useState(null);
-  const user = useSelector((state) => state.user);
+  const [error, setError] = React.useState(null);
 
-  const onPressButton = async () => {
+
+  const onPressLogout = async () => {
+    
     try {
       await auth.signOut();
       dispatch(logout());
-      props.navigation.navigate(LOGIN);
+      navigation.navigate("Login");
+      //alert("You have signed out");
     } catch (error) {
       setError(error.message);
     }
@@ -22,12 +27,30 @@ const Logout = (props) => {
 
   return (
     <View>
-      <TouchableOpacity style={styles.buttonLarge} onPress={onPressButton}>
-        <Text style={styles.buttonLargeText}>Logout</Text>
+      <TouchableOpacity style={styles.logout} onPress={onPressLogout}>
+        <Text>Logout</Text>
       </TouchableOpacity>
-      {error && <Text style={{ color: "red" }}>{error}</Text>}
+      {error && <Text>{error}</Text>}
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+
+logout: {
+  shadowColor: "rgb(44, 89, 74)",
+  shadowOffset: { width: -2, height: 4 },
+  shadowOpacity: 0.2,
+  shadowRadius: 3,
+  backgroundColor: "white",
+  padding: 16,
+  width: "100%",
+  borderRadius: 30,
+  flexDirection: "row",
+  alignItems: "flex-start",
+  justifyContent: "space-between",
+  marginBottom: 20,
+  }
+})
 
 export default Logout;

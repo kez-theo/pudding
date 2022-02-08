@@ -1,5 +1,6 @@
 const router = require('express'). Router()
 const User = require("../db/models/User");
+// const { checkAuth } = require('../auth-middleware');
 
   router.get('/', async (req, res, next) => {
     try {

@@ -1,10 +1,15 @@
 require("dotenv").config();
+const { database } = require("firebase-admin");
 const admin = require("firebase-admin");
+
+// const databaseName =
+//   pkg.name + (process.env.NODE_ENV === "test" ? "-test" : "");
 
 const serviceAccount = require("../client/firebaseAuth/serviceAccountKey.json")
 
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
+  credential: admin.credential.cert(serviceAccount),
+  // databaseURL: `postgres://localhost:5432/${databaseName}`
 });
 
 
@@ -22,3 +27,4 @@ const checkAuth = async (req, res, next) => {
 };
 
 module.exports = { checkAuth };
+

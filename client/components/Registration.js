@@ -58,10 +58,9 @@ export default function Registration({ navigation }) {
           style={styles.tinyTomato}
           source={{
             uri:
-              "https://upload.wikimedia.org/wikipedia/commons/8/89/Tomato_je.jpg",
+            "https://us.123rf.com/450wm/eridanka/eridanka2103/eridanka210300026/165315737-a-sprig-of-rosemary-hand-drawn-sketch-style-illustration-design-element.jpg?ver=6",
           }}
         />
-        <Text style={styles.text}></Text>
           <TextInput
             style={styles.firstnameInput}
             placeholder="Enter your firstname*"
@@ -69,7 +68,6 @@ export default function Registration({ navigation }) {
             onChangeText={(firstName) => setFirstName(firstName)}
             autoCapitalize="none"
           />
-          <Text style={styles.text}></Text>
           <TextInput
             style={styles.lastnameInput}
             placeholder="Enter your lastname*"
@@ -77,7 +75,6 @@ export default function Registration({ navigation }) {
             onChangeText={(lastName) => setLastName(lastName)}
             autoCapitalize="none"
           />
-        <Text style={styles.text}></Text>
           <TextInput
             style={styles.emailInput}
             placeholder="Enter your email*"
@@ -118,7 +115,7 @@ export default function Registration({ navigation }) {
         container: {
           flex:1,
           padding:"4%",
-          backgroundColor: "#CCFFCC",
+          backgroundColor: "white",
           alignItems: "center",
           // justifyContent: "center",
           position: 'relative',
@@ -137,7 +134,8 @@ export default function Registration({ navigation }) {
           justifyContent: "center",
           width: 300,
           borderWidth: 3,
-          borderColor:"#96C598",
+          borderRadius: 25,
+          borderColor:"rgb(65, 140, 115)",
           padding: 10,
           margin: 5,
         },
@@ -146,7 +144,8 @@ export default function Registration({ navigation }) {
           justifyContent: "center",
           width: 300,
           borderWidth: 3,
-          borderColor:"#96C598",
+          borderRadius: 25,
+          borderColor:"rgb(65, 140, 115)",
           padding: 10,
           margin: 5,
         },
@@ -155,7 +154,8 @@ export default function Registration({ navigation }) {
           justifyContent: "center",
           width: 300,
           borderWidth: 3,
-          borderColor:"#96C598",
+          borderRadius: 25,
+          borderColor:"rgb(65, 140, 115)",
           padding: 10,
           margin: 5,
         },
@@ -164,7 +164,8 @@ export default function Registration({ navigation }) {
           justifyContent: "center",
           width: 300,
           borderWidth: 3,
-          borderColor:"#96C598",
+          borderRadius: 25,
+          borderColor:"rgb(65, 140, 115)",
           padding: 10,
           margin: 5,
         },
@@ -204,7 +205,7 @@ export default function Registration({ navigation }) {
         footerView: {
           flex: 1,
           alignItems: 'center',
-          marginTop: 165,
+          marginTop:80
         },
         footerText: {
           fontSize: 17,

@@ -20,7 +20,7 @@ export default function Login({ navigation }) {
     React.useEffect(() => {
       const unsubscribe = auth.onAuthStateChanged(user => {
         if (user) {
-          navigation.navigate("Profile")
+          navigation.navigate("Home")
         }
       })
     return unsubscribe
@@ -44,7 +44,7 @@ export default function Login({ navigation }) {
           style={styles.tinyTomato}
           source={{
             uri:
-              "https://upload.wikimedia.org/wikipedia/commons/8/89/Tomato_je.jpg",
+            "https://us.123rf.com/450wm/eridanka/eridanka2103/eridanka210300026/165315737-a-sprig-of-rosemary-hand-drawn-sketch-style-illustration-design-element.jpg?ver=6",
           }}
         />
         <Text style={styles.text}>Enter your email and password to sign in:</Text>
@@ -84,7 +84,7 @@ export default function Login({ navigation }) {
         container: {
           flex:1,
           padding:"4%",
-          backgroundColor: "#CCFFCC",
+          backgroundColor: "white",
           alignItems: "center",
           // justifyContent: "center",
           position: 'relative',
@@ -93,7 +93,7 @@ export default function Login({ navigation }) {
         },
         text: {
           textAlign: "center",
-          fontSize: 18,
+          fontSize: 15,
           margin: 10,
           fontWeight: "bold",
           color: "#40434E",
@@ -103,7 +103,8 @@ export default function Login({ navigation }) {
           justifyContent: "center",
           width: 300,
           borderWidth: 3,
-          borderColor:"#96C598",
+          borderRadius: 25,
+          borderColor:"rgb(65, 140, 115)",
           padding: 10,
           margin: 5,
         },
@@ -112,7 +113,8 @@ export default function Login({ navigation }) {
           justifyContent: "center",
           width: 300,
           borderWidth: 3,
-          borderColor:"#96C598",
+          borderRadius: 25,
+          borderColor:"rgb(65, 140, 115)",
           padding: 10,
           margin: 5,
         },
@@ -152,7 +154,7 @@ export default function Login({ navigation }) {
         footerView: {
           flex: 1,
           alignItems: 'center',
-          marginTop: 165,
+          marginTop: 100,
         },
         footerText: {
           fontSize: 17,
@@ -167,3 +169,89 @@ export default function Login({ navigation }) {
           letterSpacing: 0.2,
         },
       });
+      // const styles = StyleSheet.create({
+      //   container: {
+      //     flex: 1,
+      //     backgroundColor: "white",
+      //     alignItems: "center",
+      //     justifyContent: "center",  
+      //     margin: 200,
+      //   },
+      //   text: {
+      //     textAlign: "center",
+      //     fontSize: 18,
+      //     margin: 10,
+      //     fontWeight: "bold",
+      //     color: "#40434E",
+      //   },
+      //   emailInput: {
+      //     textAlign: "center",
+      //     justifyContent: "center",
+      //     width: 300,
+      //     borderWidth: 3,
+      //     borderRadius: 25,
+      //     borderColor:"rgb(65, 140, 115)",
+      //     padding: 10,
+      //     margin: 5,
+      //   },
+      //   passwordInput: {
+      //     textAlign: "center",
+      //     justifyContent: "center",
+      //     width: 300,
+      //     borderWidth: 3,
+      //     borderRadius: 25,
+      //     borderColor:"rgb(65, 140, 115)",
+      //     padding: 10,
+      //     margin: 5,
+      //   },
+      //   buttonText: {
+      //     color: "white",
+      //     fontWeight: "bold",
+      //     textAlign: "center",
+      //   },
+      //   button: {
+      //     width: 150,
+      //     padding: 5,
+      //     backgroundColor: "#8F540E",
+      //     borderWidth: 2,
+      //     borderColor: "#AD8557",
+      //     borderRadius: 15,
+      //     alignSelf: "center",
+      //     margin: 8,
+      //   },
+      //   forgotButton:{
+      //     width: 200,
+      //     padding: 6,
+      //     backgroundColor: "#8F540E",
+      //     borderWidth: 2,
+      //     borderColor: "#AD8557",
+      //     borderRadius: 15,
+      //     alignSelf: "center",
+      //     margin: 5,
+      //   },
+      //   scrollView: {
+      //     backgroundColor: 'whitesmoke',
+      //     marginHorizontal: 20,
+      //   },
+      //   tinyThyme: {
+      //     width: 150,
+      //     height: 150,
+      //   },
+      //   footerView: {
+      //     flex: 1,
+      //     alignItems: 'center',
+      //     marginBottom: 250
+      //   },
+      //   footerText: {
+      //     fontSize: 17,
+      //     color: '#2e2e2d',
+      //     fontFamily: 'Lato_400Regular',
+      //     letterSpacing: 0.2,
+      //   },
+      //   footerLink: {
+      //     color: '#1261B1',
+      //     fontFamily: 'Lato_900Black',
+      //     fontSize: 17,
+      //     letterSpacing: 0.2,
+      //   },
+      // });

@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { StatusBar } from "expo-status-bar";
 import { Button, StyleSheet, Image, Text, View } from "react-native";
+import Logout from "./Logout";
 
 //navigation prop passed down documentation: https://reactnavigation.org/docs/navigation-prop
 export default function Home({ navigation }) {
@@ -30,6 +31,7 @@ export default function Home({ navigation }) {
         title="Go to Recipe"
         onPress={() => navigation.navigate("SingleRecipe")}
       />
+      <Logout />
       {/* // <NavigationBar /> */}
     </View>
   );
