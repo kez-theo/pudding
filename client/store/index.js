@@ -5,18 +5,17 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import recipesReducer from "./recipes";
 import recipeReducer from "./singleRecipe";
 import foodItemsReducer from "./foodItems";
+import foodItemReducer from "./foodItem";
 import fridgeReducer from "./fridge";
-
 
 //add reducers here! Don't forget to import!
 
 const reducer = combineReducers({
   recipesReducer,
   recipeReducer,
-  recipeReducer,
   foodItemsReducer,
+  foodItemReducer,
   fridgeReducer,
-
 });
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
