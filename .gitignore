@@ -16,3 +16,4 @@ package-lock.json
 fbServiceAccountKey.json
 # macOS
 .DS_Store
+serviceAccountKey.json
