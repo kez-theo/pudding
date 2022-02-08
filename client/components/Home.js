@@ -21,11 +21,11 @@ export default function Home({ navigation }) {
         title="Go to Fridge"
         onPress={() => navigation.navigate("Fridge")}
       />
-      <Button
+      {/* <Button
         style={styles.button}
         title="Go to Recipes"
         onPress={() => navigation.navigate("Recipes")}
-      />
+      /> */}
       <Button
         style={styles.button}
         title="Go to Recipe"
