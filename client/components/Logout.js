@@ -4,7 +4,6 @@ import { View, TouchableOpacity, Text, StyleSheet, Alert } from "react-native";
 import { logout } from "../store/auth";
 import { auth } from "../firebaseAuth/firebase";
 import { useNavigation } from "@react-navigation/native";
-import { NavigationActions, StackActions } from "@react-navigation/routers";
 
 const Logout = () => {
 
