@@ -19,7 +19,7 @@ const fridges = [
 
 const foodItems = [
   {
-    foodItem_name: "watermelon",
+    foodItem_name: "banana",
     category: "vegetable",
   },
   {
@@ -39,7 +39,7 @@ const foodItems = [
 const users = [
   {
     uid: "u087CSU21PhXkg73Rd4Uxa2ugtw2",
-    firstName: "Codys",
+    firstName: "Codyco",
     lastName: "Fullstack",
     email: "cody@fullstack.com",
     password: "123456",
@@ -47,7 +47,7 @@ const users = [
   },
   {
     uid: "innDr0j21XQl7pHHo7KhxMUYEuP2",
-    firstName: "Fawne",
+    firstName: "Elena",
     lastName: "Lunt",
     email: "flunt0@va.gov",
     password: "WrwpJz",
