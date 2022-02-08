@@ -14,6 +14,7 @@ import Login from "./client/components/Login";
 import Registration from "./client/components/Registration";
 import SingleRecipe from "./client/components/SingleRecipe";
 import SingleFoodItem from "./client/components/SingleFoodItem";
+import SearchSingleRecipe from "./client/components/SearchSingleRecipe";
 
 const Stack = createNativeStackNavigator();
 
@@ -133,6 +134,20 @@ const AppSource = () => {
           component={SingleFoodItem}
           options={{
             title: "Food Details",
+            headerStyle: {
+              backgroundColor: "rgb(65, 140, 115)",
+            },
+            headerTintColor: "white",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
+          }}
+         />
+        <Stack.Screen
+          name="SearchSingleRecipe"
+          component={SearchSingleRecipe}
+          options={{
+            title: "Recipe",
             headerStyle: {
               backgroundColor: "rgb(65, 140, 115)",
             },

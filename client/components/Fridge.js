@@ -9,6 +9,7 @@ import {
   FlatList,
   TouchableOpacity,
   Image,
+  View,
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { getFridgeThunk } from "../store/fridge";
@@ -26,13 +27,7 @@ export default function Fridge({ navigation }) {
     viewFridge(1);
   }, []);
 
-  const FridgeFlatList = ({
-    navigation,
-    item,
-    onPress,
-    backgroundColor,
-    textColor,
-  }) => (
+  const FridgeFlatList = ({ item, onPress, backgroundColor, textColor }) => (
     <TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor]}>
       <Image
         style={styles.tinyThyme}
@@ -68,7 +63,7 @@ export default function Fridge({ navigation }) {
   let DATA = fridgeSelector.foodItems;
   return (
     <SafeAreaView style={styles.container}>
-      {!fridgeSelector.foodItems ? (
+      {!DATA ? (
         <Text> Loading... </Text>
       ) : (
         <SafeAreaView>
@@ -141,11 +136,5 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     fontFamily: "Avenir",
-  },
-  shadowProp: {
-    shadowColor: "#171717",
-    shadowOffset: { width: -2, height: 4 },
-    shadowOpacity: 0.2,
-    shadowRadius: 3,
   },
 });

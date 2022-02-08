@@ -4,6 +4,7 @@ const FoodItem = require("../db/models/FoodItem");
 const Fridge = require("../db/models/Fridge");
 const User = require("../db/models/User");
 
+
 let UserId = 1;
 
 router.get("/", async (req, res, next) => {

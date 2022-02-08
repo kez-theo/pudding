@@ -23,7 +23,7 @@ const foodItems = [
     category: "vegetable",
   },
   {
-    foodItem_name: "eggplant",
+    foodItem_name: "tomato",
     category: "vegetable",
   },
   {
