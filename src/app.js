@@ -5,7 +5,6 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const cors = require("cors");
 const app = express();
-
 module.exports = app;
 
 // logging middleware
@@ -23,6 +22,8 @@ app.use(express.json());
 // auth and api routes
 //app.use("/auth", require("./auth"));
 app.use("/api", require("./api"));
+app.use("/auth/auth", require("./auth/auth"))
+
 
 app.get("/", (req, res) =>
   res.sendFile(path.join(__dirname, "..", "public/index.html"))

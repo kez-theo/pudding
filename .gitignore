@@ -12,5 +12,8 @@ npm-debug.*
 web-build/
 .env
 package-lock.json
+.keys.js
+fbServiceAccountKey.json
 # macOS
 .DS_Store
+serviceAccountKey.json

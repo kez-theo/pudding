@@ -7,6 +7,9 @@ const db = require("../db");
 //const SALT_ROUNDS = 5;
 
 const User = db.define("user", {
+  uid: {
+    type: Sequelize.STRING,
+  },
   firstName: {
     type: Sequelize.STRING,
     allowNull: false,
