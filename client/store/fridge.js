@@ -37,7 +37,7 @@ export const getFridgeThunk = (userId) => {
   return async (dispatch) => {
     try {
       const { data: fridge } = await axios.get(
-        `https://tall-snail-87.loca.lt/api/fridge/${userId}`
+        `https://the-thymely-cook.herokuapp.com/api/fridge/${userId}`
       );
       dispatch(_getFridge(fridge));
     } catch (error) {
@@ -50,9 +50,12 @@ export const deleteFoodItemFromFridgeThunk = (userId, foodItemId) => {
   return async (dispatch) => {
     try {
       userId = 1;
-      await axios.delete(`https://tall-snail-87.loca.lt/api/fridge/${userId}`, {
-        foodItemId,
-      });
+      await axios.delete(
+        `https://the-thymely-cook.herokuapp.com/api/fridge/${userId}`,
+        {
+          foodItemId,
+        }
+      );
     } catch (err) {
       console.error(`Failed to delete fridge item`, err);
     }
@@ -64,7 +67,7 @@ export const addToFridgeThunk = (foodItem_name) => {
   return async (dispatch) => {
     try {
       const { data: foodItem } = await axios.post(
-        `https://tall-snail-87.loca.lt/api/fridge/${userId}`,
+        `https://the-thymely-cook.herokuapp.com/api/fridge/${userId}`,
         {
           foodItem_name,
         }
