@@ -29,7 +29,7 @@ export default function Home({ navigation }) {
       <Button
         style={styles.button}
         title="Go to Recipe"
-        onPress={() => navigation.navigate("SingleRecipe")}
+        onPress={() => navigation.navigate("SingleRecipe", { id: 663641, title: "Some Cool Name" })}
       />
       <Logout />
       {/* // <NavigationBar /> */}
