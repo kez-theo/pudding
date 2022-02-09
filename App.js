@@ -15,6 +15,7 @@ import Registration from "./client/components/Registration";
 import SingleRecipe from "./client/components/SingleRecipe";
 import SingleFoodItem from "./client/components/SingleFoodItem";
 import SearchSingleRecipe from "./client/components/SearchSingleRecipe";
+import BETA from "./client/components/BETA";
 
 const Stack = createNativeStackNavigator();
 
@@ -30,7 +31,7 @@ const AppSource = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen 
+        <Stack.Screen
           name="Login"
           component={Login}
           options={{
@@ -42,22 +43,23 @@ const AppSource = () => {
             headerTitleStyle: {
               fontWeight: "bold",
             },
+            headerLeft: null
           }}
-         />
+        />
         {/* <Stack.Screen name="Profile" component={Profile}/> */}
-        <Stack.Screen 
-        name ="Registration" 
-        component={Registration}
-        options={{
-          title: "Login",
-          headerStyle: {
-            backgroundColor: "rgb(65, 140, 115)",
-          },
-          headerTintColor: "white",
-          headerTitleStyle: {
-            fontWeight: "bold",
-          },
-        }}
+        <Stack.Screen
+          name="Registration"
+          component={Registration}
+          options={{
+            title: "Login",
+            headerStyle: {
+              backgroundColor: "rgb(65, 140, 115)",
+            },
+            headerTintColor: "white",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
+          }}
         />
         <Stack.Screen
           name="Home"
@@ -71,6 +73,7 @@ const AppSource = () => {
             headerTitleStyle: {
               fontWeight: "bold",
             },
+            headerLeft: () => false
           }}
         />
         <Stack.Screen
@@ -142,12 +145,26 @@ const AppSource = () => {
               fontWeight: "bold",
             },
           }}
-         />
+        />
         <Stack.Screen
           name="SearchSingleRecipe"
           component={SearchSingleRecipe}
           options={{
             title: "Recipe",
+            headerStyle: {
+              backgroundColor: "rgb(65, 140, 115)",
+            },
+            headerTintColor: "white",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
+          }}
+        />
+        <Stack.Screen
+          name="BETA"
+          component={BETA}
+          options={{
+            title: "BETA",
             headerStyle: {
               backgroundColor: "rgb(65, 140, 115)",
             },
@@ -166,7 +183,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    alignItems: "center", 
+    alignItems: "center",
     justifyContent: "center",
   },
 });

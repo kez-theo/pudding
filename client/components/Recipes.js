@@ -38,13 +38,10 @@ const Recipes = ({ route, navigation }) => {
     };
     fetchRecipes();
   }, []);
-
-  const navigateSingleRecipe = (recipeId, recipeName) => {
+  
+  const navigateSingleRecipe = (recipeId, recipeName, image) => {
     // @Elena make sure you change "SearchSingleRecipe" to the name of your Component
-    navigation.navigate("SearchSingleRecipe", {
-      id: recipeId,
-      title: recipeName,
-    });
+    navigation.navigate("SingleRecipe", { id: recipeId, title: recipeName, image: image });
   };
 
   const renderRecipe = ({ item }) => {
@@ -53,8 +50,8 @@ const Recipes = ({ route, navigation }) => {
         title={item.title}
         image={item.image}
         onPress={() => {
-          setCurrentRecipe(item.id);
-          navigateSingleRecipe(item.id, item.title);
+          setCurrentRecipe(item.id)
+          navigateSingleRecipe(item.id, item.title, item.image)
         }}
       />
     );

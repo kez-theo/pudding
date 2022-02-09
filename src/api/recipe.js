@@ -7,11 +7,11 @@ let UserId = 1;
 
 router.post("recipe/:UserId", async (req, res, next) => {
   try {
-    let user = await User.findOne({Where: { id: 1 }});
+    let user = await User.findOne({Where: { id: 2 }});
     const recipeToSave = await Recipe.findOrCreate({
       where: { id: req.body.id },
     });
-    let user_recipe = user.addRecipe(recipe);
+    let user_recipe = user.addRecipe(recipeToSave[0]);
     res.status(201).json(fridge);
   } catch (error) {
     next(error);
