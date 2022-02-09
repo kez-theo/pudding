@@ -37,7 +37,7 @@ export default function Fridge({ navigation }) {
         }}
       />
       <Text style={[styles.title, textColor]}>{item.foodItem_name}</Text>
-      <Text style={styles.itemText2}> {item.fridge.quantity} </Text>
+      <Text style={styles.itemText2}> Amount: {item.fridge.quantity} </Text>
     </TouchableOpacity>
   );
 
@@ -89,14 +89,8 @@ const styles = StyleSheet.create({
     backgroundColor: "whitesmoke",
     alignItems: "center",
     justifyContent: "center",
-  },
-  heading: {
-    color: "rgb(65, 140, 115)",
-    fontSize: 15,
-    fontWeight: "bold",
-    fontFamily: "Avenir",
-    alignItems: "flex-end",
-    justifyContent: "space-between",
+    flexDirection: "column",
+    marginTop: 50,
   },
   item: {
     shadowColor: "rgb(44, 89, 74)",
@@ -112,19 +106,13 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     marginBottom: 20,
   },
-  itemLeft: {
-    flexDirection: "row",
-    alignItems: "center",
-    flexWrap: "wrap",
-  },
   tinyThyme: {
     width: 20,
     height: 20,
   },
-
   title: {
     fontSize: 16,
-    color: "green",
+    color: "rgb(65, 140, 115)",
     fontWeight: "bold",
     justifyContent: "center",
     alignItems: "center",
@@ -132,8 +120,9 @@ const styles = StyleSheet.create({
   },
   itemText2: {
     fontSize: 16,
-    color: "green",
+    color: "rgb(65, 140, 115)",
     justifyContent: "center",
+    flexDirection: "row",
     alignItems: "center",
     fontFamily: "Avenir",
   },
