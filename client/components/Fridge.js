@@ -63,6 +63,13 @@ export default function Fridge({ navigation }) {
   let DATA = fridgeSelector.foodItems;
   return (
     <SafeAreaView style={styles.container}>
+      <TouchableOpacity
+        style={styles.touchable}
+        onPress={() => navigation.navigate("Scanner")}
+      >
+        <Text style={{ color: "rgb(65, 140, 115)" }}>Add Food</Text>
+      </TouchableOpacity>
+      <Text style={styles.heading}>My Food</Text>
       {!DATA ? (
         <Text> Loading... </Text>
       ) : (
@@ -72,10 +79,6 @@ export default function Fridge({ navigation }) {
             renderItem={renderFridgeFlatList}
             keyExtractor={(item) => item.id}
             extraData={selectedId}
-          />
-          <Button
-            title="Go to Scanner"
-            onPress={() => navigation.navigate("Scanner")}
           />
         </SafeAreaView>
       )}
@@ -90,7 +93,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "column",
-    marginTop: 50,
   },
   item: {
     shadowColor: "rgb(44, 89, 74)",
@@ -106,6 +108,19 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     marginBottom: 20,
   },
+  touchable: {
+    shadowColor: "rgb(44, 89, 74)",
+    shadowOffset: { width: -2, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+    backgroundColor: "white",
+    padding: 16,
+    color: "red",
+    borderRadius: 30,
+    flexDirection: "row",
+    marginTop: 155,
+    margin: 20,
+  },
   tinyThyme: {
     width: 20,
     height: 20,
@@ -117,6 +132,15 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     fontFamily: "Avenir",
+  },
+  heading: {
+    fontSize: 25,
+    color: "rgb(65, 140, 115)",
+    fontWeight: "bold",
+    justifyContent: "center",
+    alignItems: "center",
+    fontFamily: "Avenir",
+    margin: 20,
   },
   itemText2: {
     fontSize: 16,

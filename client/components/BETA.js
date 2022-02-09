@@ -16,9 +16,9 @@ export default function BETA({ navigation }) {
   return (
     <SafeAreaView>
       <Text style={styles.hint}>
-        Hello Beta Testers!! Here, will be a voice assistant for foodcooking.
-        What features would you find useful to help you with cooking? click the
-        phrases for your top 2!
+        Hello Beta Testers!! Here, will be a voice assistant for food and
+        cooking. What features would you find useful to help you with cooking?
+        click the phrases for your top 2!
       </Text>
 
       <Button
@@ -54,8 +54,5 @@ const styles = StyleSheet.create({
     alignItems: "center",
     fontFamily: "Noteworthy",
     padding: 30,
-  },
-  Button: {
-    padding: 20,
   },
 });
