@@ -1,38 +1,73 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StatusBar } from "expo-status-bar";
-import { Button, StyleSheet, Image, Text, View } from "react-native";
+import { Button, StyleSheet, TouchableOpacity, Image, FlatList, SafeAreaView, Text, View, ScrollView } from 'react-native';
+const spnAPI = 'https://api.spoonacular.com/recipes/';
+import {SPOON_API_KEY} from '@env'
+const axios = require("axios");
+
 import { useSelector, useDispatch } from "react-redux";
-import { getRecipeById, saveRecipeThunk } from "../store/singleRecipe";
-//this screen should get resipeId and name as props
-export default function SingleRecipe({navigation}) {
-    
+import {  saveRecipeThunk } from "../store/singleRecipe";
+
+export default function SingleRecipe({route}) {
+    const [recipe, setRecipe] = useState( null );
+    const id = route.params.id
+    const name = route.params.title
+    const image = route.params.image
     const dispatch = useDispatch();
 
-    const { recipeSteps } = useSelector((state) => {
-        return {
-            recipeSteps: state.recipeReducer.recipe.steps,
-        }
-    });  
-    //need change number to recipeId (will pass from recipes screen)
+    // const { recipeSteps } = useSelector((state) => {
+    //     return {
+    //         recipeSteps: state.recipeReducer.recipe.steps,
+    //     }
+    // });  
+    //my old
+    
+    // useEffect(() => {
+    //    dispatch(getRecipeById(route.params.id));
+    // }, []);
+
+    const handleSave = (recipe) => {
+        saveRecipeThunk(recipe)
+    }
+
+
     useEffect(() => {
-       dispatch(getRecipeById(663641));
-    }, []);
+        const fetchRecipe = async () => {
+            const { data: recipe } = await axios.get(`${spnAPI}${id}/information?includeNutrition=false&apiKey=${SPOON_API_KEY}`);
+            
+            console.log("this is my steps", recipe.analyzedInstructions[0])
+          setRecipe(recipe)
+        };
+        fetchRecipe(); 
+      }, []);
 
-    const handlePress = (recipe) => {
-    dispatch(saveRecipeThunk(saveRecipeThunk(recipe)));
-  };
+//     const handlePress = (recipe) => {
+        
+//     dispatch(saveRecipeThunk(saveRecipeThunk(recipe)));
+//   };
 
-    return (
+    if (recipe) {
+        return (
+            
+        
 
+            <ScrollView>
         <View style={styles.container}>
+        <Image  source={ {uri: image} } />
             <Text style={styles.text}></Text> 
-            <Text style={styles.text}>{dummyRecipesOptions.results[1].title} preparation</Text> 
+            
+            <Text style={styles.text}>{name}</Text> 
+            <Text style={styles.text2}>{ recipe.readyInMinutes } Minutes </Text>
             {
-                //recipeSteps.map((item, index) => ( <Text key={index} style={styles.text2}>{item.number}. {item.step}</Text>  )) map crash ternary fix:
-                recipeSteps ? (recipeSteps.map((item, index) => ( <Text key={index} style={styles.text2}>{item.number}. {item.step}</Text>  ))) : (<Text>Loading...</Text>)
-               
-            }  
-            <Text style={styles.text}>Enjoy!</Text> 
+                recipe.extendedIngredients.map((ingredient) => (<Text style={styles.text3}> { ingredient.original }</Text>))
+            } 
+            <Text style={styles.text2}>Preparation steps: </Text> 
+            {
+                recipe.analyzedInstructions[0].steps ? (recipe.analyzedInstructions[0].steps.map((item, index) => ( <Text key={index} style={styles.text3}>{item.number}. {item.step}</Text>  ))) : (<Text>Loading...</Text>)
+            }
+            <TouchableOpacity style={styles.button} >
+            <Text style={styles.buttonText} onPress={handleSave}>Save to favorites</Text>
+          </TouchableOpacity>
             <Image
                 style={styles.tinyThyme}
                 source={{
@@ -40,15 +75,17 @@ export default function SingleRecipe({navigation}) {
                     "https://us.123rf.com/450wm/eridanka/eridanka2103/eridanka210300026/165315737-a-sprig-of-rosemary-hand-drawn-sketch-style-illustration-design-element.jpg?ver=6",
                 }}
             />
-            <Button
-                style={styles.button}
-                title="Save to favorites"
-                onPress={handlePress}
-            />
+             
         </View> 
-    )
+        </ScrollView>
+    ) } else {
+        return (
+          <View>
+            <Text>Loading...</Text>
+          </View>
+        )
   
-}
+}}
 
 
 const styles = StyleSheet.create({
@@ -57,19 +94,29 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+    
   },
   
   text:{
-    fontSize: 22, 
+    fontSize: 20, 
     fontWeight: 'bold',
     justifyContent: 'center', 
     alignItems: 'center',
     color: 'teal',
     fontFamily: 'Avenir',
-    paddingTop: 20,
+    paddingTop: 40,
   },
   text2:{
     fontSize: 16, 
+    fontWeight: 'bold',
+    justifyContent: 'center', 
+    alignItems: 'center',
+    color: 'darkblue',
+    fontFamily: 'Avenir',
+    paddingTop: 20,
+  },
+  text3:{
+    fontSize: 14, 
     color: 'green',
     //fontWeight: 'bold',
     justifyContent: 'center', 
@@ -78,162 +125,23 @@ const styles = StyleSheet.create({
     padding: 5, 
   },
   tinyThyme: {
-    width: 60,
-    height: 60,
+    width: 40,
+    height: 40,
+  },
+  buttonText: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  button: {
+    width: 150,
+    padding: 5,
+    backgroundColor: "lightgrey",
+    borderWidth: 2,
+    borderColor: "lightblue",
+    borderRadius: 15,
+    alignSelf: "center",
+    margin: 8,
   },
 });
 
-const dummyRecipesOptions = {
-    "results": [
-        {
-            "id": 663588,
-            "title": "Tomato Cutlets",
-            "image": "https://spoonacular.com/recipeImages/663588-312x231.jpg",
-            "imageType": "jpg"
-        },
-        {
-            "id": 663641,
-            "title": "Tomato tarte tatin",
-            "image": "https://spoonacular.com/recipeImages/663641-312x231.jpg",
-            "imageType": "jpg"
-        }
-    ],
-    "offset": 0,
-    "number": 2,
-    "totalResults": 804
-};
-// const dummyRecipe = [
-//     {
-//         "name": "",
-//         "steps": [
-//             {
-//                 "number": 1,
-//                 "step": "Prepare the eggs, bread crumbs and sliced tomatoes.Dip the tomato slice in the egg wash and then in the bread crumbs.  If you have extra egg wash and bread crumbs you can repeat this process.",
-//                 "ingredients": [
-//                     {
-//                         "id": 18079,
-//                         "name": "breadcrumbs",
-//                         "localizedName": "breadcrumbs",
-//                         "image": "breadcrumbs.jpg"
-//                     },
-//                     {
-//                         "id": 11529,
-//                         "name": "tomato",
-//                         "localizedName": "tomato",
-//                         "image": "tomato.png"
-//                     },
-//                     {
-//                         "id": 1123,
-//                         "name": "egg",
-//                         "localizedName": "egg",
-//                         "image": "egg.png"
-//                     },
-//                     {
-//                         "id": 0,
-//                         "name": "dip",
-//                         "localizedName": "dip",
-//                         "image": ""
-//                     }
-//                 ],
-//                 "equipment": []
-//             },
-//             {
-//                 "number": 2,
-//                 "step": "Heat a large frying pan with the olive oil and place the prepared tomato slices in the pan.  When the tomatoes have a nice golden color gently flip and finish cooking on the other side.  This will take about 3-4 minutes on each side on medium heat.",
-//                 "ingredients": [
-//                     {
-//                         "id": 10511529,
-//                         "name": "tomato slices",
-//                         "localizedName": "tomato slices",
-//                         "image": "sliced-tomato.jpg"
-//                     },
-//                     {
-//                         "id": 4053,
-//                         "name": "olive oil",
-//                         "localizedName": "olive oil",
-//                         "image": "olive-oil.jpg"
-//                     },
-//                     {
-//                         "id": 11529,
-//                         "name": "tomato",
-//                         "localizedName": "tomato",
-//                         "image": "tomato.png"
-//                     }
-//                 ],
-//                 "equipment": [
-//                     {
-//                         "id": 404645,
-//                         "name": "frying pan",
-//                         "localizedName": "frying pan",
-//                         "image": "pan.png"
-//                     }
-//                 ],
-//                 "length": {
-//                     "number": 4,
-//                     "unit": "minutes"
-//                 }
-//             },
-//             {
-//                 "number": 3,
-//                 "step": "Place halved eggplant in the frying pan and sprinkle with dashes of salt and pepper.",
-//                 "ingredients": [
-//                     {
-//                         "id": 1102047,
-//                         "name": "salt and pepper",
-//                         "localizedName": "salt and pepper",
-//                         "image": "salt-and-pepper.jpg"
-//                     },
-//                     {
-//                         "id": 11209,
-//                         "name": "eggplant",
-//                         "localizedName": "eggplant",
-//                         "image": "eggplant.png"
-//                     }
-//                 ],
-//                 "equipment": [
-//                     {
-//                         "id": 404645,
-//                         "name": "frying pan",
-//                         "localizedName": "frying pan",
-//                         "image": "pan.png"
-//                     }
-//                 ]
-//             },
-//             {
-//                 "number": 4,
-//                 "step": "Let the eggplant saut on one side to a golden color then turn and saut on the other side.  This will take about 3  4 minutes on each side.Plate and finish with the parsley garnish, lemon juice and grated cheese.",
-//                 "ingredients": [
-//                     {
-//                         "id": 9152,
-//                         "name": "lemon juice",
-//                         "localizedName": "lemon juice",
-//                         "image": "lemon-juice.jpg"
-//                     },
-//                     {
-//                         "id": 11209,
-//                         "name": "eggplant",
-//                         "localizedName": "eggplant",
-//                         "image": "eggplant.png"
-//                     },
-//                     {
-//                         "id": 11297,
-//                         "name": "parsley",
-//                         "localizedName": "parsley",
-//                         "image": "parsley.jpg"
-//                     },
-//                     {
-//                         "id": 1041009,
-//                         "name": "cheese",
-//                         "localizedName": "cheese",
-//                         "image": "cheddar-cheese.png"
-//                     }
-//                 ],
-//                 "equipment": [],
-//                 "length": {
-//                     "number": 4,
-//                     "unit": "minutes"
-//                 }
-//             }
-//         ]
-//     }
-// ]
