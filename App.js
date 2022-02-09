@@ -43,6 +43,7 @@ const AppSource = () => {
             headerTitleStyle: {
               fontWeight: "bold",
             },
+            headerLeft: null
           }}
         />
         {/* <Stack.Screen name="Profile" component={Profile}/> */}
@@ -72,6 +73,7 @@ const AppSource = () => {
             headerTitleStyle: {
               fontWeight: "bold",
             },
+            headerLeft: () => false
           }}
         />
         <Stack.Screen
