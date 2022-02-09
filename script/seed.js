@@ -38,13 +38,15 @@ const foodItems = [
 
 const users = [
   {
-    firstName: "codie",
+    uid: "u087CSU21PhXkg73Rd4Uxa2ugtw2",
+    firstName: "Codys",
     lastName: "Fullstack",
     email: "cody@fullstack.com",
-    password: "123",
+    password: "123456",
     isLoggedIn: true,
   },
   {
+    uid: "innDr0j21XQl7pHHo7KhxMUYEuP2",
     firstName: "Fawne",
     lastName: "Lunt",
     email: "flunt0@va.gov",
