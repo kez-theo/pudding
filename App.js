@@ -42,6 +42,7 @@ const AppSource = () => {
             headerTitleStyle: {
               fontWeight: "bold",
             },
+            headerLeft: null
           }}
          />
         {/* <Stack.Screen name="Profile" component={Profile}/> */}
@@ -66,12 +67,12 @@ const AppSource = () => {
             title: "Thymely Cook",
             headerStyle: {
               backgroundColor: "rgb(65, 140, 115)",
-              headerLeft: null,
             },
             headerTintColor: "white",
             headerTitleStyle: {
               fontWeight: "bold",
             },
+            headerLeft: null
           }}
         />
         <Stack.Screen
