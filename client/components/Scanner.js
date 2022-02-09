@@ -5,7 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import { addFoodItemThunk } from "../store/foodItems";
 import { addToFridgeThunk } from "../store/fridge";
-import { EDEMAM_KEY, EDEMAM_ID } from "@env";
+// import { EDEMAM_KEY, EDEMAM_ID } from "@env";
+require('dotenv').config()
 import axios from "axios";
 
 let EdamamURL = "https://api.edamam.com/api/food-database/v2/parser?";
