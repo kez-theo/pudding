@@ -15,11 +15,16 @@ const fridges = [
     foodItemId: 3,
     quantity: 1,
   },
+  {
+    userId: 1,
+    foodItemId: 4,
+    quantity: 1,
+  },
 ];
 
 const foodItems = [
   {
-    foodItem_name: "watermelon",
+    foodItem_name: "bananas",
     category: "vegetable",
   },
   {
@@ -47,7 +52,7 @@ const users = [
   },
   {
     uid: "innDr0j21XQl7pHHo7KhxMUYEuP2",
-    firstName: "Fawne",
+    firstName: "Lelena",
     lastName: "Lunt",
     email: "flunt0@va.gov",
     password: "WrwpJz",

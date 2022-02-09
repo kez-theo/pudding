@@ -32,7 +32,7 @@ const Recipes = ( {navigation} ) => {
   
   const navigateSingleRecipe = (recipeId, recipeName) => {
     // @Elena make sure you change "SearchSingleRecipe" to the name of your Component
-    navigation.navigate("SearchSingleRecipe", { id: recipeId, title: recipeName });
+    navigation.navigate("SingleRecipe", { id: recipeId, title: recipeName });
   };
 
   const renderRecipe = ({ item }) => {
