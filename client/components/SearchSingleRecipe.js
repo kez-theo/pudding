@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 const axios = require("axios");
 import { Button, StyleSheet, Image, Text, View } from "react-native";
-import {SPOON_API_KEY} from '@env'
+// import {SPOON_API_KEY} from '@env'
+require('dotenv').config()
 
 const spnAPI = 'https://api.spoonacular.com/recipes/'
 

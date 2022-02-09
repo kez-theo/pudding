@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { StatusBar } from "expo-status-bar";
 import { Button, StyleSheet, TouchableOpacity, Image, FlatList, SafeAreaView, Text, View, ScrollView } from 'react-native';
 const spnAPI = 'https://api.spoonacular.com/recipes/';
-import {SPOON_API_KEY} from '@env'
+// import {SPOON_API_KEY} from '@env'
 const axios = require("axios");
+require('dotenv').config()
 
 import { useSelector, useDispatch } from "react-redux";
 import {  saveRecipeThunk } from "../store/singleRecipe";
