@@ -1,1 +1,1 @@
-web: npx serve web-build
+web: node src/index.js
