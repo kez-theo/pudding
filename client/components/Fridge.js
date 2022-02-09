@@ -92,14 +92,6 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     marginTop: 50,
   },
-  heading: {
-    color: "rgb(65, 140, 115)",
-    fontSize: 15,
-    fontWeight: "bold",
-    fontFamily: "Avenir",
-    alignItems: "flex-end",
-    justifyContent: "space-between",
-  },
   item: {
     shadowColor: "rgb(44, 89, 74)",
     shadowOffset: { width: -2, height: 4 },
@@ -114,12 +106,10 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     marginBottom: 20,
   },
-
   tinyThyme: {
     width: 20,
     height: 20,
   },
-
   title: {
     fontSize: 16,
     color: "rgb(65, 140, 115)",

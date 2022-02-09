@@ -19,6 +19,12 @@ export default function SingleFoodItem({ route, navigation }) {
   const foodItemSelector = useSelector((state) => state.foodItemReducer);
   let DATA = foodItemSelector;
   let name = DATA.foodItem_name;
+  let counts = {
+    A: 0,
+    B: 0,
+    C: 0,
+    D: 0,
+  };
 
   //hook usedispatch function
   const viewFoodItem = (foodItemId) => {
@@ -66,9 +72,11 @@ export default function SingleFoodItem({ route, navigation }) {
       <TouchableOpacity style={styles.logout} onPress={onPressRecipe}>
         <Text style={{ color: "rgb(65, 140, 115)" }}>Recipe Suggestions</Text>
       </TouchableOpacity>
-      <Text style={styles.hint}>
-        Hint: Try Asking Alexa to call Ms. Pudding
-      </Text>
+      <Button
+        style={styles.button}
+        title="BETA TESTERS!! CLICK HERE"
+        onPress={() => navigation.navigate("BETA")}
+      />
     </SafeAreaView>
   );
 }
