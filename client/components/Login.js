@@ -66,7 +66,7 @@ export default function Login({ navigation }) {
             <Text style={styles.buttonText}>Submit</Text>
           </TouchableOpacity>
           {/* <TouchableOpacity style={styles.forgotButton} onPress={()=>navigation.navigate('forgotPassword')}>
-            // <Text style={styles.buttonText}>Forgot password</Text>
+            // <Text style={styles.buttonText}>Forgot password!!!</Text>
           </TouchableOpacity> */}
           <View style={styles.footerView}>
             <Text style={styles.footerText}>
