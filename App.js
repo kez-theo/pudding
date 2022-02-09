@@ -15,7 +15,7 @@ import Registration from "./client/components/Registration";
 import SingleRecipe from "./client/components/SingleRecipe";
 import SingleFoodItem from "./client/components/SingleFoodItem";
 import SearchSingleRecipe from "./client/components/SearchSingleRecipe";
-// import BETA from "./client/components/BETA";
+import BETA from "./client/components/BETA";
 
 const Stack = createNativeStackNavigator();
 
@@ -158,7 +158,7 @@ const AppSource = () => {
             },
           }}
         />
-        {/* <Stack.Screen
+        <Stack.Screen
           name="BETA"
           component={BETA}
           options={{
@@ -171,7 +171,7 @@ const AppSource = () => {
               fontWeight: "bold",
             },
           }}
-        /> */}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
