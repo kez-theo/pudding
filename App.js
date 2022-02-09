@@ -59,6 +59,7 @@ const AppSource = () => {
             headerTitleStyle: {
               fontWeight: "bold",
             },
+            headerLeft: () => false
           }}
         />
         <Stack.Screen
