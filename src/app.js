@@ -7,6 +7,11 @@ const cors = require("cors");
 const app = express();
 module.exports = app;
 
+
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
+
 // logging middleware
 app.use(morgan("dev"));
 
@@ -14,7 +19,7 @@ app.use(morgan("dev"));
 app.use(express.json());
 
 // cors middleware
-// app.use(cors());
+app.use(cors());
 
 // app.use(bodyParser.urlencoded({ extended: true }));
 // app.use(bodyParser.json());
