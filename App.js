@@ -51,7 +51,7 @@ const AppSource = () => {
           name="Registration"
           component={Registration}
           options={{
-            title: "Login",
+            title: "Registration",
             headerStyle: {
               backgroundColor: "rgb(65, 140, 115)",
             },
