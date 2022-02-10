@@ -9,6 +9,7 @@ const db = require("../db");
 const User = db.define("user", {
   uid: {
     type: Sequelize.STRING,
+    primaryKey: true
   },
   firstName: {
     type: Sequelize.STRING,

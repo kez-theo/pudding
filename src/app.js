@@ -14,15 +14,15 @@ app.use(morgan("dev"));
 app.use(express.json());
 
 // cors middleware
-// app.use(cors());
+app.use(cors());
 
-// app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 // auth and api routes
-//app.use("/auth", require("./auth"));
+app.use("/auth", require("./auth"));
 app.use("/api", require("./api"));
-app.use("/auth/auth", require("./auth/auth"))
+app.use("/auth", require("./auth"))
 
 
 app.get("/", (req, res) =>

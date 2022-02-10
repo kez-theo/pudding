@@ -5,7 +5,29 @@ const User = require("../db/models/User");
 
 let UserId = 1;
 
-router.post("recipe/:UserId", async (req, res, next) => {
+router.get("/", async (req, res, next) => {
+  try {
+    const recipe = await Recipe.findAll();
+    res.json(recipe);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get('/:id', async (req, res, next) => {
+  try {
+    const users = await Recipe.findOne({
+      where: {
+        id: req.params.id
+      },
+    })
+    res.json(users)
+  } catch(err) {
+    next (err)
+  }
+})
+
+router.post("/:id", async (req, res, next) => {
   try {
     let user = await User.findOne({Where: { id: 2 }});
     const recipeToSave = await Recipe.findOrCreate({
@@ -17,3 +39,5 @@ router.post("recipe/:UserId", async (req, res, next) => {
     next(error);
   }
 });
+
+module.exports = router;
