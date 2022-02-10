@@ -85,7 +85,7 @@ module.exports = User;
 
 // User.findByToken = async function (token) {
 //   try {
-//     const { id } = await jwt.verify(token, secret.jwtSecret);
+//     const { id } = await jwt.(token, secret.jwtSecret);
 //     const user = User.findByPk(id);
 //     if (!user) {
 //       throw "nooo";
