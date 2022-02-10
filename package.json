@@ -9,8 +9,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "seed": "node script/seed.js",
-    "build": "expo build:web"
+    "seed": "node script/seed.js"
   },
   "dependencies": {
     "@expo/metro-config": "^0.3.9",
