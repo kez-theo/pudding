@@ -24,7 +24,7 @@ const fridges = [
 
 const foodItems = [
   {
-    foodItem_name: "bananas",
+    foodItem_name: "broccoli",
     category: "vegetable",
   },
   {
