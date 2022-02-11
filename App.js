@@ -17,6 +17,7 @@ import SingleFoodItem from "./client/components/SingleFoodItem";
 import SearchSingleRecipe from "./client/components/SearchSingleRecipe";
 import BETA from "./client/components/BETA";
 
+
 const Stack = createNativeStackNavigator();
 
 const App = () => {

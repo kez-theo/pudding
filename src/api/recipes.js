@@ -1,9 +1,10 @@
+/* eslint-disable no-unused-vars */
+
 const router = require("express").Router();
 const Recipe = require("../db/models/Recipe");
 const User = require("../db/models/User");
 
 let UserId = 1;
-
 
 router.get("/", async (req, res, next) => {
   try {
@@ -55,9 +56,5 @@ router.post("/", async (req, res, next) => {
       where: { recipe_name: req.body.recipe_name },
     });
     res.status(201).json(recipe[0]);
-  } catch (error) {
-    next(error);
-  }
-});
 
 module.exports = router;
