@@ -4,8 +4,13 @@
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "server": "nodemon src/index.js",
+<<<<<<< HEAD
     "start": "node src/index.js",
     "start:dev": "expo start",
+=======
+    "start:dev": "expo start",
+    "start": "node src/index.js",
+>>>>>>> main
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
