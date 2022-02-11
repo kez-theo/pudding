@@ -17,7 +17,7 @@ router.get("/", async (req, res, next) => {
 
 router.get("/:foodItemId", async (req, res, next) => {
   try {
-    console.log(req.params.foodItemId);
+    //(req.params.foodItemId);
     const foodItem = await FoodItem.findOne({
       where: { id: req.params.foodItemId },
     });

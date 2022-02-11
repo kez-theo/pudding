@@ -1,5 +1,7 @@
 import axios from "axios";
 import { auth } from '../firebaseAuth/firebase'
+import firebase from "firebase";
+
 
 //Action Type
 const SET_USER = "SET_USER";
@@ -21,7 +23,7 @@ export const logout = () => {
 export const setUserThunk = () => async (dispatch) => {
   const idToken = await auth.currentUser.getIdToken(true);
   if (idToken) {
-    const { data } = await axios.get(`/auth/me`, {
+    const { data } = await axios.get(`https://the-thymely-cook.herokuapp.com/auth/me`, {
       headers: {
         authtoken: idToken,
       },
@@ -36,7 +38,7 @@ export const updateUserThunk =
     try {
       const idToken = await auth.currentUser.getIdToken(true);
       if (idToken) {
-        const { data } = await axios.put(`/auth/update`,
+        const { data } = await axios.put(`https://the-thymely-cook.herokuapp.com/auth/update`,
           {
             firstName,
             lastName,
@@ -55,16 +57,16 @@ export const updateUserThunk =
     }
   };
 
-export const updatePassword = async (password) => {
-  try {
-    const user = await auth.currentUser;
-    await user.updatePassword(password);
-    return true;
-  } catch (err) {
-    console.log("update password thunk error");
-    return err.message;
-  }
-};
+// export const updatePassword = async (password) => {
+//   try {
+//     const user = await auth.currentUser;
+//     await user.updatePassword(password);
+//     return true;
+//   } catch (err) {
+//     console.log("update password thunk error");
+//     return err.message;
+//   }
+// };
 
 export const authenticateSignUp =
   ({ email, firstName, lastName, password, method }) =>
@@ -74,7 +76,7 @@ export const authenticateSignUp =
         email,
         password
       );
-      const { data } = await axios.post(`/auth/${method}`, {
+      const { data } = await axios.post(`https://the-thymely-cook.herokuapp.com/auth/signup`, {
         uid: user.uid,
         email,
         firstName,
@@ -94,7 +96,7 @@ export const authenticateLogin = ({ email, password, method }) =>
         email,
         password
       );
-      const { data } = await axios.post(`/auth/${method}`, {
+      const { data } = await axios.post(`https://the-thymely-cook.herokuapp.com/auth/login`, {
         uid: user.uid,
       });
       if (verify(data, dispatch)) {

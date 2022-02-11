@@ -1,6 +1,8 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Text, StyleSheet, View, TextInput, TouchableOpacity, Alert, Image } from 'react-native';
 import { auth } from '../firebaseAuth/firebase'
+import { authenticateLogin } from '../store';
 //import { useDispatch } from 'react-redux';
 //Text - A React component for displaying text. Text supports nesting, styling, and touch handling.
 //View - The most fundamental component for building a UI, View is a container that supports layout with flexbox, style, some touch handling, and accessibility controls.
@@ -9,9 +11,10 @@ import { auth } from '../firebaseAuth/firebase'
 //TouchableOpacity - A wrapper for making views respond properly to touches. On press down, the opacity of the wrapped view is decreased, dimming it.
 
 export default function Login({ navigation }) {  
-   // dispatch = useDispatch
+    const dispatch = useDispatch();
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
+    const [error, setError] = React.useState(null)
 
     const onFooterLinkPress = () => {
       navigation.navigate('Registration')
@@ -28,13 +31,16 @@ export default function Login({ navigation }) {
   
 
     const handleLogin = async () => {
-      if(!email || !password) Alert.alert("Please fill out the required fields!")
         try {
-          const  { user } = await auth.signInWithEmailAndPassword(email, password)
-          console.log('Logged in with: ', user.email)
-          } catch(error) {
+          const response = await dispatch(
+            authenticateLogin({ email: email, password: password })
+          );
+          if(response !== true) {
+            setError(response)
+          }
+         } catch(error) {
           console.log(error);
-          Alert.alert("Incorrect Email or Password")
+          // Alert.alert("Incorrect Email or Password")
         }
     }
  
