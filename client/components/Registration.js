@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, StyleSheet, View, TextInput, TouchableOpacity, Alert, Image } from 'react-native';
 import { auth } from '../firebaseAuth/firebase'
-import { authenticateSignUp } from '../store/auth'
+import { authenticateSignUp } from '../store'
 import { useDispatch } from "react-redux"
 //import { useDispatch } from 'react-redux';
 //Text - A React component for displaying text. Text supports nesting, styling, and touch handling.
