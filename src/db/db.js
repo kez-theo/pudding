@@ -61,14 +61,14 @@ if (process.env.LOGGING === "true") {
   
 // console.log("herokudb", process.env.HEROKU_DB);
 
-// if (true) {
-//   config.dialectOptions = {
-//     ssl: {
-//       require: true,
-//       rejectUnauthorized: false,
-//     },
-//   };
-// }
+if (true) {
+  config.dialectOptions = {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false,
+    },
+  };
+}
 
 const db = new Sequelize(
 process.env.DATABASE_URL || `postgres://${process.env.HEROKU_DB}`,

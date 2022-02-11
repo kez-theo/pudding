@@ -11,14 +11,14 @@ const Recipe = db.define("recipe", {
   },
   steps: {
     type: Sequelize.TEXT,
-    allowNull: false,
+   // allowNull: false,
   },
   ingredients: {
     type: Sequelize.TEXT,
   },
   imageUrl: {
     type: Sequelize.STRING,
-    allowNull: true,
+   // allowNull: true,
   },
   category: {
     type: Sequelize.STRING,
