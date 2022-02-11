@@ -5,13 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import { addFoodItemThunk } from "../store/foodItems";
 import { addToFridgeThunk } from "../store/fridge";
-// import { EDEMAM_KEY, EDEMAM_ID } from "@env";
+import { EDEMAM_KEY, EDEMAM_ID } from "../../.keys";
 import axios from "axios";
 
 let EdamamURL = "https://api.edamam.com/api/food-database/v2/parser?";
 const EDEMAM_TYPE = "&nutrition-type=logging";
-const EDEMAM_ID = process.env.EDEMAM_ID
-const EDEMAM_KEY = process.env.EDEMAM_KEY
 
 export default function Scanner({ navigation }) {
   const [hasPermission, setHasPermission] = useState(null);

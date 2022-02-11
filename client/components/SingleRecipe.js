@@ -3,12 +3,10 @@ import { StatusBar } from "expo-status-bar";
 import { Button, StyleSheet, TouchableOpacity, Image, FlatList, SafeAreaView, Text, View, ScrollView } from 'react-native';
 import { saveRecipeThunk } from "../store/singleRecipe";
 const spnAPI = 'https://api.spoonacular.com/recipes/';
-import SPOON_API_KEY from "../../.keys";
+import { SPOON_API_KEY } from "../../.keys";
 const axios = require("axios");
-
 import { useSelector, useDispatch } from "react-redux";
-import {  saveRecipeThunk } from "../store/singleRecipe";
-// const SPOON_API_KEY = process.env.SPOON_API_KEY
+
 
 export default function SingleRecipe({route}) {
   const [recipe, setRecipe] = useState( null );

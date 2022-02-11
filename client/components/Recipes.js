@@ -9,8 +9,8 @@ import {
   View,
 } from "react-native";
 const axios = require("axios");
-import SPOON_API_KEY from "../../.keys";
-import SearchSingleRecipe from "./SingleRecipe";
+import { SPOON_API_KEY } from "../../.keys";
+import SingleRecipe from "./SingleRecipe";
 
 
 const spnAPI = "https://api.spoonacular.com/recipes/";
@@ -37,7 +37,6 @@ const Recipes = ({ route, navigation }) => {
       const res = await axios.get(
         `${spnAPI}complexSearch?query=${ingredient}&number=4&apiKey=${SPOON_API_KEY}`
       );
-      
       setRecipes(res.data.results);
       //console.log(res.data.results)
     };
