@@ -23,8 +23,8 @@ export default function Scanner({ navigation }) {
   const addFoodItem = (foodItem) => {
     dispatch(addFoodItemThunk(foodItem));
   };
-  const addToFridge = (foodItem) => {
-    dispatch(addToFridgeThunk(foodItem));
+  const addToFridge = (userId, foodItem, quantity) => {
+    dispatch(addToFridgeThunk(userId, foodItem, quantity));
   };
 
   const askForCameraPermission = () => {
@@ -55,7 +55,7 @@ export default function Scanner({ navigation }) {
       {
         text: "Yes",
         onPress: () => {
-          addToFridge(foodName);
+          addToFridge(1, foodName, 1);
           Alert.alert(`Successfully added ${foodName} to your fridge!`);
         },
       },

@@ -1,14 +1,22 @@
 /* eslint-disable no-unused-vars */
 import axios from "axios";
 export const GET_FRIDGE = "GET_FRIDGE";
+export const GET_FRIDGE_ITEM = "GET_FRIDGE_ITEM";
 export const ADD_TO_FRIDGE = "ADD_TO_FRIDGE";
-export const DELETE_FRIDGE = "DELETE_FRIDGE";
 export const DELETE_FOODITEM_FROM_FRIDGE = "DELETE_FOODITEM_FROM_FRIDGE";
+export const DELETE_FRIDGE = "DELETE_FRIDGE";
 
 export const _getFridge = (fridge) => {
   return {
     type: GET_FRIDGE,
     fridge,
+  };
+};
+
+export const _getFridgeItem = (foodItem) => {
+  return {
+    type: GET_FRIDGE_ITEM,
+    foodItem,
   };
 };
 
@@ -46,30 +54,28 @@ export const getFridgeThunk = (userId) => {
   };
 };
 
-export const deleteFoodItemFromFridgeThunk = (userId, foodItemId) => {
+export const getFridgeItemThunk = (userId, foodItemId) => {
   return async (dispatch) => {
     try {
-      userId = 1;
-      await axios.delete(
-        `https://the-thymely-cook.herokuapp.com/api/fridge/${userId}`,
-        {
-          foodItemId,
-        }
+      const { data: fridgeItem } = await axios.get(
+        `https://the-thymely-cook.herokuapp.com/api/fridge/${userId}/${foodItemId}`
       );
-    } catch (err) {
-      console.error(`Failed to delete fridge item`, err);
+      dispatch(_getFridgeItem(fridgeItem));
+    } catch (error) {
+      console.error(error);
     }
   };
 };
 
-export const addToFridgeThunk = (foodItem_name) => {
-  let userId = 1;
+export const addToFridgeThunk = (userId, foodItem_name, quantity) => {
   return async (dispatch) => {
     try {
       const { data: foodItem } = await axios.post(
         `https://the-thymely-cook.herokuapp.com/api/fridge/${userId}`,
         {
+          userId,
           foodItem_name,
+          quantity,
         }
       );
       dispatch(_addToFridge(foodItem));
@@ -80,6 +86,36 @@ export const addToFridgeThunk = (foodItem_name) => {
   };
 };
 
+export const deleteFoodItemFromFridgeThunk = (userId, foodItemId) => {
+  return async (dispatch) => {
+    try {
+      userId = 1;
+      await axios.delete(
+        `https://the-thymely-cook.herokuapp.com/api/fridge/${userId}/${foodItemId}`,
+        {
+          userId,
+          foodItemId,
+        }
+      );
+    } catch (err) {
+      console.error(`Failed to delete fridge item`, err);
+    }
+  };
+};
+
+export const deleteFridgeThunk = (userId) => {
+  return async (dispatch) => {
+    try {
+      userId = 1;
+      await axios.delete(
+        `https://the-thymely-cook.herokuapp.com/api/fridge/${userId}`,
+        { userId }
+      );
+    } catch (err) {
+      console.error(`Failed to delete fridge`, err);
+    }
+  };
+};
 let initialState = [];
 
 export default function fridgeReducer(state = initialState, action) {
@@ -88,6 +124,8 @@ export default function fridgeReducer(state = initialState, action) {
       return action.fridge;
     case ADD_TO_FRIDGE:
       return [...state, action.foodItem];
+    case GET_FRIDGE_ITEM:
+      return action.foodItem;
     case DELETE_FOODITEM_FROM_FRIDGE:
       return state.filter((foodItem) => foodItem.id !== action.foodItem.id);
     case DELETE_FRIDGE:

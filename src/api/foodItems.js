@@ -1,8 +1,5 @@
 const router = require("express").Router();
 const FoodItem = require("../db/models/FoodItem");
-const axios = require("axios");
-const Fridge = require("../db/models/Fridge");
-const User = require("../db/models/User");
 
 let UserId = 1;
 
@@ -17,7 +14,6 @@ router.get("/", async (req, res, next) => {
 
 router.get("/:foodItemId", async (req, res, next) => {
   try {
-    console.log(req.params.foodItemId);
     const foodItem = await FoodItem.findOne({
       where: { id: req.params.foodItemId },
     });
@@ -37,6 +33,19 @@ router.post("/", async (req, res, next) => {
       where: { foodItem_name: req.body.foodItem_name },
     });
     res.status(201).json(fooditem[0]);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.put("/:foodItemId", async (req, res, next) => {
+  try {
+    const foodItem = await FoodItem.findOne({
+      where: { id: req.body.foodItemId },
+    });
+    await foodItem.update(req.body);
+    await foodItem.save();
+    res.send(foodItem);
   } catch (error) {
     next(error);
   }

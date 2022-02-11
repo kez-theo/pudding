@@ -5,15 +5,17 @@ const User = require("../db/models/User");
 
 let UserId = 1;
 
-router.post("recipe/:UserId", async (req, res, next) => {
+router.post("/:UserId", async (req, res, next) => {
   try {
-    let user = await User.findOne({Where: { id: 2 }});
+    let user = await User.findOne({ where: { id: 2 } });
     const recipeToSave = await Recipe.findOrCreate({
       where: { id: req.body.id },
     });
     let user_recipe = user.addRecipe(recipeToSave[0]);
-    res.status(201).json(fridge);
+    res.status(201).json(user_recipe);
   } catch (error) {
     next(error);
   }
 });
+
+module.exports = router;
