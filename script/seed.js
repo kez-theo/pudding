@@ -20,6 +20,11 @@ const fridges = [
     foodItemId: 4,
     quantity: 1,
   },
+  {
+    userId: 1,
+    foodItemId: 1,
+    quantity: 1,
+  }
 ];
 
 const foodItems = [

@@ -22,14 +22,18 @@ export const saveRecipe = (recipe) => ({
 
 //THUNK
 
-export const saveRecipeThunk = (recipe_name) => {
+export const saveRecipeThunk = (recipeObj) => {
   let userId = 1;
-  console.log("recipe from thunk", recipe_name)
+  let recipeName = recipeObj.title
+  let recipeId = recipeObj.id
+  console.log("recipe from thunk", recipeName)
   return async (dispatch) => {
     try {
       const { data: recipe } = await axios.post(
-        `https://silly-goat-63.loca.lt/api/recipes/${userId}`,
-        recipe_name
+        `https://nervous-tiger-41.loca.lt/api/recipes/${userId}`,
+        {
+          recipeName, recipeId
+        }
       );
       dispatch(saveRecipe(recipe));
     } catch (err) {
@@ -46,7 +50,7 @@ const initialState = {
 //REDUCER
 
 export default function recipeReducer(state = initialState, action) {
-    console.log("I'm recipeReducer, I got ", action.recipe)
+    //console.log("I'm recipeReducer, I got ", action.recipe)
   switch (action.type) {
     case SAVE_RECIPE:
       return {...state, savedRecipes: [...state, action.recipe]}     

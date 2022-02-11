@@ -30,9 +30,10 @@ export default function SingleRecipe({route}) {
     fetchRecipe(); 
   }, 
   []);
-  const saveToFav = (name) => {
-    console.log("recipe from saveHandler", name)
-    dispatch(saveRecipeThunk(name));
+  const saveToFav = () => {
+    //console.log("recipe from saveHandler", recipe)
+    alert('Saved to favorites!')
+    dispatch(saveRecipeThunk(recipe));
   };
   if (recipe) {
       return (
@@ -50,7 +51,7 @@ export default function SingleRecipe({route}) {
             recipe.analyzedInstructions[0].steps ? (recipe.analyzedInstructions[0].steps.map((item, index) => ( <Text key={index} style={styles.text3}>{item.number}. {item.step}</Text>  ))) : (<Text>Loading...</Text>)
         }
         <TouchableOpacity style={styles.button} >
-        <Text style={styles.buttonText} onPress={saveToFav(name)}>Save to favorites</Text>
+        <Text style={styles.buttonText} onPress={saveToFav}>Save to favorites</Text>
         </TouchableOpacity>
         <Image
           style={styles.tinyThyme}
@@ -122,6 +123,16 @@ const styles = StyleSheet.create({
     backgroundColor: "lightgrey",
     borderWidth: 2,
     borderColor: "lightblue",
+    borderRadius: 15,
+    alignSelf: "center",
+    margin: 8,
+  },
+  buttonPressed: {
+    width: 150,
+    padding: 5,
+    backgroundColor: "lightblue",
+    borderWidth: 2,
+    borderColor: "lightgrey",
     borderRadius: 15,
     alignSelf: "center",
     margin: 8,

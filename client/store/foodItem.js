@@ -13,7 +13,7 @@ export const getFoodItemThunk = (foodItemId) => {
   return async (dispatch) => {
     try {
       const { data: foodItem } = await axios.get(
-        `https://the-thymely-cook.herokuapp.com/api/foodItems/${foodItemId}`
+        `https://nervous-tiger-41.loca.lt/api/foodItems/${foodItemId}`
       );
       dispatch(_getFoodItem(foodItem));
     } catch (error) {

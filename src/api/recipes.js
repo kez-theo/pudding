@@ -34,9 +34,10 @@ router.get("/:recipeId", async (req, res, next) => {
 
 router.post("/:userId", async (req, res, next) => {
   try {
+    console.log("reqparams from save route", req.body)
     let user = await User.findOne({ where: { id: req.params.userId } });
     const recipeToSave = await Recipe.findOrCreate({
-      where: { recipe_name: req.body.recipe_name },
+      where: { recipe_name: req.body.recipeName, id: req.body.recipeId },
     });
     let user_recipe = user.addRecipe(recipeToSave[0], {
       through: { isfav: true },
