@@ -5,8 +5,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import { addFoodItemThunk } from "../store/foodItems";
 import { addToFridgeThunk } from "../store/fridge";
-import { EDEMAM_KEY, EDEMAM_ID } from "dotenv";
+// import { EDEMAM_KEY, EDEMAM_ID } from "dotenv";
 import axios from "axios";
+const EDEMAM_KEY = process.env.EDEMAM_KEY
+const EDEMAM_ID = process.env.EDEMAM_ID
 
 let EdamamURL = "https://api.edamam.com/api/food-database/v2/parser?";
 const EDEMAM_TYPE = "&nutrition-type=logging";

@@ -9,11 +9,11 @@ import {
   View,
 } from "react-native";
 const axios = require("axios");
-import { SPOON_API_KEY } from "dotenv";
+// import { SPOON_API_KEY } from "@env";
 import SearchSingleRecipe from "./SingleRecipe";
 
 const spnAPI = "https://api.spoonacular.com/recipes/";
-
+const SPOON_API_KEY = process.env.SPOON_API_KEY
 const Recipe = ({ title, image, onPress }) => (
   <TouchableOpacity onPress={onPress} style={styles.item}>
     <Image style={styles.thumbnail} source={{ uri: image }} />
