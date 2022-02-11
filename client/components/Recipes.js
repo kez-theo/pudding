@@ -9,7 +9,7 @@ import {
   View,
 } from "react-native";
 const axios = require("axios");
-import { SPOON_API_KEY } from "@env";
+import { SPOON_API_KEY } from "dotenv";
 import SearchSingleRecipe from "./SingleRecipe";
 
 const spnAPI = "https://api.spoonacular.com/recipes/";

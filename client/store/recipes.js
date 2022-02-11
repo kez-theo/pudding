@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {SPOON_API_KEY} from '@env'
+import {SPOON_API_KEY} from 'dotenv'
 
 const spnAPI = 'https://api.spoonacular.com/recipes/'
 
