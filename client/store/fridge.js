@@ -37,7 +37,7 @@ export const getFridgeThunk = (userId) => {
   return async (dispatch) => {
     try {
       const { data: fridge } = await axios.get(
-       `https://nervous-tiger-41.loca.lt/api/fridge/${userId}`
+       `https://the-thymely-cook.herokuapp.com/api/fridge/${userId}`
         //`/api/fridge/${userId}`
       );
       dispatch(_getFridge(fridge));

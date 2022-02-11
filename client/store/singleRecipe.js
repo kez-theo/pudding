@@ -30,7 +30,7 @@ export const saveRecipeThunk = (recipeObj) => {
   return async (dispatch) => {
     try {
       const { data: recipe } = await axios.post(
-        `https://nervous-tiger-41.loca.lt/api/recipes/${userId}`,
+        `https://the-thymely-cook.herokuapp.com/api/recipes/${userId}`,
         {
           recipeName, recipeId
         }
