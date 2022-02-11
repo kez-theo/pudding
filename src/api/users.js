@@ -14,7 +14,7 @@ const User = require("../db/models/User");
   })
   
   // GET /users/:id
-  router.get('/:id', async (req, res, next) => {
+  router.get('/:id', async (req, res, next) => {s
     try {
       const users = await User.findOne({
         where: {

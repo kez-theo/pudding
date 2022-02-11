@@ -9,9 +9,10 @@ import {
   View,
 } from "react-native";
 const axios = require("axios");
-import { SPOON_API_KEY } from "@env";
+// import { SPOON_API_KEY } from "@env";
 import SearchSingleRecipe from "./SingleRecipe";
 
+const SPOON_API_KEY = process.env.SPOON_API_KEY
 const spnAPI = "https://api.spoonacular.com/recipes/";
 
 const Recipe = ({ title, image, onPress }) => (
@@ -27,14 +28,18 @@ const Recipes = ({ route, navigation }) => {
   //I am setting the RESULTS object to the recipes variable so i can access the data
   const [recipes, setRecipes] = useState([]);
   const [currentRecipe, setCurrentRecipe] = useState(null);
+  //console.log(route)
   let ingredient = route.params.name;
   //where you preform side effects, including data fetching, manually changing the DOM, using history (also available as a hook). Basically componentDidMount, componentDidUpdate and componentWillUnmount combined.
   useEffect(() => {
     const fetchRecipes = async () => {
+      //console.log(`${spnAPI}complexSearch?query=${ingredient}&number=4&apiKey=${SPOON_API_KEY}`)
       const res = await axios.get(
         `${spnAPI}complexSearch?query=${ingredient}&number=4&apiKey=${SPOON_API_KEY}`
       );
+      
       setRecipes(res.data.results);
+      //console.log(res.data.results)
     };
     fetchRecipes();
   }, []);
