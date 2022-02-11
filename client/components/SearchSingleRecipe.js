@@ -4,7 +4,7 @@ import { Button, StyleSheet, Image, Text, View } from "react-native";
 import {SPOON_API_KEY} from '@env'
 
 const spnAPI = 'https://api.spoonacular.com/recipes/'
-
+const SPOON_API_KEY = process.env.SPOON_API_KEY
 // @Elena grab the route parameter
 export default function SearchSingleRecipe({route}) {
 
