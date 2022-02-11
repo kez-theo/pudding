@@ -90,7 +90,6 @@ export const authenticateSignUp =
   };
 
 export const authenticateLogin = ({ email, password, method }) =>
-console.log('user has been authenticated!!!')
   async (dispatch) => {
     try {
       const { user } = await auth.signInWithEmailAndPassword(
