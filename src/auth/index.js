@@ -42,7 +42,7 @@ router.get("/me", checkAuth, async (req, res, next) => {
 
 router.put("/update", checkAuth, async (req, res, next) => {
   try {
-    const user = await User.findByPk(req.user.uid);
+    const user = await User.findByPk(req.body.uid);
     if (user) {
       res.json(await user.update(req.body));
     } else {
