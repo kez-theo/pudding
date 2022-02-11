@@ -22,13 +22,14 @@ export const saveRecipe = (recipe) => ({
 
 //THUNK
 
-export const saveRecipeThunk = (recipe) => {
+export const saveRecipeThunk = (recipe_name) => {
   let userId = 1;
+  console.log("recipe from thunk", recipe_name)
   return async (dispatch) => {
     try {
       const { data: recipe } = await axios.post(
-        `https://the-thymely-cook.herokuapp.com/api/recipe/${userId}`,
-        recipe
+        `https://silly-goat-63.loca.lt/api/recipes/${userId}`,
+        recipe_name
       );
       dispatch(saveRecipe(recipe));
     } catch (err) {
@@ -48,7 +49,7 @@ export default function recipeReducer(state = initialState, action) {
     console.log("I'm recipeReducer, I got ", action.recipe)
   switch (action.type) {
     case SAVE_RECIPE:
-      return {...state, savedRecipes: [... action.recipe]}     
+      return {...state, savedRecipes: [...state, action.recipe]}     
     default:
       return state;
   }

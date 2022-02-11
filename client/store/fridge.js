@@ -37,7 +37,7 @@ export const getFridgeThunk = (userId) => {
   return async (dispatch) => {
     try {
       const { data: fridge } = await axios.get(
-       `https://cuddly-sheep-65.loca.lt/api/fridge/${userId}`
+       `https://silly-goat-63.loca.lt/api/fridge/${userId}`
         //`/api/fridge/${userId}`
       );
       dispatch(_getFridge(fridge));
