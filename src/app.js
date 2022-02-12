@@ -1,7 +1,7 @@
 //all of our routes like app.use
 const path = require("path");
 const express = require("express");
-const bodyParser = require("body-parser");
+// const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const cors = require("cors");
 const app = express();
@@ -21,8 +21,8 @@ app.use(express.json());
 // cors middleware
 app.use(cors({origin: true}));
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.json());
 
 // auth and api routes
 app.use("/auth", require("./auth"));
@@ -49,9 +49,9 @@ app.use((req, res, next) => {
 });
 
 // sends index.html
-app.use("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "..", "public/index.html"));
-});
+// app.use("*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "..", "public/index.html"));
+// });
 
 // error handling endware
 app.use((err, req, res, next) => {
