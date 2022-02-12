@@ -1,7 +1,6 @@
 import axios from 'axios'
 
 const spnAPI = 'https://api.spoonacular.com/recipes/'
-import {SPOON_API_KEY} from "../.keys.js"
 
 //ACTIONS
 const GET_RECIPE = 'GET_RECIPE'
