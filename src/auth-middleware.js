@@ -17,7 +17,7 @@ admin.initializeApp({
     "projectId": "ms-pudding-auth",
     "clientEmail": "CLIENT_EMAIL",
     // "privateKey": JSON.parse(PRIVATE_KEY).replace(/\\n/g, '\n')
-    "privateKey": JSON.parse(PRIVATE_KEY).replace(/\\n/g, '\n')
+    "privateKey": JSON.parse("PRIVATE_KEY").replace(/\\n/g, '\n')
   }),
   databaseURL: `postgres://localhost:5432/${databaseName}`
 });
