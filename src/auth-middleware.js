@@ -16,7 +16,7 @@ admin.initializeApp({
   credential: admin.credential.cert({
     "projectId": "ms-pudding-auth",
     "clientEmail": "CLIENT_EMAIL",
-    "privateKey": "PRIVATE_KEY",
+    "privateKey": "PRIVATE_KEY".replace(/\\n/g, '\n'),
   }),
   databaseURL: `postgres://localhost:5432/${databaseName}`
 });
