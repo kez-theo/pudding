@@ -5,7 +5,7 @@ const admin = require("firebase-admin");
 // const databaseName =
 //   pkg.name + (process.env.NODE_ENV === "test" ? "-test" : "");
 
-// const CREDENTIAL = require("../client/firebaseAuth/serviceAccountKey.json")
+// const serviceAccount = require("../client/firebaseAuth/serviceAccountKey.json")
 
 // admin.initializeApp({
 //   credential: admin.credential.cert(serviceAccount),
@@ -14,9 +14,9 @@ const admin = require("firebase-admin");
 
 admin.initializeApp({
   credential: admin.credential.cert({
-    "projectId": ms-pudding-auth,
-    "clientEmail": CLIENT_EMAIL,
-    "privateKey": PRIVATE_KEY,
+    "projectId": "ms-pudding-auth",
+    "clientEmail": "CLIENT_EMAIL",
+    "privateKey": "PRIVATE_KEY",
   }),
   databaseURL: `postgres://localhost:5432/${databaseName}`
 });
