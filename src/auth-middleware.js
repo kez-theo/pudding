@@ -14,9 +14,9 @@ const admin = require("firebase-admin");
 
 admin.initializeApp({
   credential: admin.credential.cert({
-    "project_id": PROJECT_ID,
-    "client_email": CLIENT_EMAIL,
-    "private_key": PRIVATE_KEY
+    "projectId": PROJECT_ID,
+    "clientEmail": CLIENT_EMAIL,
+    "privateKey": PRIVATE_KEY
   }),
   // databaseURL: `postgres://localhost:5432/${databaseName}`
 });
