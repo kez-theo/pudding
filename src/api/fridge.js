@@ -4,7 +4,7 @@ const FoodItem = require("../db/models/FoodItem");
 const Fridge = require("../db/models/Fridge");
 const User = require("../db/models/User");
 
-let UserId = 1;
+let UserId = "u087CSU21PhXkg73Rd4Uxa2ugtw2";
 
 router.get("/", async (req, res, next) => {
   try {
@@ -18,11 +18,11 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-router.get("/:userId", async (req, res, next) => {
+router.get("/:userUid", async (req, res, next) => {
   try {
     const userFridge = await User.findOne({
-      where: { id: req.params.userId },
-      attributes: ["id"],
+      where: { uid: req.params.userUid },
+      attributes: ["uid"],
       include: [
         {
           model: FoodItem,
@@ -37,11 +37,11 @@ router.get("/:userId", async (req, res, next) => {
   }
 });
 
-router.get("/:userId/:foodItemId", async (req, res, next) => {
+router.get("/:userUid/:foodItemId", async (req, res, next) => {
   try {
     const userFood = await User.findOne({
-      where: { id: req.params.userId },
-      attributes: ["id"],
+      where: { uid: req.params.userUid },
+      attributes: ["uid"],
       include: {
         model: FoodItem,
         where: { id: req.params.foodItemId },
@@ -57,10 +57,10 @@ router.get("/:userId/:foodItemId", async (req, res, next) => {
   }
 });
 //quantity update only?
-router.put("/:userId/:foodItemId", async (req, res, next) => {
+router.put("/:userUid/:foodItemId", async (req, res, next) => {
   try {
     const userFridge = await Fridge.findOne({
-      where: { userId: req.body.userId, foodItemId: req.body.foodItemId },
+      where: { userUid: req.body.userUid, foodItemId: req.body.foodItemId },
     });
     await userFridge.update(req.body);
     res.json(userFridge);
@@ -69,12 +69,14 @@ router.put("/:userId/:foodItemId", async (req, res, next) => {
   }
 });
 
-router.post("/:userId", async (req, res, next) => {
+router.post("/:userUid", async (req, res, next) => {
   try {
     let fooditem = await FoodItem.findOrCreate({
       where: { foodItem_name: req.body.foodItem_name },
     });
-    let currentUser = await User.findOne({ where: { id: 1 } });
+    let currentUser = await User.findOne({
+      where: { userUid: req.body.userUid },
+    });
     let fridge = await currentUser.addFoodItem(fooditem[0], {
       through: { quantity: req.body.quantity },
     });
@@ -85,24 +87,26 @@ router.post("/:userId", async (req, res, next) => {
 });
 
 //entire fridge?
-router.delete("/:UserId", async (req, res, next) => {
+router.delete("/:userUid", async (req, res, next) => {
   try {
-    const fridge = await Fridge.findOne({ where: { id: 1 } });
-    await fridge.destroy();
-    res.send(fridge);
+    const userFridgeItem = await Fridge.findAll({
+      where: { userUid: req.body.userUid },
+    });
+    await userFridgeItem.destroy();
+    res.send("Deleted");
   } catch (error) {
     next(error);
   }
 });
 
 //one thing in fridge
-router.delete("/:UserId/:foodItemId", async (req, res, next) => {
+router.delete("/:userUid/:foodItemId", async (req, res, next) => {
   try {
-    let currentUser = await User.findOne({ where: { id: 1 } });
-    let fooditem = await FoodItem.findOne({
-      where: { id: req.body.foodItemId },
+    const userFridgeItem = await Fridge.findOne({
+      where: { userUid: req.body.userUid, foodItemId: req.body.foodItemId },
     });
-    currentUser.removeFoodItem(fooditem);
+    await userFridgeItem.destroy();
+    res.send("Deleted");
     res.status(204).send("No content");
   } catch (error) {
     next(error);

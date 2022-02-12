@@ -16,7 +16,7 @@ import SingleRecipe from "./client/components/SingleRecipe";
 import SingleFoodItem from "./client/components/SingleFoodItem";
 import SearchSingleRecipe from "./client/components/SearchSingleRecipe";
 import EditFood from "./client/components/EditFood";
-
+import AddFood from "./client/components/AddFood";
 
 const Stack = createNativeStackNavigator();
 
@@ -176,6 +176,7 @@ const AppSource = () => {
             },
           }}
         />
+        <Stack.Screen name="AddFood" component={AddFood} />
       </Stack.Navigator>
     </NavigationContainer>
   );

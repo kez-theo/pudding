@@ -14,16 +14,14 @@ app.use(morgan("dev"));
 app.use(express.json());
 
 // cors middleware
-app.use(cors({origin: true}));
+app.use(cors({ origin: true }));
 
-app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // auth and api routes
 app.use("/auth", require("./auth"));
 app.use("/api", require("./api"));
-
-
 
 app.get("/", (req, res) =>
   res.sendFile(path.join(__dirname, "..", "public/index.html"))

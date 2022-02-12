@@ -5,13 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import { addFoodItemThunk } from "../store/foodItems";
 import { addToFridgeThunk } from "../store/fridge";
-// import { EDEMAM_KEY, EDEMAM_ID } from "@env";
+import AddFood from "./AddFood";
 import axios from "axios";
 
 let EdamamURL = "https://api.edamam.com/api/food-database/v2/parser?";
 const EDEMAM_TYPE = "&nutrition-type=logging";
-const EDEMAM_ID = process.env.EDEMAM_ID
-const EDEMAM_KEY = process.env.EDEMAM_KEY
+const EDEMAM_ID = process.env.EDEMAM_ID;
+const EDEMAM_KEY = process.env.EDEMAM_KEY;
 
 export default function Scanner({ navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
@@ -57,7 +57,7 @@ export default function Scanner({ navigation }) {
       {
         text: "Yes",
         onPress: () => {
-          addToFridge(1, foodName, 1);
+          addToFridge("u087CSU21PhXkg73Rd4Uxa2ugtw2", foodName, 1);
           Alert.alert(`Successfully added ${foodName} to your fridge!`);
         },
       },
@@ -101,13 +101,7 @@ export default function Scanner({ navigation }) {
         />
         <Button
           title={"Add Manually"}
-          OnPress={() => {
-            return (
-              <View style={styles.container}>
-                <Text> Coming Soon! </Text>
-              </View>
-            );
-          }}
+          OnPress={() => navigation.navigate("Add Food")}
         />
       </View>
     );
@@ -119,6 +113,14 @@ export default function Scanner({ navigation }) {
       <BarCodeScanner
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
         style={styles.barcode}
+      />
+      <Button
+        title="Go to Fridge"
+        onPress={() => navigation.navigate("Fridge")}
+      />
+      <Button
+        title="Add Manually"
+        OnPress={() => navigation.navigate("Fridge")}
       />
       {scanned && (
         <View>

@@ -19,16 +19,16 @@ export default function Fridge({ navigation }) {
   const dispatch = useDispatch();
   const fridgeSelector = useSelector((state) => state.fridgeReducer);
 
-  const viewFridge = (userId) => {
-    dispatch(getFridgeThunk(userId));
+  const viewFridge = (userUid) => {
+    dispatch(getFridgeThunk(userUid));
   };
 
-  const deleteFridge = (userId) => {
-    dispatch(deleteFridgeThunk(userId));
+  const deleteFridge = (userUid) => {
+    dispatch(deleteFridgeThunk(userUid));
   };
 
-  useEffect((userId) => {
-    viewFridge(1);
+  useEffect((userUid) => {
+    viewFridge("u087CSU21PhXkg73Rd4Uxa2ugtw2");
   }, []);
 
   const FridgeFlatList = ({ item, onPress, backgroundColor, textColor }) => (
@@ -45,51 +45,50 @@ export default function Fridge({ navigation }) {
     </TouchableOpacity>
   );
 
-  const navigationOpacity = (foodItemId, userId) => {
-    navigation.navigate("SingleFoodItem", { foodItemId, userId });
+  const navigationOpacity = (foodItemId, userUid) => {
+    navigation.navigate("SingleFoodItem", { foodItemId, userUid });
   };
 
   const renderFridgeFlatList = ({ item }) => {
-    const color =
-      item.id === selectedId ? "rgb(42, 82, 69)" : "rgb(65, 140, 115)";
-
     return (
       <FridgeFlatList
         item={item}
         onPress={() => {
           setSelectedId(item.id);
-          navigationOpacity(item.id, 1);
+          navigationOpacity(item.id, "u087CSU21PhXkg73Rd4Uxa2ugtw2");
         }}
-        textColor={{ color }}
       />
     );
   };
   let DATA = fridgeSelector.foodItems;
   return (
-    <SafeAreaView>
-      <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      <SafeAreaView>
         <TouchableOpacity
           style={styles.touchable}
           onPress={() => navigation.navigate("Scanner")}
         >
           <Text style={{ color: "rgb(65, 140, 115)" }}>Add Food</Text>
         </TouchableOpacity>
-        <Text style={styles.heading}>My Food</Text>
-        {!DATA ? (
-          <Text> Loading... </Text>
-        ) : (
-          <SafeAreaView>
-            <FlatList
-              data={DATA}
-              renderItem={renderFridgeFlatList}
-              keyExtractor={(item) => item.id}
-              extraData={selectedId}
-            />
-          </SafeAreaView>
-        )}
       </SafeAreaView>
-      <TouchableOpacity style={styles.touchable} onPress={deleteFridge(1)}>
-        <Text style={{ color: "red" }}>Delete Your Fridge</Text>
+      <Text>My Food</Text>
+      {!DATA ? (
+        <Text> Loading... </Text>
+      ) : (
+        <SafeAreaView>
+          <FlatList
+            data={fridgeSelector.foodItems}
+            renderItem={renderFridgeFlatList}
+            keyExtractor={(item) => item.id}
+            extraData={selectedId}
+          />
+        </SafeAreaView>
+      )}
+      <TouchableOpacity
+        style={styles.touchable}
+        onPress={() => deleteFridge("u087CSU21PhXkg73Rd4Uxa2ugtw2")}
+      >
+        <Text style={{ color: "rgb(65, 140, 115)" }}>DELETE</Text>
       </TouchableOpacity>
     </SafeAreaView>
   );
@@ -102,6 +101,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "column",
+    marginTop: 200,
+    marginBottom: 100,
   },
   item: {
     shadowColor: "rgb(44, 89, 74)",
@@ -127,7 +128,6 @@ const styles = StyleSheet.create({
     color: "red",
     borderRadius: 30,
     flexDirection: "row",
-    marginTop: 155,
     margin: 20,
   },
   tinyThyme: {

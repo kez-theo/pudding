@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const FoodItem = require("../db/models/FoodItem");
 
-let UserId = 1;
+let userUid = "u087CSU21PhXkg73Rd4Uxa2ugtw2";
 
 router.get("/", async (req, res, next) => {
   try {

@@ -19,35 +19,47 @@ export default function SingleFoodItem({ route, navigation }) {
   const dispatch = useDispatch();
   const fridgeSelector = useSelector((state) => state.fridgeReducer);
   const foodItemSelector = useSelector((state) => state.foodItemReducer);
-  let DATA = fridgeSelector;
   let id = route.params.foodItemId;
-  let user = route.params.userId;
+  let userUid = route.params.userUid;
 
   //hook usedispatch function
-  const viewFoodItem = (userId, foodItemId) => {
-    dispatch(getFridgeItemThunk(userId, foodItemId));
+  const viewFoodItem = (userUid, foodItemId) => {
+    dispatch(getFridgeItemThunk(userUid, foodItemId));
   };
 
-  const deleteFromFridge = (userId, foodItemId) => {
-    dispatch(deleteFoodItemFromFridgeThunk(userId, foodItemId));
+  const deleteFromFridge = (userUid, foodItemId) => {
+    dispatch(
+      deleteFoodItemFromFridgeThunk(
+        route.params.userUid,
+        route.params.foodItemId
+      )
+    );
   };
 
   //immediate page render
   useEffect((id) => {
-    viewFoodItem(user, id);
+    viewFoodItem(route.params.userUid, route.params.foodItemId);
   }, []);
 
   const onPressRecipe = () => navigation.navigate("Recipes", { name });
-
+  console.log(fridgeSelector.foodItems[0]);
   return (
     <SafeAreaView style={styles.container}>
-      {!DATA ? (
+      {!fridgeSelector ? (
         <Text> Loading... </Text>
       ) : (
         <SafeAreaView style={styles.item}>
-          <Text style={styles.heading}>{name}</Text>
+          <Text style={styles.heading}>
+            {fridgeSelector.foodItems[0].foodItem_name}
+          </Text>
           <View>
-            <Text style={styles.itemText2}>Quantity</Text>
+            <Text style={styles.title}>Type of Food:</Text>
+            <Text style={styles.itemText2}>
+              {fridgeSelector.foodItems[0].category}
+            </Text>
+            <Text style={styles.title}>
+              Quantity: {fridgeSelector.foodItems[0].fridge.quantity}
+            </Text>
           </View>
           <View>
             <Image
@@ -66,11 +78,16 @@ export default function SingleFoodItem({ route, navigation }) {
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.logout}
-        onPress={navigation.navigate("Edit", { user, id })}
+        onPress={() => navigation.navigate("Edit", { userUid, id })}
       >
         <Text style={{ color: "rgb(65, 140, 115)" }}>Edit</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.logout} onPress={deleteFromFridge(1, id)}>
+      <TouchableOpacity
+        style={styles.logout}
+        onPress={() =>
+          deleteFromFridge(route.params.userUid, route.params.foodItemId)
+        }
+      >
         <Text style={{ color: "rgb(65, 140, 115)" }}>Delete From Fridge</Text>
       </TouchableOpacity>
     </SafeAreaView>
@@ -132,6 +149,18 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "space-between",
+    margin: 20,
+  },
+  touchable: {
+    shadowColor: "rgb(44, 89, 74)",
+    shadowOffset: { width: -2, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+    backgroundColor: "white",
+    padding: 16,
+    color: "red",
+    borderRadius: 30,
+    flexDirection: "row",
     margin: 20,
   },
   tinyThyme: {
