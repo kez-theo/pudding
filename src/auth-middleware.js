@@ -5,10 +5,19 @@ const admin = require("firebase-admin");
 // const databaseName =
 //   pkg.name + (process.env.NODE_ENV === "test" ? "-test" : "");
 
-const serviceAccount = require("../client/firebaseAuth/serviceAccountKey.json")
+// const CREDENTIAL = require("../client/firebaseAuth/serviceAccountKey.json")
+
+// admin.initializeApp({
+//   credential: admin.credential.cert(serviceAccount),
+//   // databaseURL: `postgres://localhost:5432/${databaseName}`
+// });
 
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
+  credential: admin.credential.cert({
+    "project_id": PROJECT_ID,
+    "client_email": CLIENT_EMAIL,
+    "private_key": PRIVATE_KEY
+  }),
   // databaseURL: `postgres://localhost:5432/${databaseName}`
 });
 
