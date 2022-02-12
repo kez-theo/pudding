@@ -1,4 +1,4 @@
-require("dotenv").config();
+// require("dotenv").config();
 const { database } = require("firebase-admin");
 const admin = require("firebase-admin");
 
