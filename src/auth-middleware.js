@@ -14,11 +14,11 @@ const admin = require("firebase-admin");
 
 admin.initializeApp({
   credential: admin.credential.cert({
-    "projectId": PROJECT_ID,
+    "projectId": ms-pudding-auth,
     "clientEmail": CLIENT_EMAIL,
-    "privateKey": PRIVATE_KEY
+    "privateKey": PRIVATE_KEY,
   }),
-  // databaseURL: `postgres://localhost:5432/${databaseName}`
+  databaseURL: `postgres://localhost:5432/${databaseName}`
 });
 
 
