@@ -12,6 +12,10 @@ if (process.env.NODE_ENV !== "production") {
   require("../.keys");
 }
 
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
+
 // logging middleware
 app.use(morgan("dev"));
 
