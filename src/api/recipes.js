@@ -56,5 +56,10 @@ router.post("/", async (req, res, next) => {
       where: { recipe_name: req.body.recipe_name },
     });
     res.status(201).json(recipe[0]);
+  } catch (error) {
+    next(error);
+  }  
+})
+
 
 module.exports = router;
