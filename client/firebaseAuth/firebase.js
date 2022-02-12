@@ -1,19 +1,30 @@
 // Import the functions you need from the SDKs you need
-import firebase from "firebase/app";
-import "firebase/auth"
+import *  as firebase from "firebase";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+import {
+  API_KEY,
+  AUTH_DOMAIN,
+  PROJECT_ID,
+  STORAGE_BUCKET,
+  MESSAGING_SENDER_ID,
+  APP_ID,
+  MEASUREMENT_ID
+} from "../../.keys"
+
+
+
 const firebaseConfig = {
-  apiKey: "AIzaSyAmRuA5JACtOClySzhBu9ssAfb_zPEXv0c",
-  authDomain: "ms-pudding-auth.firebaseapp.com",
-  projectId: "ms-pudding-auth",
-  storageBucket: "ms-pudding-auth.appspot.com",
-  messagingSenderId: "267224446925",
-  appId: "1:267224446925:web:076c37686b219dda0db684",
-  measurementId: "G-RXBJNVJZKP"
+  apiKey: API_KEY,
+  authDomain: AUTH_DOMAIN,
+  projectId: PROJECT_ID,
+  storageBucket: STORAGE_BUCKET,
+  messagingSenderId: MESSAGING_SENDER_ID,
+  appId: APP_ID,
+  measurementId: MEASUREMENT_ID
 };
 
 // Initialize Firebase

@@ -12,11 +12,19 @@ import {
   ScrollView,
 } from "react-native";
 import { saveRecipeThunk } from "../store/singleRecipe";
+<<<<<<< HEAD
 const spnAPI = "https://api.spoonacular.com/recipes/";
 import { SPOON_API_KEY } from "@env";
 const axios = require("axios");
 import { useSelector, useDispatch } from "react-redux";
 // const SPOON_API_KEY = process.env.SPOON_API_KEY
+=======
+const spnAPI = 'https://api.spoonacular.com/recipes/';
+import { SPOON_API_KEY } from "../../.keys";
+const axios = require("axios");
+import { useSelector, useDispatch } from "react-redux";
+
+>>>>>>> 3bca528f447a5e4a9d9fd2a08e5891a2b617a092
 
 export default function SingleRecipe({ route }) {
   const [recipe, setRecipe] = useState(null);
