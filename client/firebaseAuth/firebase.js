@@ -5,15 +5,15 @@ import *  as firebase from "firebase";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-import {
-  API_KEY,
-  AUTH_DOMAIN,
-  PROJECT_ID,
-  STORAGE_BUCKET,
-  MESSAGING_SENDER_ID,
-  APP_ID,
-  MEASUREMENT_ID
-} from "../../.keys"
+// import {
+//   API_KEY,
+//   AUTH_DOMAIN,
+//   PROJECT_ID,
+//   STORAGE_BUCKET,
+//   MESSAGING_SENDER_ID,
+//   APP_ID,
+//   MEASUREMENT_ID
+// } from "../../.keys"
 
 
 
