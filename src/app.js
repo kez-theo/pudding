@@ -7,6 +7,11 @@ const cors = require("cors");
 const app = express();
 module.exports = app;
 
+// keys
+if (process.env.NODE_ENV !== "production") {
+  require("../.keys");
+}
+
 // logging middleware
 app.use(morgan("dev"));
 
