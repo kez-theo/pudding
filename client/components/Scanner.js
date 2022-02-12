@@ -119,8 +119,9 @@ export default function Scanner({ navigation }) {
       />
       <Button
         title="Add Manually"
-        OnPress={() => navigation.navigate("Fridge")}
+        onPress={() => navigation.navigate("AddFood")}
       />
+
       {scanned && (
         <View>
           <BarCodeScanner style={{ height: 0 }} />

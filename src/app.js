@@ -13,10 +13,13 @@ app.use(morgan("dev"));
 // body parsing middleware
 app.use(express.json());
 
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
 // cors middleware
 app.use(cors({ origin: true }));
 
-// app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // auth and api routes
