@@ -20,33 +20,23 @@ export const saveRecipe = (recipe) => ({
 });
 
 
-//THUNKgit status
+//THUNK
 
-//get recipe by  recipe id
-export const getRecipeById = (recipeId) => {
-   // console.log(`recipeId from getRecipeById thunk ${recipeId}`)
-  return async (dispatch) => {
-    try {
-        const { data: recipe } = await axios.get(`${spnAPI}${recipeId}/analyzedInstructions?&apiKey=${SPOON_API_KEY}`);
-       console.log(`The URL thunk was trying is ${spnAPI}${recipeId}/analyzedInstructions?&apiKey=${SPOON_API_KEY}`)
-        dispatch(getSingleRecipe(recipe));
-        
-    } catch (error) {
-     
-      console.log(`getSingleRecipe THUNK ERROR:${error} The URL thunk was trying is ${spnAPI}${recipeId}/analyzedInstructions?&apiKey=${SPOON_API_KEY}`);
-    }
-  };
-};
-
-export const saveRecipeThunk = (recipe) => {
+export const saveRecipeThunk = (recipeObj) => {
   let userId = 1;
+  let recipeName = recipeObj.title
+  let recipeId = recipeObj.id
+  console.log("recipe from thunk", recipeName, recipeId)
   return async (dispatch) => {
     try {
       const { data: recipe } = await axios.post(
-        `/api/recipe/${userId}`,
-        recipe
+        //`https://orange-bulldog-61.loca.lt/api/recipes/${userId}`,
+        `https://the-thymely-cook.herokuapp.com/api/recipes/${userId}`,
+        {
+          recipeName, recipeId
+        }
       );
-      dispatch(saveRecipe(recipe));
+      dispatch(saveRecipe(recipeObj));
     } catch (err) {
       console.log("saveRecipe THUNK ERROR");
     }
@@ -60,16 +50,11 @@ const initialState = {
 
 //REDUCER
 
-export default function recipeReducer(state = initialState, action) {
+export default function recipeReducer(state = [], action) {
     console.log("I'm recipeReducer, I got ", action.recipe)
   switch (action.type) {
-    case GET_RECIPE:
-    //because the url returns an array [{}]
-      //return action.recipe[0];
-      return {...state, recipe: action.recipe[0]}
     case SAVE_RECIPE:
-    //because the url returns an array [{}]
-      return {...state, savedRecipes: [... action.recipe]}     
+      return {saved: [...state, action.recipe]}
     default:
       return state;
   }
